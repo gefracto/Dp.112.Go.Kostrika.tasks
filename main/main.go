@@ -2,10 +2,11 @@ package main
 
 import (
 	//t3 "task3"
-	//t5 "task5"
+	t5 "task5"
 	//t6 "task6"
 	//"fmt"
-	t6 "task6"
+	//t6 "task6"
+	"fmt"
 )
 
 
@@ -49,9 +50,13 @@ func main() {
 	fmt.Println(m)
 	fmt.Println(t3.SortTriangles(m)) */
 
-	//fmt.Println(t5.LuckyTickets(0, 999999))
+	fmt.Println(t5.LuckyTickets(0, 5646))
 
 	//t6.DoTask6(1020, 2345)
-
+	s := [...]string{"1","2","3","4"}
+	index := 0
+	newS := s[:index]
+	newS = append(newS, s[index+1:]...)
+	fmt.Println(newS)
 
 }

@@ -35,16 +35,31 @@ func makeSixDigits(n int) (s string) {
 	return
 }
 
+func getInts(s string) []int {
+	var sl []int
+	slStr := strings.Split(s, "")
+	for _, i := range slStr {
+		l, _ := strconv.Atoi(i)
+		sl = append(sl, l)
+	}
+	return sl
+}
+
 func method1(n int) (b bool) {
 	var s string
+	var sumLeft, sumRight int
 	if n < 100000 {
 		s = makeSixDigits(n)
 	} else {
 		s = strconv.Itoa(n)
 	}
-	leftInt, _ := strconv.Atoi(s[:3])
-	rightInt, _ := strconv.Atoi(s[3:])
-	if leftInt == rightInt {
+	leftN := getInts(s[:3])
+	rightN := getInts(s[3:])
+
+	sumLeft = getSum(leftN)
+	sumRight = getSum(rightN)
+
+	if sumLeft == sumRight {
 		b = true
 	} else {
 		b = false
@@ -86,7 +101,6 @@ func method2(n int) (b bool) {
 }
 
 func LuckyTickets(min, max int) Results {
-	//numbers := getNumbers(min, max)
 	var Res Results
 	for i := min; i <= max; i++ {
 		if method1(i) {

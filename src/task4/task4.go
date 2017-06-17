@@ -6,9 +6,31 @@ package task4
 
 import (
 	"strconv"
+	"strings"
 )
-
-func Palindrom(number int) string {
+func numToSliceOfString(number int) []string {
 	str := strconv.Itoa(number)
-	return str
+	sl := strings.Split(str, "")
+	return sl
+}
+
+func isPal(sl []string) (b bool) {
+	//
+	return b
+}
+
+func deleteElementFromSlice(s []string, index int) []string {
+	newS := s[:index]
+	newS = append(newS, s[index+1:]...)
+	return newS
+}
+
+func foo(number int) (n int, ok bool) {
+	sl := numToSliceOfString(number)
+
+}
+
+
+func DoTask4() {
+
 }
