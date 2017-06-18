@@ -4,7 +4,6 @@ import (
 	t2 "task2"
 	t3 "task3"
 	"io/ioutil"
-	"fmt"
 	"encoding/json"
 )
 
@@ -33,10 +32,10 @@ type Data struct {
 	}
 }
 
-func DoMar() {
+func GetData() Data {
 	contents, _ := ioutil.ReadFile("data.json")
 	var MyData Data
 	json.Unmarshal(contents, &MyData)
-	fmt.Println(MyData)
+	return MyData
 
 }
