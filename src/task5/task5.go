@@ -100,7 +100,7 @@ func method2(n int) (b bool) {
 	return b
 }
 
-func LuckyTickets(min, max int) Results {
+func DoTask5(min, max int) Results {
 	var Res Results
 	for i := min; i <= max; i++ {
 		if method1(i) {

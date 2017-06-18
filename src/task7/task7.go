@@ -1,34 +1,16 @@
 package task7
 
 import (
-	"os"
+	"io/ioutil"
 	"strconv"
 	"strings"
 )
 
-func getFile(f string) string {
-
-	file, err := os.Open(f)
-	if err != nil {
-		// handle the error here
-		return f
-	}
-	defer file.Close()
-
-	// get the file size
-	stat, err := file.Stat()
-	if err != nil {
-		return f
-	}
-	// read the file
-	bs := make([]byte, stat.Size())
-	_, err = file.Read(bs)
-	if err != nil {
-		return f
-	}
-
-	str := string(bs)
-	return str
+func getFile(f string) (string, bool) {
+	ok := false
+	contents, _ := ioutil.ReadFile(f)
+	str := string(contents)
+	return str, ok
 }
 
 func getLength(n uint64) int {
@@ -36,9 +18,11 @@ func getLength(n uint64) int {
 	return len(str)
 }
 
-func Fibo(f string) []uint64 {
+func DoTask7(file string) []uint64 {
+	f, _ := getFile(file)
 	var numbers []uint64
-	if strings.Contains(f, " ") || strings.Contains(f, "\n") {
+
+	if strings.Contains(f, " ") {
 		s := strings.Split(f, " ")
 		min, _ := strconv.Atoi(s[0])
 		max, _ := strconv.Atoi(s[1])
@@ -50,17 +34,16 @@ func Fibo(f string) []uint64 {
 			}
 		}
 	} else {
-		// code
 		length, _ := strconv.Atoi(f)
-		//
 		var a, b uint64 = 1, 1
 		for getLength(a) <= length {
 			a, b = b, a+b
 			if getLength(a) == length {
 				numbers = append(numbers, a)
-			}
-		}
 
+			}
+
+		}
 	}
 	return numbers
 

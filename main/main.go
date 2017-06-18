@@ -1,7 +1,7 @@
 package main
 
 import (
-	//t3 "task3"
+	t7 "task7"
 	//t5 "task5"
 	//t6 "task6"
 	//"fmt"
@@ -11,7 +11,8 @@ import (
 	//"strconv"
 	//"strings"
 	//t2 "task2"
-	t1 "task1"
+	//t1 "task1"
+	"io/ioutil"
 )
 
 
@@ -69,8 +70,15 @@ func main() {
 	a = append(a, 1,2,3,4,5)
 	b = append(b, a...)
 	fmt.Println(a,b)
-*/	fmt.Println(t1.DoTask1(9,6,"*"))
+	//fmt.Println(t2.DoTask2(t2.Envelope{15,21}, t2.Envelope{3.5, 22.3}))
 
 	//fmt.Println(t4.DoTask4(121212))
+*/
 
+	fmt.Println(t7.DoTask7("context"))
+	fmt.Println(t7.DoTask7("context2"))
+
+	contents, _ := ioutil.ReadFile("context")
+	str:= string(contents)
+	fmt.Println(str, len(str))
 }

@@ -25,6 +25,13 @@ func (T *Triangle) getName() string {
 	return T.Name
 }
 
+func reverseSliceOfNames (s []string) (newS []string) {
+	for i := len(s) - 1; i >=0; i-- {
+		newS = append(newS, s[i])
+	}
+	return newS
+}
+
 func DoTask3(T []Triangle) []string {
 	var names []string
 	var squares []float64
@@ -51,6 +58,7 @@ func DoTask3(T []Triangle) []string {
 	for _, v := range indexes {
 		sortedNames = append(sortedNames, names[v])
 	}
-	return sortedNames
+	reversedSortedNames := reverseSliceOfNames(sortedNames)
+	return reversedSortedNames
 
 }
