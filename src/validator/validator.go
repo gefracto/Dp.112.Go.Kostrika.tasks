@@ -15,7 +15,7 @@ func separate(n int) {
 	fmt.Printf("\nTask #%d\n----------------------\n", n)
 }
 
-func Dance(j jsn.Data){
+func Dance(f string){
 
 	separate(1)
 	fmt.Println(t1.DoTask1(5, 8, "*"))

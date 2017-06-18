@@ -2,8 +2,10 @@ package main
 
 import (
 	"validator"
+	"os"
 )
 
 func main() {
-	validator.Dance()
+	args := string(os.Args)
+	validator.Dance(args)
 }
