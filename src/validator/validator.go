@@ -1,7 +1,7 @@
 package validator
 
 import (
-	jsn "taskJson"
+	jsn "jsonToStruct"
 )
 
 func ValidateAndGo(data jsn.Data) {
