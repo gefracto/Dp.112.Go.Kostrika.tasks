@@ -6,10 +6,11 @@ import (
 	//t6 "task6"
 	//"fmt"
 	//t6 "task6"
-	t4 "task4"
+	//t4 "task4"
 	"fmt"
 	//"strconv"
 	//"strings"
+	t2 "task2"
 )
 
 
@@ -56,16 +57,9 @@ func main() {
 	//fmt.Println(t5.LuckyTickets(0, 1))
 
 	//t6.DoTask6(1020, 2345)
+	fmt.Println(t2.DoTask2(t2.Envelope{21,15}, t2.Envelope{3.5,22.3}))
 
 
+	//fmt.Println(t4.DoTask4(121212))
 
-	fmt.Println(t4.DoTask4(121212))
-	s := "hello"
-	n := "olleh"
-	for i,j := range s {
-		fmt.Println(i,string(j))
-	}
-	if "h" == string(n[len(s)-1]) {
-		fmt.Println("HFEHEFHUF")
-	}
 }
