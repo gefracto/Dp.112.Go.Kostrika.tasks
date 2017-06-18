@@ -1,56 +1,57 @@
-/* берем первое число и ищем его повтор
- * если повтор найден, записываем и берем второе число и ищем его повтор
- * иначе берем следующее число и повторяем цикл
- */
 package task4
 
-import (
-	"strconv"
-	"strings"
-)
-func numToSliceOfString(number int) []string {
-	str := strconv.Itoa(number)
-	sl := strings.Split(str, "")
-	return sl
+import "strconv"
+
+func reverseString(s string) string {
+	var newString string = ""
+	for i := len(s) - 1; i >= 0; i-- {
+		newString += string(s[i])
+	}
+	return newString
 }
 
-func isPal(sl []string) (b bool) {
+func isPal(s string) (b bool) {
 	//
+	b = false
+	if s == reverseString(s) && len(s) > 1 {
+		b = true
+	}
 	return b
 }
 
-func strToInt(s string) int {
-	i, _ := strconv.Atoi(s)
-	return i
-}
-
-func slToStr(sl []string) string {
-	var str string
+func findLargest(sl []string) []string {
+	var largest []string
+	var largestSize int = 1
 	for _, v := range sl {
-		str += v
+		if len(v) > largestSize {
+			largestSize = len(v)
+		}
 	}
-	return str
+	for _, v := range sl {
+		if len(v) == largestSize {
+			largest = append(largest, v)
+		}
+	}
+	return largest
 }
 
-func deleteElementFromSlice(s []string, index int) []string {
-	newS := s[:index]
-	newS = append(newS, s[index+1:]...)
-	return newS
-}
+func DoTask4(num int) (largestPalindromes []string, ok bool) {
+	original := strconv.Itoa(num)
+	reversed := reverseString(original)
+	ok = false
+	var sliceOfPalindromes []string
 
-func foo(number int) (n int, ok bool) {
-	sl := numToSliceOfString(number)
-	for l, v := range sl {
-		for r:=len(sl); r > l; r-- {
-			if v == sl[r] && isPal(sl[l:r]) {
-				return strToInt(slToStr(sl[l:r])), true
+	for i1, v1 := range original {
+		for i2, v2 := range reversed {
+			if i1+i2 < len(original) && v2 == v1 && isPal(original[i1:len(original)-i2]) {
+				sliceOfPalindromes = append(sliceOfPalindromes, string(original[i1:len(original)-i2]))
+				ok = true
 			}
 		}
 	}
-	return 0, false
-}
+	if ok {
+		largestPalindromes = append(largestPalindromes, findLargest(sliceOfPalindromes)...)
+	}
 
-
-func DoTask4() {
-
+	return largestPalindromes, ok
 }

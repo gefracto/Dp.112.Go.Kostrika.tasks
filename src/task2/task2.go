@@ -15,7 +15,7 @@ func bigger(a, b, c, d int) int {
 	}
 } */
 
-func Envelope(a, b, c, d int) float64 {
+func Envelope3(a, b, c, d int) float64 {
 	if (a > c) && (b > d) {
 		return 2
 	} else if (a < c) && (b < d) {
@@ -29,4 +29,12 @@ func Envelope(a, b, c, d int) float64 {
 	} else {
 		return 1
 	}
+}
+
+type Envelope struct {
+	a, b float64
+}
+
+func DoTask2(e1 Envelope, e2 Envelope) int {
+
 }

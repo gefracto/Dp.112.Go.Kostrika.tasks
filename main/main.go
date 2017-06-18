@@ -2,11 +2,14 @@ package main
 
 import (
 	//t3 "task3"
-	t5 "task5"
+	//t5 "task5"
 	//t6 "task6"
 	//"fmt"
 	//t6 "task6"
+	t4 "task4"
 	"fmt"
+	//"strconv"
+	//"strings"
 )
 
 
@@ -50,13 +53,19 @@ func main() {
 	fmt.Println(m)
 	fmt.Println(t3.SortTriangles(m)) */
 
-	fmt.Println(t5.LuckyTickets(0, 5646))
+	//fmt.Println(t5.LuckyTickets(0, 1))
 
 	//t6.DoTask6(1020, 2345)
-	s := [...]string{"1","2","3","4"}
-	index := 0
-	newS := s[:index]
-	newS = append(newS, s[index+1:]...)
-	fmt.Println(newS)
 
+
+
+	fmt.Println(t4.DoTask4(121212))
+	s := "hello"
+	n := "olleh"
+	for i,j := range s {
+		fmt.Println(i,string(j))
+	}
+	if "h" == string(n[len(s)-1]) {
+		fmt.Println("HFEHEFHUF")
+	}
 }
