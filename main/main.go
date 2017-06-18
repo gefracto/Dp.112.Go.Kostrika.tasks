@@ -1,7 +1,7 @@
 package main
 
 import (
-	//t3 "task3"
+	t3 "task3"
 	//t5 "task5"
 	//t6 "task6"
 	//"fmt"
@@ -10,7 +10,7 @@ import (
 	"fmt"
 	//"strconv"
 	//"strings"
-	t2 "task2"
+	//t2 "task2"
 )
 
 
@@ -57,8 +57,17 @@ func main() {
 	//fmt.Println(t5.LuckyTickets(0, 1))
 
 	//t6.DoTask6(1020, 2345)
-	fmt.Println(t2.DoTask2(t2.Envelope{21,15}, t2.Envelope{3.5,22.3}))
+	//fmt.Println(t2.DoTask2(t2.Envelope{21,15}, t2.Envelope{3.5,22.3}))
+	s := make([]t3.Triangle, 1)
+	s = append(s, t3.Triangle{"sff",10,10,10},t3.Triangle{"ghj",10,10,10}, t3.Triangle{"sre",34,43,20}, t3.Triangle{"abc",2,3,2})
+	fmt.Println(t3.DoTask3(s))
 
+
+	var a []float64
+	var b []float64
+	a = append(a, 1,2,3,4,5)
+	b = append(b, a...)
+	fmt.Println(a,b)
 
 	//fmt.Println(t4.DoTask4(121212))
 

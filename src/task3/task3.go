@@ -1,55 +1,56 @@
-// S = sqrt(p*(p-a)(p-b)(p-c))
-// p = (a+b+c)/2
- 
 package task3
- 
+
 import (
-    "sort"
-    "math"
-    "fmt"
+	"math"
+	"sort"
 )
- 
+
 type Triangle struct {
-    Name string
-    A float64
-    B float64
-    C float64
+	Name string
+	A    float64
+	B    float64
+	C    float64
 }
- 
-//type Triangle []Triangle
- 
-func calculate(T Triangle) (string, float64) {
-    p := (T.A + T.B + T.C)/2
-    s := math.Sqrt(p * (p - T.A) * (p - T.B) * (p - T.C))
-    return T.Name, s
+
+func (T *Triangle) getP() float64 {
+	return (T.A + T.B + T.C) / 2
 }
- 
-func SortTriangles(sl []Triangle) []string {
-    var names []string
-    m := make(map[string]float64)
-    for i := 0; i < len(sl); i++ {
-        k, v := calculate(sl[i])
-        m[k] = v
-    }
- 
-    //Inverting maps
-    invMap := make(map[float64]string, len(m))
-    for k,v := range m {
-        invMap[v] = k
-    }
- 
-     //Sorting
-    sortedKeys := make([]float64, len(invMap))
-    var i int = 0
-    for k := range invMap {
-        sortedKeys[i] = k
-        i++
-    }
-    sort.Slice(sortedKeys, func(i, j int) bool { return sortedKeys[i] < sortedKeys[j] })
- 
-    for i := range sortedKeys {
-        names = append(names, invMap[float64(i)])
-        fmt.Println(invMap[float64(i)])
-    }
-    return names
+
+func (T *Triangle) getSquare(p float64) float64 {
+	S := math.Sqrt(p * (p - T.A) * (p - T.B) * (p - T.C))
+	return S
+}
+
+func (T *Triangle) getName() string {
+	return T.Name
+}
+
+func DoTask3(T []Triangle) []string {
+	var names []string
+	var squares []float64
+	var indexes []int
+	var sortedSquares []float64
+	var sortedNames []string
+
+	for i := range T {
+		names = append(names, T[i].getName())
+		squares = append(squares, T[i].getSquare(T[i].getP()))
+	}
+
+	sortedSquares = append(sortedSquares, squares...)
+	sort.Float64s(sortedSquares)
+	for _, v := range sortedSquares {
+		for i2, v2 := range squares {
+			if v == v2 {
+				indexes = append(indexes, i2)
+				squares[i2] = -1
+			}
+		}
+	}
+
+	for _, v := range indexes {
+		sortedNames = append(sortedNames, names[v])
+	}
+	return sortedNames
+
 }
