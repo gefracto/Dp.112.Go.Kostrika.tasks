@@ -9,7 +9,7 @@ import (
 
 func DoTask6(length int, maxSquare int) (err error) {
 	str := getSequence(length, maxSquare)
-	file, err := os.Create("number sequence by task6.go")
+	file, err := os.Create("number sequence of task6")
 	defer file.Close()
 	_, err = file.WriteString(str)
 	return err
