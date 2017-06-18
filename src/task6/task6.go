@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func DoTask6(length int, maxSquare int) (err error) {
+func DoTask6(length, maxSquare int) (err error) {
 	str := getSequence(length, maxSquare)
 	file, err := os.Create("number sequence of task6")
 	defer file.Close()
@@ -15,7 +15,7 @@ func DoTask6(length int, maxSquare int) (err error) {
 	return err
 }
 
-func getSequence(quantity int, square int) string {
+func getSequence(quantity, square int) string {
 	var file []string
 	root := int(math.Floor(math.Sqrt(float64(square))))
 
