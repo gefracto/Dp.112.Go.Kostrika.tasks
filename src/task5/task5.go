@@ -23,9 +23,9 @@ func (R *Results) method2Won() int {
 
 func (R *Results) setWinnersName() {
 	if R.method1Count > R.method2Count {
-		R.winnersName = "method 1"
+		R.winnersName = "method 1 "
 	} else if R.method2Count > R.method1Count {
-		R.winnersName = "method 2"
+		R.winnersName = "method 2 "
 	}
 }
 

@@ -23,7 +23,6 @@ func makeRow(switcher int, symbol string, width int) string {
 			row += " "
 		}
 	}
-
 	return row
 }
 
@@ -34,6 +33,5 @@ func DoTask1(width int, height int, symbol string) string {
 		board += makeRow(switcher, symbol, width) + "\n"
 		switcher *= -1
 	}
-
 	return board
 }

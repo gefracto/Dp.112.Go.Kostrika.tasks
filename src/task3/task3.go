@@ -25,8 +25,8 @@ func (T *Triangle) getName() string {
 	return T.Name
 }
 
-func reverseSliceOfNames (s []string) (newS []string) {
-	for i := len(s) - 1; i >=0; i-- {
+func reverseSliceOfNames(s []string) (newS []string) {
+	for i := len(s) - 1; i >= 0; i-- {
 		newS = append(newS, s[i])
 	}
 	return newS

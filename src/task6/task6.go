@@ -7,11 +7,12 @@ import (
 	"strings"
 )
 
-func DoTask6(q int, sq int) {
-	str := getSequence(q, sq)
-	file, _ := os.Create("number sequence")
+func DoTask6(length int, maxSquare int) (err error) {
+	str := getSequence(length, maxSquare)
+	file, err := os.Create("number sequence by task6.go")
 	defer file.Close()
-	file.WriteString(str)
+	_, err = file.WriteString(str)
+	return err
 }
 
 func getSequence(quantity int, square int) string {
@@ -28,6 +29,7 @@ func getSequence(quantity int, square int) string {
 		}
 		root += 1
 	}
+
 	f := strings.Join(file, ", ")
 	return f
 }
