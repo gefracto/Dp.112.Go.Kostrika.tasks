@@ -1,6 +1,6 @@
 package main
-
 import (
+	"jsonToStruct"
 	"fmt"
 	t1 "task1"
 	t2 "task2"
@@ -14,6 +14,7 @@ func separate(n int) {
 	fmt.Printf("\nTask #%d\n----------------------\n", n)
 }
 func main() {
+	jsonToStruct.DoMar()
 	separate(1)
 	fmt.Println(t1.DoTask1(5, 8, "*"))
 
