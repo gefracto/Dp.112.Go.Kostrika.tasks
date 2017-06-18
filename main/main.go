@@ -1,11 +1,18 @@
 package main
 
 import (
-	"validator"
-	"os"
+	//"validator"
+	"flag"
+	"fmt"
 )
 
 func main() {
-	args := string(os.Args)
-	validator.Dance(args)
+	a := flag.Args
+	args := ""
+	for _, v := range a {
+		args += v
+	}
+
+	//validator.Dance(args)
+	fmt.Println(a)
 }

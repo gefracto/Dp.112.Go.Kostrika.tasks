@@ -3,7 +3,9 @@ package jsonToStruct
 import (
 	t2 "task2"
 	t3 "task3"
+	"io/ioutil"
 )
+
 type Data struct {
 	T1 struct {
 		Width, Height int
@@ -28,3 +30,12 @@ type Data struct {
 		File string
 	}
 }
+
+func getFile(f string) (string, bool) {
+	ok := false
+	contents, _ := ioutil.ReadFile(f)
+	str := string(contents)
+	return str, ok
+}
+
+
