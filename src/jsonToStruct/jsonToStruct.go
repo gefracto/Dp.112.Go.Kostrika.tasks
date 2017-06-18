@@ -1,16 +1,16 @@
 package jsonToStruct
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	t2 "task2"
 	t3 "task3"
-	"io/ioutil"
-	"encoding/json"
 )
 
 type Data struct {
 	T1 struct {
 		Width, Height int
-		Symbol string
+		Symbol        string
 	}
 	T2 struct {
 		Env1, Env2 t2.Envelope

@@ -1,8 +1,8 @@
 package validator
 
 import (
-	jsn "jsonToStruct"
 	"fmt"
+	jsn "jsonToStruct"
 )
 
 func Task1Rules(d jsn.Data) (ok bool, reason string) {
@@ -38,7 +38,7 @@ func Task7Rules(d jsn.Data) (ok bool, reason string) {
 	return
 }
 
-func RiseAndShine(){
+func RiseAndShine() {
 	Data := jsn.GetData()
 	if ok, reason := Task1Rules(Data); ok {
 		//dowork
