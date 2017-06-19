@@ -7,6 +7,7 @@ import (
 	"strings"
 	t2 "task2"
 	t3 "task3"
+	"fmt"
 )
 
 type Data struct {
@@ -43,6 +44,9 @@ func GetData(fileName string) Data {
 	} else if extension[1] == "xml" {
 		contents, _ := ioutil.ReadFile("data.xml")
 		xml.Unmarshal(contents, &MyData)
+	} else {
+		fmt.Println("Не удалось открыть файл. \nРасширение файла должно быть формата json или xml.")
+		return MyData
 	}
 	return MyData
 }
