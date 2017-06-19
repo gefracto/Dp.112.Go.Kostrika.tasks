@@ -24,8 +24,8 @@
 		<SliceOfTriangles>
 			<Name>DEF</Name>
 			<A>10.1</A>
-			<B>10.3</B>
-			<C>10</C>
+			<B>10</B>
+			<C>10.3</C>
 		</SliceOfTriangles>
 		<SliceOfTriangles>
 			<Name>GHI</Name>
