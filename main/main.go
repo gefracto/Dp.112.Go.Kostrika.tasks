@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	validator.RiseAndShine()
+	validator.RiseAndShine("data.xml")
 }
