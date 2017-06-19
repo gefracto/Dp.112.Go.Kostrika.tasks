@@ -2,11 +2,11 @@ package parseJsonOrXml
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"io/ioutil"
+	"strings"
 	t2 "task2"
 	t3 "task3"
-	"strings"
-	"encoding/xml"
 )
 
 type Data struct {
@@ -41,7 +41,7 @@ func GetData(fileName string) Data {
 		contents, _ := ioutil.ReadFile("data.json")
 		json.Unmarshal(contents, &MyData)
 	} else if extension[1] == "xml" {
-		contents, _ := ioutil.ReadFile("data.json")
+		contents, _ := ioutil.ReadFile("data.xml")
 		xml.Unmarshal(contents, &MyData)
 	}
 	return MyData
