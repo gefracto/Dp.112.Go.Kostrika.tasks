@@ -1,6 +1,8 @@
 package task4
 
-import "strconv"
+import (
+	"strconv"
+)
 
 func reverseString(s string) string {
 	var newString string = ""
@@ -34,12 +36,12 @@ func findLargest(sl []string) []string {
 	return largest
 }
 
-func DoTask4(num int) (largestPalindromes []string, ok bool) {
+func DoTask4(num int) (largestPalindrome int, ok bool) {
 	original := strconv.Itoa(num)
 	reversed := reverseString(original)
 	ok = false
 	var sliceOfPalindromes []string
-
+	var largestPalindromes []string
 	for i1, v1 := range original {
 		for i2, v2 := range reversed {
 			if i1+i2 < len(original) && v2 == v1 && isPal(original[i1:len(original)-i2]) {
@@ -51,6 +53,11 @@ func DoTask4(num int) (largestPalindromes []string, ok bool) {
 	if ok {
 		largestPalindromes = append(largestPalindromes, findLargest(sliceOfPalindromes)...)
 	}
-
-	return largestPalindromes, ok
+	for _, v := range largestPalindromes {
+		tmp,_ := strconv.Atoi(v)
+		if largestPalindrome < tmp {
+			largestPalindrome = tmp
+		}
+	}
+	return largestPalindrome, ok
 }
