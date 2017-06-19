@@ -70,14 +70,44 @@ func simpleSpellCheckerXml(file string) (b bool, message string) {
 	return b, message
 }
 
+func checkForNames(file string) (b bool, message string) {
+	b = true
+
+	var rules []string = []string{
+		"T1", "T2", "T3", "T4", "T5", "T6", "T7",
+		"Width", "Height", "Symbol",
+		"Env1", "Env2", "Side1", "Side2",
+		"SliceOfTriangles", "Name", "A", "B", "C",
+		"Number",
+		"Min", "Max",
+		"Length", "MaxSquare",
+		"File"}
+
+	for _, v := range rules {
+		if strings.Contains(file, v) == false {
+			b = false
+			message += v + "  "
+		}
+	}
+	if b == false {
+		message += " \n\nОтсутствуют либо неправильно написаны перечисленные выше переменные"
+	}
+	return b, message
+}
+
 func GetData(fileName string) Data {
 	var MyData Data
 	extension := strings.Split(fileName, ".")
-	
+
 	if extension[len(extension)-1] == "json" {
 		contents, _ := ioutil.ReadFile("data.json")
 
 		if b, m := simpleSpellCheckerJson(string(contents)); b == false {
+			fmt.Println(m)
+			return MyData
+		}
+
+		if b, m := checkForNames(string(contents)); b == false {
 			fmt.Println(m)
 			return MyData
 		}
@@ -88,6 +118,11 @@ func GetData(fileName string) Data {
 		contents, _ := ioutil.ReadFile("data.xml")
 
 		if b, m := simpleSpellCheckerXml(string(contents)); b == false {
+			fmt.Println(m)
+			return MyData
+		}
+
+		if b, m := checkForNames(string(contents)); b == false {
 			fmt.Println(m)
 			return MyData
 		}
