@@ -53,7 +53,6 @@ func separator(n int) {
 	fmt.Printf("\n\n------------->Task #%d<-------------\n\n", n)
 }
 func Operate(Data parse.Data){
-	fmt.Println(validateData("data.json"))
 	separator(1)
 	fmt.Println(task1.DoTask1(Data.T1.Width, Data.T1.Height, Data.T1.Symbol))
 	separator(2)
@@ -71,39 +70,8 @@ func Operate(Data parse.Data){
 	fmt.Println(task7.DoTask7(Data.T7.File))
 }
 
-func validateData(fileName string) (parse.DataChecking, bool, string) {
-	extension := strings.Split(fileName, ".")
-	var checking parse.DataChecking
-	if extension[len(extension)-1] == "json" {
-		contents, _ := ioutil.ReadFile("data.json")
-
-		if b, m := parse.SimpleSpellCheckerJson(string(contents)); b == false {
-			return checking, false, m
-		}
-
-		if b, m := parse.CheckForNames(string(contents)); b == false {
-			return checking, false, m
-		}
-
-		json.Unmarshal(contents, &checking)
-
-	} else if extension[len(extension)-1] == "xml" {
-		contents, _ := ioutil.ReadFile("data.xml")
-
-		if b, m := parse.SimpleSpellCheckerXml(string(contents)); b == false {
-			return checking, false, m
-		}
-
-		if b, m := parse.CheckForNames(string(contents)); b == false {
-			return checking, false, m
-		}
-
-		xml.Unmarshal(contents, &checking)
-
-	} else {
-		return checking, false, "Не удалось открыть файл. \nРасширение файла должно быть формата json или xml."
-	}
-	return checking, true, ""
+func validateData(file string) (ok bool, reason string) {
+	
 }
 
 func RiseAndShine(fileName string) (parse.Data, bool, string) {

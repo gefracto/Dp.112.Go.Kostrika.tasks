@@ -33,8 +33,6 @@ type Data struct {
 		File string
 	}
 }
-
-
 type DataChecking struct {
 	T1 struct {
 		Width, Height string
