@@ -3,10 +3,16 @@ package main
 import (
 	"flag"
 	"validator"
+	"fmt"
 )
 
 func main() {
 	arg := flag.String("file", "data.json", "Usage: -file=fileName.extension")
 	flag.Parse()
-	validator.RiseAndShine(*arg)
+	data, ok, reason := validator.RiseAndShine(*arg)
+	if ok {
+		validator.Operate(data)
+	} else {
+		fmt.Println(reason)
+	}
 }

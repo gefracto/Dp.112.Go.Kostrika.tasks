@@ -95,7 +95,7 @@ func checkForNames(file string) (b bool, message string) {
 	return b, message
 }
 
-func GetData(fileName string) Data {
+func GetData(fileName string) (Data, bool, string) {
 	var MyData Data
 	extension := strings.Split(fileName, ".")
 
@@ -104,12 +104,11 @@ func GetData(fileName string) Data {
 
 		if b, m := simpleSpellCheckerJson(string(contents)); b == false {
 			fmt.Println(m)
-			return MyData
+			return MyData, false, m
 		}
 
 		if b, m := checkForNames(string(contents)); b == false {
-			fmt.Println(m)
-			return MyData
+			return MyData, false, m
 		}
 
 		json.Unmarshal(contents, &MyData)
@@ -119,19 +118,18 @@ func GetData(fileName string) Data {
 
 		if b, m := simpleSpellCheckerXml(string(contents)); b == false {
 			fmt.Println(m)
-			return MyData
+			return MyData, false, m
 		}
 
 		if b, m := checkForNames(string(contents)); b == false {
 			fmt.Println(m)
-			return MyData
+			return MyData, false, m
 		}
 
 		xml.Unmarshal(contents, &MyData)
 
 	} else {
-		fmt.Println("Не удалось открыть файл. \nРасширение файла должно быть формата json или xml.")
-		return MyData
+		return MyData, false, "Не удалось открыть файл. \nРасширение файла должно быть формата json или xml."
 	}
-	return MyData
+	return MyData, true, ""
 }

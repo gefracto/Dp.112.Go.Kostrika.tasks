@@ -78,8 +78,8 @@ func Task7Rules(d parse.Data) (ok bool, reason string) {
 func separator(n int) {
 	fmt.Printf("\n\n------------->Task #%d<-------------\n\n", n)
 }
-func RiseAndShine(fileName string) {
-	Data := parse.GetData(fileName)
+
+func Operate(Data parse.Data) {
 	separator(1)
 	if ok, reason := Task1Rules(Data); ok {
 		//dowork
@@ -137,4 +137,9 @@ func RiseAndShine(fileName string) {
 		//dontwork
 		fmt.Println(ok, reason)
 	}
+}
+
+func RiseAndShine(fileName string) (parse.Data, bool, string){
+	Data, ok, reason := parse.GetData(fileName)
+	return Data, ok, reason
 }
