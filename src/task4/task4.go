@@ -54,7 +54,7 @@ func DoTask4(num int) (largestPalindrome int, ok bool) {
 		largestPalindromes = append(largestPalindromes, findLargest(sliceOfPalindromes)...)
 	}
 	for _, v := range largestPalindromes {
-		tmp,_ := strconv.Atoi(v)
+		tmp, _ := strconv.Atoi(v)
 		if largestPalindrome < tmp {
 			largestPalindrome = tmp
 		}

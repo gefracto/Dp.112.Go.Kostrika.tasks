@@ -11,16 +11,17 @@ import (
 	"task6"
 	"task7"
 )
+
 func typeof(v interface{}) string {
 	return fmt.Sprintf("%T", v)
 }
 func Task1Rules(d parse.Data) (ok bool, reason string) {
 	ok = true
-	if (typeof(d.T1.Width) != "int")&&(typeof(d.T1.Height) != "int") {
+	if (typeof(d.T1.Width) != "int") && (typeof(d.T1.Height) != "int") {
 		reason = "Sides must be integers"
 		ok = false
 	}
-	if (typeof(d.T1.Symbol) != "string") {
+	if typeof(d.T1.Symbol) != "string" {
 		reason = "Symbol must be string type"
 		ok = false
 	}
@@ -38,12 +39,12 @@ func Task2Rules(d parse.Data) (ok bool, reason string) {
 		reason = "Must be of Envelope types"
 	}
 
-	if typeof(d.T2.Env1.Side1) != "float64" || typeof(d.T2.Env1.Side2) != "float64"{
+	if typeof(d.T2.Env1.Side1) != "float64" || typeof(d.T2.Env1.Side2) != "float64" {
 		ok = false
 		reason = "Sides of envelope 1 must be float64"
 	}
 
-	if typeof(d.T2.Env2.Side1) != "float64" || typeof(d.T2.Env2.Side2) != "float64"{
+	if typeof(d.T2.Env2.Side1) != "float64" || typeof(d.T2.Env2.Side2) != "float64" {
 		ok = false
 		reason = "Sides of envelope 2 must be float64"
 	}
@@ -139,7 +140,7 @@ func Operate(Data parse.Data) {
 	}
 }
 
-func RiseAndShine(fileName string) (parse.Data, bool, string){
+func RiseAndShine(fileName string) (parse.Data, bool, string) {
 	Data, ok, reason := parse.GetData(fileName)
 	return Data, ok, reason
 }

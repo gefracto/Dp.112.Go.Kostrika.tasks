@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"validator"
 	"fmt"
+	"validator"
 )
 
 func main() {

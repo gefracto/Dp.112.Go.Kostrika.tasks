@@ -3,7 +3,6 @@ package parseJsonOrXml
 import (
 	"encoding/json"
 	"encoding/xml"
-	"fmt"
 	"io/ioutil"
 	"strings"
 	t2 "task2"
@@ -39,8 +38,13 @@ func simpleSpellCheckerJson(file string) (b bool, message string) {
 	openingCurlyBraces := strings.Count(file, "{")
 	closingCurlyBraces := strings.Count(file, "}")
 	quotes := strings.Count(file, "\"")
+	openingBrackets := strings.Count(file, "[")
+	closingBrackets := strings.Count(file, "]")
 
-	if openingCurlyBraces != closingCurlyBraces {
+	if (openingBrackets + closingBrackets)%2 != 0 {
+		b = false
+		message += "К-ство открывающих и закрывающих квадратных скобок не равно\n"
+	} else if (openingCurlyBraces + closingCurlyBraces)%2 != 0 {
 		b = false
 		message += "К-ство открывающих и закрывающих фигурных скобок не равно\n"
 	} else if quotes%2 != 0 {
@@ -103,7 +107,6 @@ func GetData(fileName string) (Data, bool, string) {
 		contents, _ := ioutil.ReadFile("data.json")
 
 		if b, m := simpleSpellCheckerJson(string(contents)); b == false {
-			fmt.Println(m)
 			return MyData, false, m
 		}
 
@@ -117,12 +120,10 @@ func GetData(fileName string) (Data, bool, string) {
 		contents, _ := ioutil.ReadFile("data.xml")
 
 		if b, m := simpleSpellCheckerXml(string(contents)); b == false {
-			fmt.Println(m)
 			return MyData, false, m
 		}
 
 		if b, m := checkForNames(string(contents)); b == false {
-			fmt.Println(m)
 			return MyData, false, m
 		}
 
