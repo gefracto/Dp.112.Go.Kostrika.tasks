@@ -38,10 +38,10 @@ type Data struct {
 func GetData(fileName string) Data {
 	var MyData Data
 	extension := strings.Split(fileName, ".")
-	if extension[1] == "json" {
+	if extension[len(extension)-1] == "json" {
 		contents, _ := ioutil.ReadFile("data.json")
 		json.Unmarshal(contents, &MyData)
-	} else if extension[1] == "xml" {
+	} else if extension[len(extension)-1] == "xml" {
 		contents, _ := ioutil.ReadFile("data.xml")
 		xml.Unmarshal(contents, &MyData)
 	} else {
