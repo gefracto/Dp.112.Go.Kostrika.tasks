@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	arg := flag.String("file", "data.json", "Usage: -file=fileName.extension")
+	arg := flag.String("file", "data.xml", "Usage: -file=fileName.extension")
 	flag.Parse()
 	validator.RiseAndShine(*arg)
 }
