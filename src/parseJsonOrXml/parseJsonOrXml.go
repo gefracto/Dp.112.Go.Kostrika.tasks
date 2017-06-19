@@ -73,6 +73,7 @@ func simpleSpellCheckerXml(file string) (b bool, message string) {
 func GetData(fileName string) Data {
 	var MyData Data
 	extension := strings.Split(fileName, ".")
+	
 	if extension[len(extension)-1] == "json" {
 		contents, _ := ioutil.ReadFile("data.json")
 
