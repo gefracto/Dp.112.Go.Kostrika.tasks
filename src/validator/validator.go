@@ -11,17 +11,47 @@ import (
 	"task6"
 	"task7"
 )
-
+func typeof(v interface{}) string {
+	return fmt.Sprintf("%T", v)
+}
 func Task1Rules(d parse.Data) (ok bool, reason string) {
 	ok = true
-	if d.T1.Height <= 0 || d.T1.Width <= 0 {
+	if (typeof(d.T1.Width) != "int")&&(typeof(d.T1.Height) != "int") {
 		reason = "Sides must be integers"
+		ok = false
+	}
+	if (typeof(d.T1.Symbol) != "string") {
+		reason = "Symbol must be string type"
 		ok = false
 	}
 	return
 }
 func Task2Rules(d parse.Data) (ok bool, reason string) {
 	ok = true
+	if typeof(d.T2.Env1) != typeof(d.T2.Env2) {
+		ok = false
+		reason = "Envelopes must be equal type"
+	}
+
+	if (typeof(d.T2.Env1) != "task2.Envelope") || (typeof(d.T2.Env1) != "task2.Envelope") {
+		ok = false
+		reason = "Must be of Envelope types"
+	}
+
+	if typeof(d.T2.Env1.Side1) != "float64" || typeof(d.T2.Env1.Side2) != "float64"{
+		ok = false
+		reason = "Sides of envelope 1 must be float64"
+	}
+
+	if typeof(d.T2.Env2.Side1) != "float64" || typeof(d.T2.Env2.Side2) != "float64"{
+		ok = false
+		reason = "Sides of envelope 2 must be float64"
+	}
+
+	if d.T2.Env1.Side1 <= 0 || d.T2.Env1.Side2 <= 0 || d.T2.Env2.Side1 <= 0 || d.T2.Env2.Side2 <= 0 {
+		ok = false
+		reason = "Sides must be > 0"
+	}
 	return
 }
 func Task3Rules(d parse.Data) (ok bool, reason string) {
