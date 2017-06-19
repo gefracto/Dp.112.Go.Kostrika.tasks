@@ -15,16 +15,28 @@
 		"SliceOfTriangles":
 			[
 				{
-					"Name":"ABC","A":10.3,"B":10.1,"C":10
+                  "Name":"ABC",
+                  "A":10.3,
+                  "B":10.1,
+                  "C":10
 				},
 				{
-					"Name":"DEF","A":10.1,"B":10.3,"C":10
+                  "Name":"DEF",
+                  "A":10.1,
+                  "B":10.3,
+                  "C":10
 				},
 				{
-					"Name":"GHI","A":34,"B":43.2,"C":20
+				  "Name":"GHI",
+                  "A":34,
+                  "B":43.2,
+                  "C":20
 				},
 				{
-					"Name":"JKL","A":2,"B":3,"C":2
+				  "Name":"JKL",
+                  "A":2,
+                  "B":3,
+                  "C":2
 				}
 			]
 	},
@@ -37,6 +49,9 @@
 	},
 	"T6":{
 		"Length":10,
-		"MaxSquare":25},
-	"T7":{"File":"context"}
+		"MaxSquare":25
+    },
+	"T7":{
+      "File":"context"
+    }
 }
