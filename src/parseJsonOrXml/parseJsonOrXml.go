@@ -34,7 +34,32 @@ type Data struct {
 	}
 }
 
-func simpleSpellCheckerJson(file string) (b bool, message string) {
+type DataChecking struct {
+	T1 struct {
+		Width, Height string
+		Symbol        string
+	}
+	T2 struct {
+		Env1, Env2 string
+	}
+	T3 struct {
+		SliceOfTriangles string
+	}
+	T4 struct {
+		Number string
+	}
+	T5 struct {
+		Min, Max string
+	}
+	T6 struct {
+		Length, MaxSquare string
+	}
+	T7 struct {
+		File string
+	}
+}
+
+func SimpleSpellCheckerJson(file string) (b bool, message string) {
 	openingCurlyBraces := strings.Count(file, "{")
 	closingCurlyBraces := strings.Count(file, "}")
 	quotes := strings.Count(file, "\"")
@@ -56,7 +81,7 @@ func simpleSpellCheckerJson(file string) (b bool, message string) {
 	return b, message
 }
 
-func simpleSpellCheckerXml(file string) (b bool, message string) {
+func SimpleSpellCheckerXml(file string) (b bool, message string) {
 	openingAngleBrackets := strings.Count(file, "<")
 	closingAngleBrackets := strings.Count(file, ">")
 	slashes := strings.Count(file, "/")
@@ -74,7 +99,7 @@ func simpleSpellCheckerXml(file string) (b bool, message string) {
 	return b, message
 }
 
-func checkForNames(file string) (b bool, message string) {
+func CheckForNames(file string) (b bool, message string) {
 	b = true
 
 	var rules []string = []string{
@@ -106,11 +131,11 @@ func GetData(fileName string) (Data, bool, string) {
 	if extension[len(extension)-1] == "json" {
 		contents, _ := ioutil.ReadFile("data.json")
 
-		if b, m := simpleSpellCheckerJson(string(contents)); b == false {
+		if b, m := SimpleSpellCheckerJson(string(contents)); b == false {
 			return MyData, false, m
 		}
 
-		if b, m := checkForNames(string(contents)); b == false {
+		if b, m := CheckForNames(string(contents)); b == false {
 			return MyData, false, m
 		}
 
@@ -119,11 +144,11 @@ func GetData(fileName string) (Data, bool, string) {
 	} else if extension[len(extension)-1] == "xml" {
 		contents, _ := ioutil.ReadFile("data.xml")
 
-		if b, m := simpleSpellCheckerXml(string(contents)); b == false {
+		if b, m := SimpleSpellCheckerXml(string(contents)); b == false {
 			return MyData, false, m
 		}
 
-		if b, m := checkForNames(string(contents)); b == false {
+		if b, m := CheckForNames(string(contents)); b == false {
 			return MyData, false, m
 		}
 
