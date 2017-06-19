@@ -1,1 +1,42 @@
-{"T1":{"Width":8,"Height":5,"Symbol":"*"},"T2":{"Env1":{"Side1":21,"Side2":15},"Env2":{"Side1":3.5,"Side2":22.3}},"T3":{"SliceOfTriangles":[{"Name":"ABC","A":10.3,"B":10.1,"C":10},{"Name":"DEF","A":10.1,"B":10.3,"C":10},{"Name":"GHI","A":34,"B":43.2,"C":20},{"Name":"JKL","A":2,"B":3,"C":2}]},"T4":{"Number":41212226},"T5":{"Min":1,"Max":999999},"T6":{"Length":10,"MaxSquare":25},"T7":{"File":"context"}}
+{
+	"T1": {
+		"Width":8,
+		"Height":5,
+		"Symbol":"*"},
+	"T2": {
+		"Env1":{
+			"Side1":21,"Side2":15
+		},
+		"Env2":{
+			"Side1":3.5,"Side2":22.3
+		}
+	},
+	"T3":{
+		"SliceOfTriangles":
+			[
+				{
+					"Name":"ABC","A":10.3,"B":10.1,"C":10
+				},
+				{
+					"Name":"DEF","A":10.1,"B":10.3,"C":10
+				},
+				{
+					"Name":"GHI","A":34,"B":43.2,"C":20
+				},
+				{
+					"Name":"JKL","A":2,"B":3,"C":2
+				}
+			]
+	},
+	"T4":{
+		"Number":41212226
+	},
+	"T5":{
+		"Min":1,
+		"Max":999999
+	},
+	"T6":{
+		"Length":10,
+		"MaxSquare":25},
+	"T7":{"File":"context"}
+}

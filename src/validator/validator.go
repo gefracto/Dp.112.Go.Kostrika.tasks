@@ -40,7 +40,7 @@ func Task7Rules(d parse.Data) (ok bool, reason string) {
 }
 
 func RiseAndShine() {
-	Data := parse.GetData("data.xml")
+	Data := parse.GetData("data.json")
 	if ok, reason := Task1Rules(Data); ok {
 		//dowork
 		fmt.Println(task1.DoTask1(Data.T1.Width, Data.T1.Height, Data.T1.Symbol))
