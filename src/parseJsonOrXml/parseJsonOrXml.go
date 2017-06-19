@@ -33,30 +33,6 @@ type Data struct {
 		File string
 	}
 }
-type DataChecking struct {
-	T1 struct {
-		Width, Height string
-		Symbol        string
-	}
-	T2 struct {
-		Env1, Env2 string
-	}
-	T3 struct {
-		SliceOfTriangles string
-	}
-	T4 struct {
-		Number string
-	}
-	T5 struct {
-		Min, Max string
-	}
-	T6 struct {
-		Length, MaxSquare string
-	}
-	T7 struct {
-		File string
-	}
-}
 
 func SimpleSpellCheckerJson(file string) (b bool, message string) {
 	openingCurlyBraces := strings.Count(file, "{")
@@ -129,7 +105,6 @@ func GetData(fileName string) (Data, bool, string) {
 
 	if extension[len(extension)-1] == "json" {
 		contents, _ := ioutil.ReadFile("data.json")
-
 		if b, m := SimpleSpellCheckerJson(string(contents)); b == false {
 			return MyData, false, m
 		}

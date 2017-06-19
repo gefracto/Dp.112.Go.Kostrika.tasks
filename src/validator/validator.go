@@ -2,6 +2,7 @@ package validator
 
 import (
 	"fmt"
+	"io/ioutil"
 	parse "parseJsonOrXml"
 	"task1"
 	"task2"
@@ -10,16 +11,13 @@ import (
 	"task5"
 	"task6"
 	"task7"
-	"encoding/json"
-	"io/ioutil"
-	"encoding/xml"
-	"strings"
 )
 
 func typeof(v interface{}) string {
 	return fmt.Sprintf("%T", v)
 }
 
+/*
 func Task1Rules(d parse.Data) (ok bool, reason string) {
 	ok = true
 	return
@@ -48,11 +46,11 @@ func Task7Rules(d parse.DataChecking) (ok bool, reason string) {
 	ok = true
 	return
 }
-
+*/
 func separator(n int) {
 	fmt.Printf("\n\n------------->Task #%d<-------------\n\n", n)
 }
-func Operate(Data parse.Data){
+func Operate(Data parse.Data) {
 	separator(1)
 	fmt.Println(task1.DoTask1(Data.T1.Width, Data.T1.Height, Data.T1.Symbol))
 	separator(2)
@@ -70,8 +68,30 @@ func Operate(Data parse.Data){
 	fmt.Println(task7.DoTask7(Data.T7.File))
 }
 
-func validateData(file string) (ok bool, reason string) {
-	
+func ValidateData() (ok bool, reason string) {
+	contents, _ := ioutil.ReadFile("data.json")
+	var contentsSlice []string
+	for _, v := range contents {
+		contentsSlice = append(contentsSlice, string(v))
+	}
+	var file string
+	for _, v := range contentsSlice {
+		file += v
+	}
+	var newFile string
+	for i := 0; i < len(file); i++ {
+		if  string(file[i]) != "{" &&
+			string(file[i]) != "}" &&
+			string(file[i]) != "[" &&
+			string(file[i]) != "]" &&
+			string(file[i]) != "\n" &&
+			string(file[i]) != "," &&
+			string(file[i]) != ":" &&
+			string(file[i]) != "\"" &&
+			string(file[i]) != "\t" &&
+			string(file[i]) != " " {newFile += string(file[i])}
+	}
+	return true, newFile
 }
 
 func RiseAndShine(fileName string) (parse.Data, bool, string) {

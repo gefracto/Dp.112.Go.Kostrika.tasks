@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+
 	arg := flag.String("file", "data.json", "Usage: -file=fileName.extension")
 	flag.Parse()
 	data, ok, reason := validator.RiseAndShine(*arg)
@@ -15,4 +16,6 @@ func main() {
 	} else {
 		fmt.Println(reason)
 	}
+
+
 }
