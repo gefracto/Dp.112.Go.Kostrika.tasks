@@ -61,8 +61,8 @@ func RiseAndShine(fileName string) {
 	separator(2)
 	if ok, reason := Task2Rules(Data); ok {
 		//dowork
-		fmt.Println(task2.DoTask2(task2.Envelope{Data.T2.Env1.Side1,Data.T2.Env1.Side2},
-		task2.Envelope{Data.T2.Env2.Side1, Data.T2.Env2.Side2}))
+		fmt.Println(task2.DoTask2(task2.Envelope{Data.T2.Env1.Side1, Data.T2.Env1.Side2},
+			task2.Envelope{Data.T2.Env2.Side1, Data.T2.Env2.Side2}))
 	} else {
 		//dontwork
 		fmt.Println(ok, reason)
