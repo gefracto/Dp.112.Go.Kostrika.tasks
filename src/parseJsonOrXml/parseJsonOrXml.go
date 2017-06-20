@@ -18,7 +18,7 @@ import (
 
 type Data struct {
 	T1 struct {
-		Width, Height int
+		Width, Height uint
 		Symbol        string
 	}
 	T2 struct {
@@ -131,8 +131,19 @@ func GetData(fileName string) (Data, bool, string) {
 		if b, m := CheckForNames(file); b == false {
 			return MyData, false, m
 		}
-		var unmarshalFails string = "Не удалось распарсить json. \nНечисловые значения должны быть заключены в кавычки \"значение\"" +
-			"Числа должны быть без кавычек."
+		var unmarshalFails string = "Не удалось распарсить json. " +
+			"\nПроверьте данные." +
+			"\nЗначения типа string должны быть заключены в кавычки: \"значение\"" +
+			"\nЧисла должны быть без кавычек." +
+			"\nЧисло не может быть меньше ноля" +
+			"\n\nОбщий формат json'a таков: " +
+			"\n{" +
+			"\n\t\"ключ\":значение1,значение2\n}" +
+			"\nЗначения разделяются запятой." +
+			"\nЕсли значение составное, то действует то же правило:" +
+			"\n{\n\"ключ1\":\n\t{" +
+			"\n\t\"ключ2\":\n\t\tзначение1,значение2\n\t}," +
+			"\n\t{\n\t\"ключ3\":\n\t\tзначение1,значение2\n\t}\n......\n}"
 		if err = json.Unmarshal(contents, &MyData); err != nil {
 			return MyData, false, unmarshalFails
 		}

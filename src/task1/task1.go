@@ -26,11 +26,11 @@ func makeRow(switcher int, symbol string, width int) string {
 	return row
 }
 
-func DoTask1(width int, height int, symbol string) string {
+func DoTask1(width uint, height uint, symbol string) string {
 	switcher := 1
 	board := ""
-	for i := 1; i <= height; i++ {
-		board += makeRow(switcher, symbol, width) + "\n"
+	for i := 1; i <= int(height); i++ {
+		board += makeRow(switcher, symbol, int(width)) + "\n"
 		switcher *= -1
 	}
 	return board

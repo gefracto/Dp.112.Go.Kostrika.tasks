@@ -2,6 +2,7 @@ package validator
 
 import (
 	"fmt"
+	"strings"
 )
 
 func typeof(v interface{}) string {
@@ -10,6 +11,8 @@ func typeof(v interface{}) string {
 
 func Task1Rules(s string) (ok bool, reason string, file string) {
 	ok = true
+	strings.Index(s,"T1")
+	//strconv.Parse
 	return
 }
 func Task2Rules(s string) (ok bool, reason string, file string) {
