@@ -5,8 +5,15 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"strings"
-	t2 "task2"
-	t3 "task3"
+	"fmt"
+	"task1"
+	"task2"
+	"task3"
+	"task4"
+	"task5"
+	"task6"
+	"task7"
+	"validator"
 )
 
 type Data struct {
@@ -15,10 +22,10 @@ type Data struct {
 		Symbol        string
 	}
 	T2 struct {
-		Env1, Env2 t2.Envelope
+		Env1, Env2 task2.Envelope
 	}
 	T3 struct {
-		SliceOfTriangles []t3.Triangle
+		SliceOfTriangles []task3.Triangle
 	}
 	T4 struct {
 		Number int
@@ -98,13 +105,19 @@ func CheckForNames(file string) (b bool, message string) {
 	}
 	return b, message
 }
-
+var S string
 func GetData(fileName string) (Data, bool, string) {
 	var MyData Data
 	extension := strings.Split(fileName, ".")
 
 	if extension[len(extension)-1] == "json" {
 		contents, _ := ioutil.ReadFile("data.json")
+
+		//here comes data validator
+
+		for _,v := range contents {
+			S += string(v)
+		}
 		if b, m := SimpleSpellCheckerJson(string(contents)); b == false {
 			return MyData, false, m
 		}
@@ -117,6 +130,8 @@ func GetData(fileName string) (Data, bool, string) {
 
 	} else if extension[len(extension)-1] == "xml" {
 		contents, _ := ioutil.ReadFile("data.xml")
+
+		//here comes data validator
 
 		if b, m := SimpleSpellCheckerXml(string(contents)); b == false {
 			return MyData, false, m
@@ -132,4 +147,33 @@ func GetData(fileName string) (Data, bool, string) {
 		return MyData, false, "Не удалось открыть файл. \nРасширение файла должно быть формата json или xml."
 	}
 	return MyData, true, ""
+}
+
+func MakeAStructFromJson(fileName string) (Data, bool, string) {
+	Data, ok, reason := GetData(fileName)
+	return Data, ok, reason
+}
+
+func separator(n int) {
+	fmt.Printf("\n\n------------->Task #%d<-------------\n\n", n)
+}
+
+
+func Operate(Data Data) {
+	fmt.Println(validator.ValidateData(S))
+	separator(1)
+	fmt.Println(task1.DoTask1(Data.T1.Width, Data.T1.Height, Data.T1.Symbol))
+	separator(2)
+	fmt.Println(task2.DoTask2(task2.Envelope{Data.T2.Env1.Side1, Data.T2.Env1.Side2},
+		task2.Envelope{Data.T2.Env2.Side1, Data.T2.Env2.Side2}))
+	separator(3)
+	fmt.Println(task3.DoTask3(Data.T3.SliceOfTriangles))
+	separator(4)
+	fmt.Println(task4.DoTask4(Data.T4.Number))
+	separator(5)
+	fmt.Println(task5.DoTask5(Data.T5.Min, Data.T5.Max))
+	separator(6)
+	fmt.Println(task6.DoTask6(Data.T6.Length, Data.T6.MaxSquare))
+	separator(7)
+	fmt.Println(task7.DoTask7(Data.T7.File))
 }
