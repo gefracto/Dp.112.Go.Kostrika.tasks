@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-func DoTask6(length, maxSquare int) (err error) {
-	str := getSequence(length, maxSquare)
+func DoTask6(length, maxSquare uint) (err error) {
+	str := getSequence(int(length), int(maxSquare))
 	file, err := os.Create("number sequence of task6")
 	defer file.Close()
 	_, err = file.WriteString(str)

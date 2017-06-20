@@ -36,8 +36,8 @@ func findLargest(sl []string) []string {
 	return largest
 }
 
-func DoTask4(num int) (largestPalindrome int, ok bool) {
-	original := strconv.Itoa(num)
+func DoTask4(num uint) (largestPalindrome int, ok bool) {
+	original := strconv.Itoa(int(num))
 	reversed := reverseString(original)
 	ok = false
 	var sliceOfPalindromes []string

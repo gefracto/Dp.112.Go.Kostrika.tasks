@@ -28,13 +28,13 @@ type Data struct {
 		SliceOfTriangles []task3.Triangle
 	}
 	T4 struct {
-		Number int
+		Number uint
 	}
 	T5 struct {
-		Min, Max int
+		Min, Max uint
 	}
 	T6 struct {
-		Length, MaxSquare int
+		Length, MaxSquare uint
 	}
 	T7 struct {
 		File string

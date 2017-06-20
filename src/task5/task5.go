@@ -100,14 +100,14 @@ func method2(n int) (b bool) {
 	return b
 }
 
-func DoTask5(min, max int) Results {
+func DoTask5(min, max uint) Results {
 	var Res Results
 	for i := min; i <= max; i++ {
-		if method1(i) {
+		if method1(int(i)) {
 			Res.method1Won()
 		}
 
-		if method2(i) {
+		if method2(int(i)) {
 			Res.method2Won()
 		}
 	}
