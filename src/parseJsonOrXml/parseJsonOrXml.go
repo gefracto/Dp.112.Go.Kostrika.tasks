@@ -131,9 +131,10 @@ func GetData(fileName string) (Data, bool, string) {
 		if b, m := CheckForNames(file); b == false {
 			return MyData, false, m
 		}
-
+		var unmarshalFails string = "Не удалось распарсить json. \nНечисловые значения должны быть заключены в кавычки \"значение\"" +
+			"Числа должны быть без кавычек."
 		if err = json.Unmarshal(contents, &MyData); err != nil {
-			return MyData, false, "Не удалось распарсить json"
+			return MyData, false, unmarshalFails
 		}
 
 	} else if extension[len(extension)-1] == "xml" {

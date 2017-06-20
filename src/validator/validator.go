@@ -78,9 +78,9 @@ func ValidateData(contents []byte, format string) (ok bool, reason string) {
 		//file = XmlToStr(file)
 	//}
 
-	
-	var newFile string
+	fmt.Println(file)
+	//var newFile string
 
-	return true, newFile
+	return true, reason
 
 }
