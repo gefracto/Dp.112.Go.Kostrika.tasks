@@ -56,7 +56,7 @@ func JsonToStr(file string) (newFile string) {
 	}
 	return newFile
 }
-
+//T1Width16Height8Symbol*T2Env1Side121Side215Env2Side13.5Side222.3T3SliceOfTrianglesNameABCA10.3B10.1C10NameDEFA10.1B10C10.3NameGHIA34B43.2C20NameJKLA2B3C2T4Number41212226T5Min999990Max999999T6Length10MaxSquare25T7Filecontext
 func XmlToStr(file string) (newFile string) {
 	for i := 0; i < len(file); i++ {
 		if string(file[i]) != "<" &&
@@ -80,9 +80,35 @@ func ValidateData(contents []byte, format string) (ok bool, reason string) {
 	} //else if format == "xml" {
 		//file = XmlToStr(file)
 	//}
-
-	fmt.Println(file)
 	//var newFile string
+
+	if ok, reason, file = Task1Rules(file); ok == false {
+		return false, reason
+	}
+
+	if ok, reason, file = Task2Rules(file); ok == false {
+		return false, reason
+	}
+
+	if ok, reason, file = Task3Rules(file); ok == false {
+		return false, reason
+	}
+
+	if ok, reason, file = Task4Rules(file); ok == false {
+		return false, reason
+	}
+
+	if ok, reason, file = Task5Rules(file); ok == false {
+		return false, reason
+	}
+
+	if ok, reason, file = Task6Rules(file); ok == false {
+		return false, reason
+	}
+
+	if ok, reason = Task7Rules(file); ok == false {
+		return false, reason
+	}
 
 	return true, reason
 

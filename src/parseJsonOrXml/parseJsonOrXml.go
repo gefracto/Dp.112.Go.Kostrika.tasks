@@ -132,7 +132,7 @@ func GetData(fileName string) (Data, bool, string) {
 			return MyData, false, m
 		}
 		var unmarshalFails string = "Не удалось распарсить json. " +
-			"\nПроверьте данные." +
+			"\nПроверьте данные и их типы." +
 			"\nЗначения типа string должны быть заключены в кавычки: \"значение\"" +
 			"\nЧисла должны быть без кавычек." +
 			"\nЧисло не может быть меньше ноля" +
