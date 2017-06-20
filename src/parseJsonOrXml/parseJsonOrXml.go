@@ -3,9 +3,9 @@ package parseJsonOrXml
 import (
 	"encoding/json"
 	"encoding/xml"
+	"fmt"
 	"io/ioutil"
 	"strings"
-	"fmt"
 	"task1"
 	"task2"
 	"task3"
@@ -48,10 +48,10 @@ func SimpleSpellCheckerJson(file string) (b bool, message string) {
 	openingBrackets := strings.Count(file, "[")
 	closingBrackets := strings.Count(file, "]")
 
-	if (openingBrackets + closingBrackets)%2 != 0 {
+	if (openingBrackets+closingBrackets)%2 != 0 {
 		b = false
 		message += "К-ство открывающих и закрывающих квадратных скобок не равно\n"
-	} else if (openingCurlyBraces + closingCurlyBraces)%2 != 0 {
+	} else if (openingCurlyBraces+closingCurlyBraces)%2 != 0 {
 		b = false
 		message += "К-ство открывающих и закрывающих фигурных скобок не равно\n"
 	} else if quotes%2 != 0 {
@@ -111,7 +111,11 @@ func GetData(fileName string) (Data, bool, string) {
 	extension := strings.Split(fileName, ".")
 
 	if extension[len(extension)-1] == "json" {
-		contents, _ := ioutil.ReadFile("data.json")
+		var contents []byte
+		var err error
+		if contents, err = ioutil.ReadFile("data.json"); err != nil {
+			return MyData, false, "Не удалось прочитать файл"
+		}
 		var file string
 		for _, v := range contents {
 			file += string(v)
@@ -128,17 +132,20 @@ func GetData(fileName string) (Data, bool, string) {
 			return MyData, false, m
 		}
 
-		if err := json.Unmarshal(contents, &MyData); err != nil {
-			return MyData, false, string(err)
+		if err = json.Unmarshal(contents, &MyData); err != nil {
+			return MyData, false, "Не удалось распарсить json"
 		}
 
 	} else if extension[len(extension)-1] == "xml" {
-		contents, _ := ioutil.ReadFile("data.xml")
+		var contents []byte
+		var err error
 		var file string
+		if contents, err = ioutil.ReadFile("data.xml"); err != nil {
+			return MyData, false, "Не удалось открыть файл"
+		}
 		for _, v := range contents {
 			file += string(v)
 		}
-		//here comes data validator
 		if b, m := validator.ValidateData(contents, extension[len(extension)-1]); b == false {
 			return MyData, false, m
 		}
@@ -150,8 +157,8 @@ func GetData(fileName string) (Data, bool, string) {
 			return MyData, false, m
 		}
 
-		if err := xml.Unmarshal(contents, &MyData); err != nil {
-			return MyData, false, string(err)
+		if err = xml.Unmarshal(contents, &MyData); err != nil {
+			return MyData, false, "Не удалось распаковать xml"
 		}
 
 	} else {
@@ -168,7 +175,6 @@ func MakeAStructFromJson(fileName string) (Data, bool, string) {
 func separator(n int) {
 	fmt.Printf("\n\n------------->Task #%d<-------------\n\n", n)
 }
-
 
 func Operate(Data Data) {
 	separator(1)

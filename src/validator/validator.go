@@ -8,7 +8,6 @@ func typeof(v interface{}) string {
 	return fmt.Sprintf("%T", v)
 }
 
-
 func Task1Rules(s string) (ok bool, reason string, file string) {
 	ok = true
 	return
@@ -39,7 +38,7 @@ func Task7Rules(s string) (ok bool, reason string) {
 }
 func JsonToStr(file string) (newFile string) {
 	for i := 0; i < len(file); i++ {
-		if  string(file[i]) != "{" &&
+		if string(file[i]) != "{" &&
 			string(file[i]) != "}" &&
 			string(file[i]) != "[" &&
 			string(file[i]) != "]" &&
@@ -48,18 +47,22 @@ func JsonToStr(file string) (newFile string) {
 			string(file[i]) != ":" &&
 			string(file[i]) != "\"" &&
 			string(file[i]) != "\t" &&
-			string(file[i]) != " " {newFile += string(file[i])}
+			string(file[i]) != " " {
+			newFile += string(file[i])
+		}
 	}
 	return newFile
 }
 
 func XmlToStr(file string) (newFile string) {
 	for i := 0; i < len(file); i++ {
-		if  string(file[i]) != "<" &&
+		if string(file[i]) != "<" &&
 			string(file[i]) != ">" &&
 			string(file[i]) != "/" &&
 			string(file[i]) != "\n" &&
-			string(file[i]) != "\t"{newFile += string(file[i])}
+			string(file[i]) != "\t" {
+			newFile += string(file[i])
+		}
 	}
 	return newFile
 }
@@ -71,15 +74,13 @@ func ValidateData(contents []byte, format string) (ok bool, reason string) {
 	}
 	if format == "json" {
 		file = JsonToStr(file)
-	} else if format == "xml" {
-		file = XmlToStr(file)
-	}
+	} //else if format == "xml" {
+		//file = XmlToStr(file)
+	//}
 
 	
 	var newFile string
-	
+
 	return true, newFile
 
 }
-
-
