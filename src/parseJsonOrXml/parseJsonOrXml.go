@@ -105,24 +105,26 @@ func CheckForNames(file string) (b bool, message string) {
 	}
 	return b, message
 }
-var S string
+
 func GetData(fileName string) (Data, bool, string) {
 	var MyData Data
 	extension := strings.Split(fileName, ".")
 
 	if extension[len(extension)-1] == "json" {
 		contents, _ := ioutil.ReadFile("data.json")
-
-		//here comes data validator
-
-		for _,v := range contents {
-			S += string(v)
+		var file string
+		for _, v := range contents {
+			file += string(v)
 		}
-		if b, m := SimpleSpellCheckerJson(string(contents)); b == false {
+		if b, m := ValidateData(contents, extension[len(extension)-1]); b == false {
 			return MyData, false, m
 		}
 
-		if b, m := CheckForNames(string(contents)); b == false {
+		if b, m := SimpleSpellCheckerJson(file); b == false {
+			return MyData, false, m
+		}
+
+		if b, m := CheckForNames(file); b == false {
 			return MyData, false, m
 		}
 
@@ -130,9 +132,14 @@ func GetData(fileName string) (Data, bool, string) {
 
 	} else if extension[len(extension)-1] == "xml" {
 		contents, _ := ioutil.ReadFile("data.xml")
-
+		var file string
+		for _, v := range contents {
+			file += string(v)
+		}
 		//here comes data validator
-
+		if b, m := ValidateData(contents, extension[len(extension)-1]); b == false {
+			return MyData, false, m
+		}
 		if b, m := SimpleSpellCheckerXml(string(contents)); b == false {
 			return MyData, false, m
 		}

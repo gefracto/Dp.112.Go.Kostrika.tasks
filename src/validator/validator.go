@@ -37,9 +37,7 @@ func Task7Rules(s string) (ok bool, reason string) {
 	ok = true
 	return
 }
-
-func ValidateData(file string) (ok bool, reason string) {
-	var newFile string
+func JsonToStr(file string) (newFile string) {
 	for i := 0; i < len(file); i++ {
 		if  string(file[i]) != "{" &&
 			string(file[i]) != "}" &&
@@ -52,17 +50,34 @@ func ValidateData(file string) (ok bool, reason string) {
 			string(file[i]) != "\t" &&
 			string(file[i]) != " " {newFile += string(file[i])}
 	}
-	if ok, reason, file := Task1Rules(newFile); ok {
-		newFile = file
-	} else {
-		return false, reason
+	return newFile
+}
+
+func XmlToStr(file string) (newFile string) {
+	for i := 0; i < len(file); i++ {
+		if  string(file[i]) != "<" &&
+			string(file[i]) != ">" &&
+			string(file[i]) != "/" &&
+			string(file[i]) != "\n" &&
+			string(file[i]) != "\t"{newFile += string(file[i])}
+	}
+	return newFile
+}
+
+func ValidateData(contents []byte, format string) (ok bool, reason string) {
+	var file string
+	for _, v := range contents {
+		file += string(v)
+	}
+	if format == "json" {
+		file = JsonToStr(file)
+	} else if format == "xml" {
+		file = XmlToStr(file)
 	}
 
-	if ok, reason, file := Task2Rules(newFile); ok {
-		newFile = file
-	} else {
-		return false, reason
-	}
+	
+	var newFile string
+	
 	return true, newFile
 
 }
