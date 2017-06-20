@@ -3,16 +3,37 @@ package validator
 import (
 	"fmt"
 	"strings"
+	"strconv"
 )
 
 func typeof(v interface{}) string {
 	return fmt.Sprintf("%T", v)
 }
+//T1Width16Height8Symbol*T2Env1Side121Side215Env2Side13.5Side222.3T3SliceOfTrianglesNameABCA10.3B10.1C10NameDEFA10.1B10C10.3NameGHIA34B43.2C20NameJKLA2B3C2T4Number41212226T5Min999990Max999999T6Length10MaxSquare25T7Filecontext
 
-func Task1Rules(s string) (ok bool, reason string, file string) {
+func Task1Rules(str string) (ok bool, reason string, file string) {
 	ok = true
-	strings.Index(s,"T1")
-	//strconv.Parse
+
+	leftWidth := strings.Index(str, "Width") + len("Width")
+	rightWidth := strings.Index(str, "Height")
+
+	if _, err := strconv.Atoi(string(str[leftWidth:rightWidth])); err != nil {
+		ok = false
+		reason = "\"Width\" должно быть числом типа int и без кавычек"
+	}
+	//fmt.Println(strconv.Atoi(string(str[leftWidth:rightWidth])))
+
+	leftHeight := strings.Index(str, "Height") + 6
+	rightHeight := strings.Index(str, "Symbol")
+
+	if _, err := strconv.Atoi(string(str[leftHeight:rightHeight])); err != nil {
+		ok = false
+		reason = "\"Height\" должно быть числом типа int и без кавычек"
+	}
+	//fmt.Println(strconv.Atoi(string(str[leftHeight:rightHeight])))
+	// Symbol не проверяем
+	beginFileWithIndex := strings.Index(str, "Env1Side1") + len("Env1Side1")
+	file = string(str[beginFileWithIndex:])
 	return
 }
 func Task2Rules(s string) (ok bool, reason string, file string) {
@@ -56,7 +77,7 @@ func JsonToStr(file string) (newFile string) {
 	}
 	return newFile
 }
-//T1Width16Height8Symbol*T2Env1Side121Side215Env2Side13.5Side222.3T3SliceOfTrianglesNameABCA10.3B10.1C10NameDEFA10.1B10C10.3NameGHIA34B43.2C20NameJKLA2B3C2T4Number41212226T5Min999990Max999999T6Length10MaxSquare25T7Filecontext
+
 func XmlToStr(file string) (newFile string) {
 	for i := 0; i < len(file); i++ {
 		if string(file[i]) != "<" &&
@@ -78,7 +99,7 @@ func ValidateData(contents []byte, format string) (ok bool, reason string) {
 	if format == "json" {
 		file = JsonToStr(file)
 	} //else if format == "xml" {
-		//file = XmlToStr(file)
+	//file = XmlToStr(file)
 	//}
 	//var newFile string
 
