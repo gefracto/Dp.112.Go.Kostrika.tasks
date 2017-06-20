@@ -38,8 +38,6 @@ func Task7Rules(s string) (ok bool, reason string) {
 	return
 }
 
-
-
 func ValidateData(file string) (ok bool, reason string) {
 	var newFile string
 	for i := 0; i < len(file); i++ {
