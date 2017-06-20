@@ -116,7 +116,7 @@ func GetData(fileName string) (Data, bool, string) {
 		for _, v := range contents {
 			file += string(v)
 		}
-		if b, m := ValidateData(contents, extension[len(extension)-1]); b == false {
+		if b, m := validator.ValidateData(contents, extension[len(extension)-1]); b == false {
 			return MyData, false, m
 		}
 
@@ -128,7 +128,9 @@ func GetData(fileName string) (Data, bool, string) {
 			return MyData, false, m
 		}
 
-		json.Unmarshal(contents, &MyData)
+		if err := json.Unmarshal(contents, &MyData); err != nil {
+			return MyData, false, string(err)
+		}
 
 	} else if extension[len(extension)-1] == "xml" {
 		contents, _ := ioutil.ReadFile("data.xml")
@@ -137,7 +139,7 @@ func GetData(fileName string) (Data, bool, string) {
 			file += string(v)
 		}
 		//here comes data validator
-		if b, m := ValidateData(contents, extension[len(extension)-1]); b == false {
+		if b, m := validator.ValidateData(contents, extension[len(extension)-1]); b == false {
 			return MyData, false, m
 		}
 		if b, m := SimpleSpellCheckerXml(string(contents)); b == false {
@@ -148,7 +150,9 @@ func GetData(fileName string) (Data, bool, string) {
 			return MyData, false, m
 		}
 
-		xml.Unmarshal(contents, &MyData)
+		if err := xml.Unmarshal(contents, &MyData); err != nil {
+			return MyData, false, string(err)
+		}
 
 	} else {
 		return MyData, false, "Не удалось открыть файл. \nРасширение файла должно быть формата json или xml."
@@ -167,7 +171,6 @@ func separator(n int) {
 
 
 func Operate(Data Data) {
-	fmt.Println(validator.ValidateData(S))
 	separator(1)
 	fmt.Println(task1.DoTask1(Data.T1.Width, Data.T1.Height, Data.T1.Symbol))
 	separator(2)
