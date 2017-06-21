@@ -1,18 +1,18 @@
 package validator
 
-import (
+/*import (
 	"fmt"
 	"strings"
 	"strconv"
-)
+)*/
 
-func typeof(v interface{}) string {
+/*func typeof(v interface{}) string {
 	return fmt.Sprintf("%T", v)
-}
+}*/
 //T1Width16Height8Symbol*T2Env1Side121Side215Env2Side13.5Side222.3T3SliceOfTrianglesNameABCA10.3B10.1C10NameDEFA10.1B10C10.3NameGHIA34B43.2C20NameJKLA2B3C2T4Number41212226T5Min999990Max999999T6Length10MaxSquare25T7Filecontext
 //21Side215Env2Side13.5Side222.3T3SliceOfTrianglesNameABCA10.3B10.1C10NameDEFA10.1B10C10.3NameGHIA34B43.2C20NameJKLA2B3C2T4Number12345T5Min999990Max999999T6Length10MaxSquare25T7Filecontext
 
-func Task1Rules(str string) (ok bool, reason string, file string) {
+/*func Task1Rules(str string) (ok bool, reason string, file string) {
 	ok = true
 
 	leftWidth := strings.Index(str, "Width") + len("Width")
@@ -102,14 +102,14 @@ func Task6Rules(s string) (ok bool, reason string, file string) {
 }
 func Task7Rules(str string) (ok bool, reason string) {
 	ok = true
-/*	if string(str[strings.Index(str,"T7FileContex")]) != "T7FileContext" {
+*//*	if string(str[strings.Index(str,"T7FileContex")]) != "T7FileContext" {
 		ok = false
 		reason = "Файл должен называться \"context\""
 	}
-*/
+*//*
 	return
-}
-func JsonToStr(file string) (newFile string) {
+}*/
+/*func JsonToStr(file string) (newFile string) {
 	for i := 0; i < len(file); i++ {
 		if string(file[i]) != "{" &&
 			string(file[i]) != "}" &&
@@ -127,7 +127,7 @@ func JsonToStr(file string) (newFile string) {
 	return newFile
 }
 
-func XmlToStr(file string) (newFile string) {
+//func XmlToStr(file string) (newFile string) {
 	for i := 0; i < len(file); i++ {
 		if string(file[i]) != "<" &&
 			string(file[i]) != ">" &&
@@ -138,9 +138,9 @@ func XmlToStr(file string) (newFile string) {
 		}
 	}
 	return newFile
-}
+}*/
 
-func ValidateData(contents []byte, format string) (ok bool, reason string) {
+/*func ValidateData(contents []byte, format string) (ok bool, reason string) {
 	var file string
 	for _, v := range contents {
 		file += string(v)
@@ -182,4 +182,4 @@ func ValidateData(contents []byte, format string) (ok bool, reason string) {
 
 	return true, reason
 
-}
+}*/

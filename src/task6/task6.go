@@ -5,14 +5,15 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"fmt"
 )
 
-func DoTask6(length, maxSquare uint) (err error) {
-	str := getSequence(int(length), int(maxSquare))
+func DoTask6(length, maxSquare int) {
+	str := getSequence(length, maxSquare)
 	file, err := os.Create("number sequence of task6")
 	defer file.Close()
 	_, err = file.WriteString(str)
-	return err
+	fmt.Println(err)
 }
 
 func getSequence(quantity, square int) string {

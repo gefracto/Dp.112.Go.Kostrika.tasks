@@ -13,12 +13,12 @@ import (
 	"task5"
 	"task6"
 	"task7"
-	"validator"
+	/*"validator"*/
 )
 
 type Data struct {
 	T1 struct {
-		Width, Height uint
+		Width, Height int
 		Symbol        string
 	}
 	T2 struct {
@@ -28,19 +28,20 @@ type Data struct {
 		SliceOfTriangles []task3.Triangle
 	}
 	T4 struct {
-		Number uint
+		Number int
 	}
 	T5 struct {
-		Min, Max uint
+		Min, Max int
 	}
 	T6 struct {
-		Length, MaxSquare uint
+		Length, MaxSquare int
 	}
 	T7 struct {
 		File string
 	}
 }
 
+/*
 func SimpleSpellCheckerJson(file string) (b bool, message string) {
 	openingCurlyBraces := strings.Count(file, "{")
 	closingCurlyBraces := strings.Count(file, "}")
@@ -105,103 +106,56 @@ func CheckForNames(file string) (b bool, message string) {
 	}
 	return b, message
 }
+*/
 
 func GetData(fileName string) (Data, bool, string) {
 	var MyData Data
-	extension := strings.Split(fileName, ".")
-
-	if extension[len(extension)-1] == "json" {
+	if strings.HasSuffix(fileName, ".json") {
 		var contents []byte
 		var err error
 		if contents, err = ioutil.ReadFile("data.json"); err != nil {
-			return MyData, false, "Не удалось прочитать файл"
+			return MyData, false, "Не удалось найти файл"
 		}
-		var file string
-		for _, v := range contents {
-			file += string(v)
-		}
-		if b, m := validator.ValidateData(contents, extension[len(extension)-1]); b == false {
-			return MyData, false, m
-		}
-
-		if b, m := SimpleSpellCheckerJson(file); b == false {
-			return MyData, false, m
-		}
-
-		if b, m := CheckForNames(file); b == false {
-			return MyData, false, m
-		}
-		var unmarshalFails string = "Не удалось распарсить json. " +
-			"\nПроверьте данные и их типы." +
-			"\nЗначения типа string должны быть заключены в кавычки: \"значение\"" +
-			"\nЧисла должны быть без кавычек." +
-			"\nЧисло не может быть меньше ноля" +
-			"\n\nОбщий формат json'a таков: " +
-			"\n{" +
-			"\n\t\"ключ\":значение1,значение2\n}" +
-			"\nЗначения разделяются запятой." +
-			"\nЕсли значение составное, то действует то же правило:" +
-			"\n{\n\"ключ1\":\n\t{" +
-			"\n\t\"ключ2\":\n\t\tзначение1,значение2\n\t}," +
-			"\n\t{\n\t\"ключ3\":\n\t\tзначение1,значение2\n\t}\n......\n}"
 		if err = json.Unmarshal(contents, &MyData); err != nil {
-			return MyData, false, unmarshalFails
+			return MyData, false, "Не удалось распаковать json"
 		}
 
-	} else if extension[len(extension)-1] == "xml" {
+	} else if strings.HasSuffix(fileName, ".xml") {
 		var contents []byte
 		var err error
-		var file string
 		if contents, err = ioutil.ReadFile("data.xml"); err != nil {
-			return MyData, false, "Не удалось открыть файл"
+			return MyData, false, "Не удалось найти json файл"
 		}
-		for _, v := range contents {
-			file += string(v)
-		}
-		if b, m := validator.ValidateData(contents, extension[len(extension)-1]); b == false {
-			return MyData, false, m
-		}
-		if b, m := SimpleSpellCheckerXml(string(contents)); b == false {
-			return MyData, false, m
-		}
-
-		if b, m := CheckForNames(string(contents)); b == false {
-			return MyData, false, m
-		}
-
 		if err = xml.Unmarshal(contents, &MyData); err != nil {
 			return MyData, false, "Не удалось распаковать xml"
 		}
 
 	} else {
-		return MyData, false, "Не удалось открыть файл. \nРасширение файла должно быть формата json или xml."
+		return MyData, false, "Не удалось открыть файл. " +
+			"\nРасширение файла должно быть формата json или xml."
 	}
 	return MyData, true, ""
-}
-
-func MakeAStructFromJson(fileName string) (Data, bool, string) {
-	Data, ok, reason := GetData(fileName)
-	return Data, ok, reason
 }
 
 func separator(n int) {
 	fmt.Printf("\n\n------------->Task #%d<-------------\n\n", n)
 }
 
-func Operate(Data Data) {
+func Operate(Data Data) (bool, string) {
 	separator(1)
-	fmt.Println(task1.DoTask1(Data.T1.Width, Data.T1.Height, Data.T1.Symbol))
+	task1.DoTask1(Data.T1.Width, Data.T1.Height, Data.T1.Symbol)
 	separator(2)
-	fmt.Println(task2.DoTask2(task2.Envelope{Data.T2.Env1.Side1, Data.T2.Env1.Side2},
-		task2.Envelope{Data.T2.Env2.Side1, Data.T2.Env2.Side2}))
+	task2.DoTask2(task2.Envelope{Data.T2.Env1.Side1, Data.T2.Env1.Side2},
+		task2.Envelope{Data.T2.Env2.Side1, Data.T2.Env2.Side2})
 	separator(3)
-	fmt.Println(task3.DoTask3(Data.T3.SliceOfTriangles))
+	task3.DoTask3(Data.T3.SliceOfTriangles)
 	separator(4)
-	fmt.Println(task4.DoTask4(Data.T4.Number))
+	task4.DoTask4(Data.T4.Number)
 	separator(5)
-	fmt.Println(task5.DoTask5(Data.T5.Min, Data.T5.Max))
+	task5.DoTask5(Data.T5.Min, Data.T5.Max)
 	separator(6)
-	fmt.Println(task6.DoTask6(Data.T6.Length, Data.T6.MaxSquare))
+	task6.DoTask6(Data.T6.Length, Data.T6.MaxSquare)
 	separator(7)
-	fmt.Println(task7.DoTask7(Data.T7.File))
+	task7.DoTask7(Data.T7.File)
+	return true,""
 }

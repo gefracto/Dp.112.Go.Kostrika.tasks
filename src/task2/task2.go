@@ -1,6 +1,10 @@
 package task2
 
-import "math"
+import (
+	"math"
+	//"strings"
+	"fmt"
+)
 
 type Envelope struct {
 	Side1, Side2 float64
@@ -36,14 +40,14 @@ func (e *Envelope) findDiagonal() (f float64) {
 	return
 }
 
-func DoTask2(e1 Envelope, e2 Envelope) int {
-	if (e1.Side1 == e2.Side1 || e1.Side1 == e2.Side2) && (e1.Side2 == e2.Side1 || e1.Side2 == e2.Side2) {
-		return 0
-	}
-	if e1.isBiggerThan(&e2) && (e1.findDiagonal()-e2.biggerSide() >= e2.smallerSide()) {
-		return 2
+func DoTask2(e1 Envelope, e2 Envelope) {
+	if e1.Side1 <= 0 || e1.Side2 <= 0 || e2.Side1 <= 0 || e2.Side2 <= 0 {
+		fmt.Println("Ошибка!\nСторона конверта не может быть меньше или равно 0")
+	} else if (e1.Side1 == e2.Side1 || e1.Side1 == e2.Side2) && (e1.Side2 == e2.Side1 || e1.Side2 == e2.Side2) {
+		fmt.Println(0)
+	} else if e1.isBiggerThan(&e2) && (e1.findDiagonal()-e2.biggerSide() >= e2.smallerSide()) {
+		fmt.Println(2)
 	} else if e2.isBiggerThan(&e1) && (e2.findDiagonal()-e1.biggerSide() >= e1.smallerSide()) {
-		return 1
+		fmt.Println(1)
 	}
-	return 0
 }

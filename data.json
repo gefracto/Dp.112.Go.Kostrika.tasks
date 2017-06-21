@@ -1,12 +1,12 @@
 {
 	"T1": {
-		"Width":16,
+		"Width":-56,
 		"Height":8,
-		"Symbol":"*"
+		"Symbol":"Go"
 	},
 	"T2": {
 		"Env1":{
-			"Side1":21,
+			"Side1":-3,
 			"Side2":15
 		},
 		"Env2":{
@@ -44,7 +44,7 @@
 			]
 	},
 	"T4":{
-		"Number":12345
+		"Number":-123454
 	},
 	"T5":{
 		"Min":999990,

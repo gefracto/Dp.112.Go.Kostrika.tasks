@@ -3,6 +3,7 @@ package task5
 import (
 	"strconv"
 	"strings"
+	"fmt"
 )
 
 type Results struct {
@@ -100,19 +101,24 @@ func method2(n int) (b bool) {
 	return b
 }
 
-func DoTask5(min, max uint) Results {
-	var Res Results
-	for i := min; i <= max; i++ {
-		if method1(int(i)) {
-			Res.method1Won()
-		}
+func DoTask5(min, max int) {
+	if min <= 0 || max <= 0 {
+		fmt.Println("Значения должны быть больше нуля")
+	} else if min > max {
+		fmt.Println("Минимальное значение не должно быть больше максимального")
+	} else {
+		var Res Results
+		for i := min; i <= max; i++ {
+			if method1(i) {
+				Res.method1Won()
+			}
 
-		if method2(int(i)) {
-			Res.method2Won()
+			if method2(i) {
+				Res.method2Won()
+			}
 		}
+		Res.setWinnersName()
+
+		fmt.Println(Res)
 	}
-	Res.setWinnersName()
-
-	return Res
-
 }

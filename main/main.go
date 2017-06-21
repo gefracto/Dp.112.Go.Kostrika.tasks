@@ -10,7 +10,7 @@ func main() {
 
 	arg := flag.String("file", "data.json", "Usage: -file=fileName.extension")
 	flag.Parse()
-	data, ok, reason := pars.MakeAStructFromJson(*arg)
+	data, ok, reason := pars.GetData(*arg)
 	if ok {
 		pars.Operate(data)
 	} else {

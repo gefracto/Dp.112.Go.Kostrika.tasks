@@ -4,38 +4,44 @@ import (
 	"io/ioutil"
 	"strconv"
 	"strings"
+	"fmt"
+	"regexp"
 )
 
-func getFile(f string) (string, bool) {
-	ok := false
-	contents, _ := ioutil.ReadFile(f)
-	str := string(contents)
-	return str, ok
-}
-
-func getLength(n uint64) int {
-	str := strconv.Itoa(int(n))
+func getLength(n int) int {
+	str := strconv.Itoa(n)
 	return len(str)
 }
 
-func DoTask7(file string) []uint64 {
-	f, _ := getFile(file)
-	var numbers []uint64
+func DoTask7(file string) {
+	var f string
+	var numbers []int
 
-	if strings.Contains(f, " ") {
+	if file != "context" {
+		fmt.Println("Не удалось найти файл \"context\"")
+
+	} else if contents, err := ioutil.ReadFile(file); err != nil {
+		fmt.Println("Не удалось найти файл")
+
+	} else if f = string(contents); len(f) == 0 {
+		fmt.Println("Файл должен содержать числовые данные")
+
+	} else if strings.Contains(f, " ") {
 		s := strings.Split(f, " ")
 		min, _ := strconv.Atoi(s[0])
 		max, _ := strconv.Atoi(s[1])
-		var a, b uint64 = 1, 1
-		for a < uint64(max) {
+		var a, b int = 1, 1
+		for a < int(max) {
 			a, b = b, a+b
-			if a >= uint64(min) && a < uint64(max) {
+			if a >= min && a < max {
 				numbers = append(numbers, a)
 			}
 		}
-	} else {
+		fmt.Println(numbers)
+
+	} else if ok, _ := regexp.MatchString("([0-9]+)", f); ok {
 		length, _ := strconv.Atoi(f)
-		var a, b uint64 = 1, 1
+		var a, b int = 1, 1
 		for getLength(a) <= length {
 			a, b = b, a+b
 			if getLength(a) == length {
@@ -44,7 +50,7 @@ func DoTask7(file string) []uint64 {
 			}
 
 		}
+		fmt.Println(numbers)
 	}
-	return numbers
 
 }
