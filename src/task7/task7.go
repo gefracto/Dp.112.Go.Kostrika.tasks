@@ -2,10 +2,9 @@ package task7
 
 import (
 	"io/ioutil"
+	"regexp"
 	"strconv"
 	"strings"
-	"fmt"
-	"regexp"
 )
 
 func getLength(n int) int {
@@ -13,35 +12,56 @@ func getLength(n int) int {
 	return len(str)
 }
 
-func DoTask7(file string) {
+func DoTask7(file string) (ok bool, data []int, reason string) {
 	var f string
 	var numbers []int
+	var s []string
 
 	if file != "context" {
-		fmt.Println("Не удалось найти файл \"context\"")
+		return false, data, "Ошибка!\nНе удалось найти файл."
 
 	} else if contents, err := ioutil.ReadFile(file); err != nil {
-		fmt.Println("Не удалось найти файл")
+		return false, data, "Ошибка!\nНе удалось прочитать файл."
 
 	} else if f = string(contents); len(f) == 0 {
-		fmt.Println("Файл должен содержать числовые данные")
+		return false, data, "Ошибка!\nФайл должен содержать числовые данные"
 
-	} else if strings.Contains(f, " ") {
-		s := strings.Split(f, " ")
+	} else if ok, _ := regexp.MatchString("[0-9][,| |\n]{1}[0-9]", f); ok {
+
+		if strings.Contains(f, ",") {
+			s = strings.Split(f, ",")
+
+		} else if strings.Contains(f, " ") {
+			s = strings.Split(f, " ")
+
+		} else if strings.Contains(f, "\n") {
+			s = strings.Split(f, "\n")
+		}
+
 		min, _ := strconv.Atoi(s[0])
 		max, _ := strconv.Atoi(s[1])
-		var a, b int = 1, 1
-		for a < int(max) {
-			a, b = b, a+b
-			if a >= min && a < max {
-				numbers = append(numbers, a)
-			}
-		}
-		fmt.Println(numbers)
 
-	} else if ok, _ := regexp.MatchString("([0-9]+)", f); ok {
+		if min > max {
+			return false, data, "Ошибка!\nЗначение нижней границы диапазона\nне может быть больше значения верхней"
+
+		} else if min < 1 || max < 1 {
+			return false, data, "Ошибка!\nЗначения должны быть больше нуля"
+		} else {
+			var a, b int = 1, 1
+			for a < int(max) {
+				a, b = b, a+b
+				if a >= min && a < max {
+					numbers = append(numbers, a)
+				}
+			}
+
+			return true, numbers, reason
+		}
+
+	} else if ok, _ := regexp.MatchString("[0-9]", f); ok {
 		length, _ := strconv.Atoi(f)
 		var a, b int = 1, 1
+
 		for getLength(a) <= length {
 			a, b = b, a+b
 			if getLength(a) == length {
@@ -50,7 +70,15 @@ func DoTask7(file string) {
 			}
 
 		}
-		fmt.Println(numbers)
+
+		return true, numbers, reason
+
+	} else if ok, _ := regexp.MatchString("\\D", f); ok {
+		return false, data, "Ошибка!\nДопустимы лишь цифры в значениях."
 	}
+
+	return false, data, "Ошибка!\nФайл должен содержать либо:\n1: Нижнюю и верхнюю границы " +
+		"диапазона числовых значений,\nразделенные запятой, пробелом или переносом строки." +
+		"\n2: Числовое значение длины."
 
 }

@@ -2,7 +2,6 @@ package task1
 
 import (
 	"strings"
-	"fmt"
 )
 
 func makeRow(switcher int, symbol string, width int) string {
@@ -31,9 +30,9 @@ func makeRow(switcher int, symbol string, width int) string {
 	return row
 }
 
-func DoTask1(width int, height int, symbol string) {
+func DoTask1(width int, height int, symbol string) (ok bool, data interface{}, reason string) {
 	if width <= 0 || height <= 0 {
-		fmt.Println("Ошибка!\nЗначения ширины и высоты должно быть больше ноля\n")
+		return false, nil, "Ошибка!\nЗначения ширины и высоты должно быть больше ноля\n"
 	} else {
 		switcher := 1
 		board := ""
@@ -41,6 +40,6 @@ func DoTask1(width int, height int, symbol string) {
 			board += makeRow(switcher, symbol, width) + "\n"
 			switcher *= -1
 		}
-		fmt.Println(board)
+		return true, board, reason
 	}
 }

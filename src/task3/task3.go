@@ -1,10 +1,9 @@
 package task3
 
 import (
-	"fmt"
 	"math"
-	"regexp"
 	"sort"
+	"regexp"
 )
 
 type Triangle struct {
@@ -40,29 +39,31 @@ func reverseSliceOfNames(s []string) (newS []string) {
 
 func checkTriangles(T []Triangle) (ok bool, reason string) {
 	for _, v := range T {
-		ok, _ := regexp.MatchString("([A-Z]{3})", v.Name)
-		if len(v.Name) != 3 && ok {
+		if ok, _ := regexp.MatchString("[A-Z]{3}", v.Name); ok == false {
 			return false, "Имя треугольника должно состоять из имен трех вершин\n"
 
 		} else if v.A >= v.B+v.C || v.A <= 0 {
-			return false, "Значение стороны А " + v.Name + " не должно быть больше суммы сторон B и C, " +
-				"а также не может быть меньше или равно нулю\n"
+			return false, "Значение стороны \"А\" треугольника \"" + v.Name +
+				"\"\nне должно быть больше суммы сторон \"B\" и \"C\", " +
+				"\nа также не может быть меньше или равно нулю\n"
 
 		} else if v.B >= v.A+v.C || v.B <= 0 {
-			return false, "Значение стороны B треугольника " + v.Name + " не должно быть больше суммы сторон A и C, " +
-				"а также не может быть меньше или равно нулю\n"
+			return false, "Значение стороны \"B\" треугольника \"" + v.Name +
+				"\"\nне должно быть больше суммы сторон \"A\" и \"C\", " +
+				"\nа также не может быть меньше или равно нулю\n"
 
 		} else if v.C >= v.A+v.B || v.C <= 0 {
-			return false, "Значение стороны C треугольника " + v.Name + " не должно быть больше суммы сторон B и C, " +
-				"а также не может быть меньше или равно нулю\n"
+			return false, "Значение стороны \"C\" треугольника \"" + v.Name +
+				"\"\nне должно быть больше суммы сторон \"B\" и \"A\", " +
+				"\nа также не может быть меньше или равно нулю\n"
 		}
 	}
 	return true, ""
 }
 
-func DoTask3(T []Triangle) {
-	if ok, reason := checkTriangles(T); ok != false {
-		fmt.Println(reason)
+func DoTask3(T []Triangle) (ok bool, data []string, reason string) {
+	if ok, reason := checkTriangles(T); ok == false {
+		return ok, nil, reason
 	} else {
 		var names []string
 		var squares []float64
@@ -89,8 +90,8 @@ func DoTask3(T []Triangle) {
 		for _, v := range indexes {
 			sortedNames = append(sortedNames, names[v])
 		}
-		reversedSortedNames := reverseSliceOfNames(sortedNames)
-		fmt.Println(reversedSortedNames)
+		reversedNames := reverseSliceOfNames(sortedNames)
+		return ok, reversedNames, reason
 
 	}
 }

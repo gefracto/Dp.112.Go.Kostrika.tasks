@@ -2,7 +2,6 @@ package task4
 
 import (
 	"strconv"
-	"fmt"
 )
 
 func reverseString(s string) string {
@@ -37,15 +36,14 @@ func findLargest(sl []string) []string {
 	return largest
 }
 
-func DoTask4(num int) {
+func DoTask4(num int) (ok bool, data int, reason string){
 	original := strconv.Itoa(num)
 	reversed := reverseString(original)
 	var largestPalindrome int
-	var ok bool
 	var sliceOfPalindromes []string
 	var largestPalindromes []string
 	if num <= 0 {
-		fmt.Println("Ошибка!\nЗадайте число больше нуля")
+		return false, data, "\nОшибка!\nЗадайте число больше нуля"
 	} else {
 		for i1, v1 := range original {
 			for i2, v2 := range reversed {
@@ -64,6 +62,8 @@ func DoTask4(num int) {
 				largestPalindrome = tmp
 			}
 		}
-		fmt.Println(largestPalindrome)
+		return ok, largestPalindrome, reason
 	}
+	return ok, largestPalindrome, reason
+
 }

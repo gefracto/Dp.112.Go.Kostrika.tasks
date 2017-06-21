@@ -2,8 +2,6 @@ package task2
 
 import (
 	"math"
-	//"strings"
-	"fmt"
 )
 
 type Envelope struct {
@@ -40,14 +38,15 @@ func (e *Envelope) findDiagonal() (f float64) {
 	return
 }
 
-func DoTask2(e1 Envelope, e2 Envelope) {
+func DoTask2(e1 Envelope, e2 Envelope) (ok bool, data interface{}, reason string) {
 	if e1.Side1 <= 0 || e1.Side2 <= 0 || e2.Side1 <= 0 || e2.Side2 <= 0 {
-		fmt.Println("Ошибка!\nСторона конверта не может быть меньше или равно 0")
+		return false, nil, "Ошибка!\nСторона конверта не может быть меньше или равно 0"
 	} else if (e1.Side1 == e2.Side1 || e1.Side1 == e2.Side2) && (e1.Side2 == e2.Side1 || e1.Side2 == e2.Side2) {
-		fmt.Println(0)
+		return true, 0, reason
 	} else if e1.isBiggerThan(&e2) && (e1.findDiagonal()-e2.biggerSide() >= e2.smallerSide()) {
-		fmt.Println(2)
+		return true, 2, reason
 	} else if e2.isBiggerThan(&e1) && (e2.findDiagonal()-e1.biggerSide() >= e1.smallerSide()) {
-		fmt.Println(1)
+		return true, 1, reason
 	}
+	return true, 0, reason
 }

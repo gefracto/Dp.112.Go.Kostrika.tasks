@@ -5,15 +5,18 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
-func DoTask6(length, maxSquare int) {
-	str := getSequence(length, maxSquare)
-	file, err := os.Create("number sequence of task6")
-	defer file.Close()
-	_, err = file.WriteString(str)
-	fmt.Println(err)
+func DoTask6(length, maxSquare int) (ok bool, err error, reason string) {
+	if length < 0 || maxSquare < 0 {
+		return false, err, "Значения не должны быть меньше нуля.\nФайл не создан."
+	} else {
+		str := getSequence(length, maxSquare)
+		file, err := os.Create("number sequence of task6")
+		defer file.Close()
+		_, err = file.WriteString(str)
+		return true, err, reason
+	}
 }
 
 func getSequence(quantity, square int) string {
