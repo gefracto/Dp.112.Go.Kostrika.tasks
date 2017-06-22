@@ -40,7 +40,7 @@ func reverseSliceOfNames(s []string) (newS []string) {
 func checkTriangles(T []Triangle) (ok bool, reason string) {
 	for _, v := range T {
 		if ok, _ := regexp.MatchString("\\A[A-Z]{3}$", v.Name); ok == false {
-			return false, "Имя треугольника должно состоять из имен трех вершин\n"
+			return false, "Имя треугольника " + v.Name + " должно состоять из имен трех вершин\n"
 
 		} else if v.A >= v.B+v.C || v.A <= 0 {
 			return false, "Значение стороны \"А\" треугольника \"" + v.Name +
