@@ -26,16 +26,14 @@ func DoTask7(file string) (ok bool, data []int, reason string) {
 	} else if f = string(contents); len(f) == 0 {
 		return false, data, "Ошибка!\nФайл должен содержать числовые данные"
 
-	} else if ok, _ := regexp.MatchString("[0-9][,| |\n]{1}[0-9]", f); ok {
+	} else if ok, _ := regexp.MatchString("[\\d]+[,| |\n]{1}[\\d]+", f); ok {
 
-		if strings.Contains(f, ",") {
-			s = strings.Split(f, ",")
-
+		if  strings.Contains(f, "\n") {
+			s = strings.Split(f, "\n")
 		} else if strings.Contains(f, " ") {
 			s = strings.Split(f, " ")
-
-		} else if strings.Contains(f, "\n") {
-			s = strings.Split(f, "\n")
+		} else if strings.Contains(f, ",") {
+			s = strings.Split(f, ",")
 		}
 
 		min, _ := strconv.Atoi(s[0])
@@ -58,7 +56,7 @@ func DoTask7(file string) (ok bool, data []int, reason string) {
 			return true, numbers, reason
 		}
 
-	} else if ok, _ := regexp.MatchString("[0-9]", f); ok {
+	} else if ok, _ := regexp.MatchString("[\\d]+", f); ok {
 		length, _ := strconv.Atoi(f)
 		var a, b int = 1, 1
 
@@ -72,11 +70,7 @@ func DoTask7(file string) (ok bool, data []int, reason string) {
 		}
 
 		return true, numbers, reason
-
-	} else if ok, _ := regexp.MatchString("\\D", f); ok {
-		return false, data, "Ошибка!\nДопустимы лишь цифры в значениях."
 	}
-
 	return false, data, "Ошибка!\nФайл должен содержать либо:\n1: Нижнюю и верхнюю границы " +
 		"диапазона числовых значений,\nразделенные запятой, пробелом или переносом строки." +
 		"\n2: Числовое значение длины."
