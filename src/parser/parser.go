@@ -1,4 +1,4 @@
-package parseJsonOrXml
+package parser
 
 import (
 	"encoding/json"

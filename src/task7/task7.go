@@ -33,7 +33,7 @@ func DoTask7(file string) (ok bool, data []int, reason string) {
 
 		} else if strings.Contains(f, " ") {
 			s = strings.Split(f, " ")
-			
+
 		} else if strings.Contains(f, ",") {
 			s = strings.Split(f, ",")
 		}

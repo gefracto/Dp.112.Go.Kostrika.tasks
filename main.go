@@ -3,16 +3,16 @@ package main
 import (
 	"flag"
 	"fmt"
-	pars "parseJsonOrXml"
+	"parser"
 )
 
 func main() {
 
 	arg := flag.String("file", "data.json", "Usage: -file=fileName.extension")
 	flag.Parse()
-	data, ok, reason := pars.GetData(*arg)
+	data, ok, reason := parser.GetData(*arg)
 	if ok {
-		pars.Operate(data)
+		parser.Operate(data)
 	} else {
 		fmt.Println(reason)
 	}
