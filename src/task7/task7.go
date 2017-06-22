@@ -26,7 +26,7 @@ func DoTask7(file string) (ok bool, data []int, reason string) {
 	} else if f = string(contents); len(f) == 0 {
 		return false, data, "Ошибка!\nФайл должен содержать числовые данные"
 
-	} else if ok, _ := regexp.MatchString("[\\d]+[,| |\n]{1}[\\d]+", f); ok {
+	} else if ok, _ := regexp.MatchString("\\A[\\d]+[,| |\n]{1}[\\d]+$", f); ok {
 
 		if  strings.Contains(f, "\n") {
 			s = strings.Split(f, "\n")
@@ -56,7 +56,7 @@ func DoTask7(file string) (ok bool, data []int, reason string) {
 			return true, numbers, reason
 		}
 
-	} else if ok, _ := regexp.MatchString("[\\d]+", f); ok {
+	} else if ok, _ := regexp.MatchString("\\A[\\d]+$", f); ok {
 		length, _ := strconv.Atoi(f)
 		var a, b int = 1, 1
 
