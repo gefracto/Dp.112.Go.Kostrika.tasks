@@ -10,6 +10,7 @@ import (
 func DoTask6(length, maxSquare int) (ok bool, err error, reason string) {
 	if length < 0 || maxSquare < 0 {
 		return false, err, "Значения не должны быть меньше нуля.\nФайл не создан."
+
 	} else {
 		str := getSequence(length, maxSquare)
 		file, err := os.Create("number sequence of task6")

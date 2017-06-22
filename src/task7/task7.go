@@ -30,8 +30,10 @@ func DoTask7(file string) (ok bool, data []int, reason string) {
 
 		if  strings.Contains(f, "\n") {
 			s = strings.Split(f, "\n")
+
 		} else if strings.Contains(f, " ") {
 			s = strings.Split(f, " ")
+			
 		} else if strings.Contains(f, ",") {
 			s = strings.Split(f, ",")
 		}

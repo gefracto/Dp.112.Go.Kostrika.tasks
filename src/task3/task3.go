@@ -64,6 +64,7 @@ func checkTriangles(T []Triangle) (ok bool, reason string) {
 func DoTask3(T []Triangle) (ok bool, data []string, reason string) {
 	if ok, reason := checkTriangles(T); ok == false {
 		return ok, nil, reason
+
 	} else {
 		var names []string
 		var squares []float64
@@ -79,7 +80,9 @@ func DoTask3(T []Triangle) (ok bool, data []string, reason string) {
 		sortedSquares = append(sortedSquares, squares...)
 		sort.Float64s(sortedSquares)
 		for _, v := range sortedSquares {
+
 			for i2, v2 := range squares {
+
 				if v == v2 {
 					indexes = append(indexes, i2)
 					squares[i2] = -1
@@ -90,6 +93,7 @@ func DoTask3(T []Triangle) (ok bool, data []string, reason string) {
 		for _, v := range indexes {
 			sortedNames = append(sortedNames, names[v])
 		}
+
 		reversedNames := reverseSliceOfNames(sortedNames)
 		return ok, reversedNames, reason
 

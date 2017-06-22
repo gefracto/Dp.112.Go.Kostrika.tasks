@@ -44,26 +44,32 @@ func DoTask4(num int) (ok bool, data int, reason string){
 	var largestPalindromes []string
 	if num <= 0 {
 		return false, data, "\nОшибка!\nЗадайте число больше нуля"
+
 	} else {
 		for i1, v1 := range original {
 			for i2, v2 := range reversed {
 				if i1+i2 < len(original) && v2 == v1 && isPal(original[i1:len(original)-i2]) {
 					sliceOfPalindromes = append(sliceOfPalindromes, string(original[i1:len(original)-i2]))
+
 					ok = true
 				}
 			}
 		}
+
 		if ok {
 			largestPalindromes = append(largestPalindromes, findLargest(sliceOfPalindromes)...)
 		}
+
 		for _, v := range largestPalindromes {
 			tmp, _ := strconv.Atoi(v)
 			if largestPalindrome < tmp {
 				largestPalindrome = tmp
 			}
 		}
+
 		return ok, largestPalindrome, reason
 	}
+
 	return ok, largestPalindrome, reason
 
 }

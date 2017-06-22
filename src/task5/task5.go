@@ -38,6 +38,7 @@ func makeSixDigits(n int) (s string) {
 func getInts(s string) []int {
 	var sl []int
 	slStr := strings.Split(s, "")
+
 	for _, i := range slStr {
 		l, _ := strconv.Atoi(i)
 		sl = append(sl, l)
@@ -80,20 +81,24 @@ func method2(n int) (b bool) {
 	var odds, evens []int
 	if n < 100000 {
 		s = makeSixDigits(n)
+
 	} else {
 		s = strconv.Itoa(n)
 	}
+
 	var str []string = strings.Split(s, "")
 	for _, k := range str {
 		i, _ := strconv.Atoi(string(k))
 		if i%2 == 0 {
 			odds = append(odds, i)
+
 		} else {
 			evens = append(evens, i)
 		}
 	}
 	if getSum(odds) == getSum(evens) {
 		b = true
+
 	} else {
 		b = false
 	}
@@ -103,8 +108,10 @@ func method2(n int) (b bool) {
 func DoTask5(min, max int) (ok bool, data Results, reason string) {
 	if min < 0 || max < 0 {
 		return false, data, "Значения должны быть больше нуля"
+
 	} else if min > max {
 		return false, data, "Минимальное значение не должно быть больше максимального"
+
 	} else {
 		var Res Results
 		for i := min; i <= max; i++ {
@@ -116,6 +123,7 @@ func DoTask5(min, max int) (ok bool, data Results, reason string) {
 				Res.method2Won()
 			}
 		}
+
 		Res.setWinnersName()
 		return true, Res, reason
 	}
