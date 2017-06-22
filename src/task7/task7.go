@@ -28,7 +28,7 @@ func DoTask7(file string) (ok bool, data []int, reason string) {
 
 	} else if ok, _ := regexp.MatchString("\\A[\\d]+[,| |\n]{1}[\\d]+$", f); ok {
 
-		if  strings.Contains(f, "\n") {
+		if strings.Contains(f, "\n") {
 			s = strings.Split(f, "\n")
 
 		} else if strings.Contains(f, " ") {

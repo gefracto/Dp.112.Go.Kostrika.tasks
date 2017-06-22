@@ -36,7 +36,7 @@ func findLargest(sl []string) []string {
 	return largest
 }
 
-func DoTask4(num int) (ok bool, data int, reason string){
+func DoTask4(num int) (ok bool, data int, reason string) {
 	original := strconv.Itoa(num)
 	reversed := reverseString(original)
 	var largestPalindrome int

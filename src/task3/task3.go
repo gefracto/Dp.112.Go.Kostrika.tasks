@@ -2,8 +2,8 @@ package task3
 
 import (
 	"math"
-	"sort"
 	"regexp"
+	"sort"
 )
 
 type Triangle struct {

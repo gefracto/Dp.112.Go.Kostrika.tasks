@@ -75,41 +75,54 @@ func separator(n int) {
 	fmt.Printf("\n\n------------->Task #%d<-------------\n\n", n)
 }
 
-
 func Operate(Data Data) {
 	separator(1)
 	if ok, data, reason := task1.DoTask1(Data.T1.Width, Data.T1.Height, Data.T1.Symbol); ok {
 		fmt.Println(data)
-	} else {fmt.Println(reason)}
+	} else {
+		fmt.Println(reason)
+	}
 
 	separator(2)
 	if ok, data, reason := task2.DoTask2(task2.Envelope{Data.T2.Env1.Side1, Data.T2.Env1.Side2},
 		task2.Envelope{Data.T2.Env2.Side1, Data.T2.Env2.Side2}); ok {
 		fmt.Println(data)
-	} else {fmt.Println(reason)}
+	} else {
+		fmt.Println(reason)
+	}
 
 	separator(3)
 	if ok, data, reason := task3.DoTask3(Data.T3.SliceOfTriangles); ok {
 		fmt.Println(data)
-	} else {fmt.Println(reason)}
+	} else {
+		fmt.Println(reason)
+	}
 
 	separator(4)
 	if ok, data, reason := task4.DoTask4(Data.T4.Number); ok {
 		fmt.Println(data, ok)
-	} else {fmt.Println(ok, reason)}
+	} else {
+		fmt.Println(ok, reason)
+	}
 
 	separator(5)
 	if ok, data, reason := task5.DoTask5(Data.T5.Min, Data.T5.Max); ok {
 		fmt.Println(data)
-	} else {fmt.Println(reason)}
+	} else {
+		fmt.Println(reason)
+	}
 
 	separator(6)
 	if ok, data, reason := task6.DoTask6(Data.T6.Length, Data.T6.MaxSquare); ok {
 		fmt.Println(data)
-	} else {fmt.Println(reason)}
+	} else {
+		fmt.Println(reason)
+	}
 
 	separator(7)
 	if ok, data, reason := task7.DoTask7(Data.T7.File); ok {
 		fmt.Println(data)
-	} else {fmt.Println(reason, ok)}
+	} else {
+		fmt.Println(reason, ok)
+	}
 }
