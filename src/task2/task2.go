@@ -2,14 +2,27 @@ package task2
 
 import (
 	"math"
+	"fmt"
 )
+
+// укоротить длинные куски кода
+
+type T2 struct {
+	E1 Envelope
+	E2 Envelope
+}
+
+func (T *T2)Dotask2() {
+	_, d, _ := Dotask(T.E1, T.E2)
+	fmt.Println(d)
+}
 
 type Envelope struct {
 	Side1, Side2 float64
 }
 
-func (e1 *Envelope) isBiggerThan(e2 *Envelope) (b bool) {
-	if e1.Side1*e1.Side2 > e2.Side1*e2.Side2 {
+func (e *Envelope) isBiggerThan(e2 *Envelope) (b bool) {
+	if e.Side1*e.Side2 > e2.Side1*e2.Side2 {
 		return true
 	}
 	return false
@@ -42,7 +55,7 @@ func (e *Envelope) findDiagonal() (f float64) {
 	return
 }
 
-func DoTask2(e1 Envelope, e2 Envelope) (ok bool, data interface{}, reason string) {
+func Dotask(e1 Envelope, e2 Envelope) (ok bool, data interface{}, reason string) {
 	if e1.Side1 <= 0 || e1.Side2 <= 0 || e2.Side1 <= 0 || e2.Side2 <= 0 {
 		return false, nil, "Ошибка!\nСторона конверта не может быть меньше или равно 0"
 

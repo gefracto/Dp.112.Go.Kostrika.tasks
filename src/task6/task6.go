@@ -5,9 +5,19 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"fmt"
 )
 
-func DoTask6(length, maxSquare int) (ok bool, err error, reason string) {
+type T6 struct {
+	Length, MaxSquare int
+}
+
+func (T *T6) Dotask6() {
+	_, d, _ := Dotask(T.Length, T.MaxSquare)
+	fmt.Println(d)
+}
+
+func Dotask(length, maxSquare int) (ok bool, err error, reason string) {
 	if length < 0 || maxSquare < 0 {
 		return false, err, "Значения не должны быть меньше нуля.\nФайл не создан."
 

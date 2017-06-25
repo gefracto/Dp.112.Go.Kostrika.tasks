@@ -1,20 +1,15 @@
 {
-	"T1": {
 		"Width":6,
 		"Height":8,
-		"Symbol":"Go"
-	},
-	"T2": {
-		"Env1":{
+		"Symbol":"Go",
+		"E1":{
 			"Side1":3,
 			"Side2":15
 		},
-		"Env2":{
+		"E2":{
 			"Side1":3.5,
 			"Side2":22.3
-		}
-	},
-	"T3":{
+		},
 		"SliceOfTriangles":
 			[
 				{
@@ -41,20 +36,11 @@
                   "B":3,
                   "C":2
 				}
-			]
-	},
-	"T4":{
-		"Number":191991
-	},
-	"T5":{
-		"Min":999990,
-		"Max":999999
-	},
-	"T6":{
+			],
+		"Number":191991,
+		"Min":0,
+		"Max":999999,
 		"Length":3,
-		"MaxSquare":25
-    },
-	"T7":{
-      "File":"context"
-    }
+		"MaxSquare":25,
+      	"File":"context"
 }

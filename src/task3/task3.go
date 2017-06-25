@@ -4,7 +4,19 @@ import (
 	"math"
 	"regexp"
 	"sort"
+	"fmt"
 )
+
+// Вынести задачи из check triangles в отдельные функции
+
+type T3 struct {
+	SliceOfTriangles []Triangle
+}
+
+func (T *T3) Dotask3() {
+	_, d, _ := Dotask(T.SliceOfTriangles)
+	fmt.Println(d)
+}
 
 type Triangle struct {
 	Name string
@@ -33,13 +45,11 @@ func reverseSliceOfNames(s []string) (newS []string) {
 	return newS
 }
 
-/*func isTriangle(a,b,c float64) bool {
-	if
-}*/
 
 func checkTriangles(T []Triangle) (ok bool, reason string) {
 	for _, v := range T {
-		if ok, _ := regexp.MatchString("\\A[A-Z]{3}$", v.Name); ok == false {
+		var pattern string = "\\A[A-Z]{1}[0-9]?[A-Z]{1}[0-9]?[A-Z]{1}[0-9]?$"
+		if ok, _ := regexp.MatchString(pattern, v.Name); ok == false {
 			return false, "Имя треугольника " + v.Name + " должно состоять из имен трех вершин\n"
 
 		} else if v.A >= v.B+v.C || v.A <= 0 {
@@ -61,7 +71,7 @@ func checkTriangles(T []Triangle) (ok bool, reason string) {
 	return true, ""
 }
 
-func DoTask3(T []Triangle) (ok bool, data []string, reason string) {
+func Dotask(T []Triangle) (ok bool, data []string, reason string) {
 	if ok, reason := checkTriangles(T); ok == false {
 		return ok, nil, reason
 

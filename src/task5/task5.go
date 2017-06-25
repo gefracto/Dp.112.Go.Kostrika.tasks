@@ -3,7 +3,19 @@ package task5
 import (
 	"strconv"
 	"strings"
+	"fmt"
 )
+
+type T5 struct {
+	Min, Max int
+}
+
+func (T *T5) Dotask5() {
+	_, d, _ := Dotask(T.Min, T.Max)
+	fmt.Println(d)
+}
+
+// обязательно переделать работу со строками на инты
 
 type Results struct {
 	winnersName  string
@@ -105,7 +117,7 @@ func method2(n int) (b bool) {
 	return b
 }
 
-func DoTask5(min, max int) (ok bool, data Results, reason string) {
+func Dotask(min, max int) (ok bool, data Results, reason string) {
 	if min < 0 || max < 0 {
 		return false, data, "Значения должны быть больше нуля"
 

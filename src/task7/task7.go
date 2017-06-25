@@ -5,14 +5,26 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"fmt"
 )
+
+type T7 struct {
+	File string
+}
+
+func (T *T7) Dotask7() {
+	_, d, _ := Dotask(T.File)
+	fmt.Println(d)
+}
+
+// разбить код из dotask на отдельные куски
 
 func getLength(n int) int {
 	str := strconv.Itoa(n)
 	return len(str)
 }
 
-func DoTask7(file string) (ok bool, data []int, reason string) {
+func Dotask(file string) (ok bool, data []int, reason string) {
 	var f string
 	var numbers []int
 	var s []string

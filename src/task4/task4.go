@@ -2,7 +2,19 @@ package task4
 
 import (
 	"strconv"
+	"fmt"
 )
+
+// make it using ints and nit strings!
+
+type T4 struct {
+	Number int
+}
+
+func (T *T4) Dotask4() {
+	_, d, _ := Dotask(T.Number)
+	fmt.Println(d)
+}
 
 func reverseString(s string) string {
 	var newString string = ""
@@ -36,7 +48,8 @@ func findLargest(sl []string) []string {
 	return largest
 }
 
-func DoTask4(num int) (ok bool, data int, reason string) {
+func Dotask(num int) (ok bool, data int, reason string) {
+
 	original := strconv.Itoa(num)
 	reversed := reverseString(original)
 	var largestPalindrome int

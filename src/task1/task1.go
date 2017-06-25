@@ -2,7 +2,22 @@ package task1
 
 import (
 	"strings"
+	"fmt"
 )
+
+// переделать
+
+
+func (T *T1) Dotask1() {
+	_, d, _ := DoTask1(T.Width, T.Height, T.Symbol)
+	fmt.Println(d)
+}
+
+type T1 struct {
+	Width, Height int
+	Symbol string
+}
+
 
 func makeRow(switcher int, symbol string, width int) string {
 	var row string
