@@ -2,14 +2,13 @@ package task1
 
 import (
 	"errors"
-	"fmt"
 	"strings"
+	"fmt"
 )
 
-// переделать
-
 func (T *T1) Dotask1() {
-	if ok, data, err := DoTask1(T.Width, T.Height, T.Symbol); ok {
+
+	if ok, data, err := DoTask(T.Width, T.Height, T.Symbol); ok {
 		fmt.Println(data)
 	} else {
 		fmt.Println(err)
@@ -47,7 +46,7 @@ func makeRow(switcher int, symbol string, width int) string {
 	return row
 }
 
-func DoTask1(width int, height int, symbol string) (ok bool, board string, err error) {
+func DoTask(width int, height int, symbol string) (ok bool, board string, err error) {
 	if width <= 0 || height <= 0 {
 		err := errors.New("Числа должны быть больше нуля!\n")
 		return false, board, err

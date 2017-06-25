@@ -56,10 +56,12 @@ func (e *Envelope) findDiagonal() (f float64) {
 }
 
 func Dotask(e1 Envelope, e2 Envelope) (ok bool, data interface{}, reason string) {
-	if e1.Side1 <= 0 || e1.Side2 <= 0 || e2.Side1 <= 0 || e2.Side2 <= 0 {
+	A, B := e1.Side1, e1.Side2
+	C, D := e2.Side1, e2.Side2
+	if A <= 0 || B <= 0 || C <= 0 || D <= 0 {
 		return false, nil, "Ошибка!\nСторона конверта не может быть меньше или равно 0"
 
-	} else if (e1.Side1 == e2.Side1 || e1.Side1 == e2.Side2) && (e1.Side2 == e2.Side1 || e1.Side2 == e2.Side2) {
+	} else if (A == C || A == D) && (B == C || B == D) {
 		return true, 0, reason
 
 	} else if e1.isBiggerThan(&e2) && (e1.findDiagonal()-e2.biggerSide() >= e2.smallerSide()) {
