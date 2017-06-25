@@ -1,23 +1,25 @@
 package task1
 
 import (
-	"strings"
+	"errors"
 	"fmt"
+	"strings"
 )
 
 // переделать
 
-
 func (T *T1) Dotask1() {
-	_, d, _ := DoTask1(T.Width, T.Height, T.Symbol)
-	fmt.Println(d)
+	if ok, data, err := DoTask1(T.Width, T.Height, T.Symbol); ok {
+		fmt.Println(data)
+	} else {
+		fmt.Println(err)
+	}
 }
 
 type T1 struct {
 	Width, Height int
-	Symbol string
+	Symbol        string
 }
-
 
 func makeRow(switcher int, symbol string, width int) string {
 	var row string
@@ -45,9 +47,10 @@ func makeRow(switcher int, symbol string, width int) string {
 	return row
 }
 
-func DoTask1(width int, height int, symbol string) (ok bool, data interface{}, reason string) {
+func DoTask1(width int, height int, symbol string) (ok bool, board string, err error) {
 	if width <= 0 || height <= 0 {
-		return false, nil, "Ошибка!\nЗначения ширины и высоты должно быть больше ноля\n"
+		err := errors.New("Числа должны быть больше нуля!\n")
+		return false, board, err
 	} else {
 		switcher := 1
 		board := ""
@@ -55,6 +58,6 @@ func DoTask1(width int, height int, symbol string) (ok bool, data interface{}, r
 			board += makeRow(switcher, symbol, width) + "\n"
 			switcher *= -1
 		}
-		return true, board, reason
+		return true, board, err
 	}
 }

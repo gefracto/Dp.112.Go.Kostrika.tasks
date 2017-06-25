@@ -1,9 +1,9 @@
 package task5
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
 type T5 struct {

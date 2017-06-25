@@ -1,6 +1,14 @@
 package main
 
 import (
+	"encoding/json"
+	"encoding/xml"
+	"errors"
+	"flag"
+	"fmt"
+	"io/ioutil"
+	"path/filepath"
+	"reflect"
 	"task1"
 	"task2"
 	"task3"
@@ -8,13 +16,6 @@ import (
 	"task5"
 	"task6"
 	"task7"
-	"flag"
-	"io/ioutil"
-	"encoding/json"
-	"encoding/xml"
-	"strings"
-	"strconv"
-	"reflect"
 )
 
 type Data struct {
@@ -28,47 +29,68 @@ type Data struct {
 }
 
 func main() {
-	arg := flag.String("file", "data.xml", "Usage: -file=fileName.extension")
+	arg := flag.String("file", "data.json", "Usage: -file=fileName.extension")
 	flag.Parse()
-	data, _,_ := GetData(*arg)
 
-	var Quantityoftasks int = 7
-	for i:=1; i<=Quantityoftasks; i++ {
-		nameofmethod := "Dotask" + strconv.Itoa(i)
-		reflect.ValueOf(&data).MethodByName(nameofmethod).Call(nil)
+	if data, err := GetData(*arg); err == nil {
+		var QuantityOfTasks int = reflect.ValueOf(&data).Elem().NumField()
+		for i := 1; i <= QuantityOfTasks; i++ {
+			methodname := fmt.Sprintf("Dotask%d", i)
+			splitOutput(i)
+			reflect.ValueOf(&data).MethodByName(methodname).Call(nil)
+		}
+
+	} else {
+		fmt.Println(err)
 	}
 
 }
 
+func splitOutput(i int) {
+	fmt.Printf("\n>>>>>>>>> Task %d <<<<<<<<<\n", i)
+}
 
+func getExtension(fileName string) (string, error) {
+	if ok, err := filepath.Match("*.js*", fileName); ok {
+		return "json", err
+	} else if ok, err := filepath.Match("*.xml*", fileName); ok {
+		return "xml", err
+	}
+	return "", errors.New("Неправильный формат файла!\n")
+}
 
-func GetData(fileName string) (Data, bool, string) {
+func readFile(fileName string) ([]byte, error) {
+	contents, err := ioutil.ReadFile(fileName)
+	return contents, err
+}
+
+func makeStructure(D Data, contents []byte, extension string) (Data, error) {
+	var err error
+
+	if extension == "json" {
+		err = json.Unmarshal(contents, &D)
+	} else if extension == "xml" {
+		err = xml.Unmarshal(contents, &D)
+	}
+	return D, err
+}
+
+func GetData(fileName string) (Data, error) {
 	var MyData Data
-	if strings.HasSuffix(fileName, ".json") {
-		var contents []byte
-		var err error
-		if contents, err = ioutil.ReadFile(fileName); err != nil {
-			return MyData, false, "Не удалось найти файл"
-		}
-		if err = json.Unmarshal(contents, &MyData); err != nil {
-			return MyData, false, "Не удалось распаковать json"
-		}
 
-	} else if strings.HasSuffix(fileName, ".xml") {
+	extension, err := getExtension(fileName)
 
-		var contents []byte
-		var err error
-		if contents, err = ioutil.ReadFile(fileName); err != nil {
-			return MyData, false, "Не удалось найти файл"
-		}
-		if err = xml.Unmarshal(contents, &MyData); err != nil {
-			return MyData, false, "Не удалось распаковать xml"
-		}
-
-	} else {
-		return MyData, false, "Не удалось открыть файл. " +
-			"\nРасширение файла должно быть формата json или xml."
+	if err != nil {
+		return MyData, err
 	}
 
-	return MyData, true, ""
+	contents, err := readFile(fileName)
+
+	if err != nil {
+		return MyData, err
+	}
+
+	MyData, err = makeStructure(MyData, contents, extension)
+
+	return MyData, err
 }

@@ -1,11 +1,11 @@
 package task7
 
 import (
+	"fmt"
 	"io/ioutil"
 	"regexp"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
 type T7 struct {

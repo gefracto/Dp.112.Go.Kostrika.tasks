@@ -1,10 +1,10 @@
 package task3
 
 import (
+	"fmt"
 	"math"
 	"regexp"
 	"sort"
-	"fmt"
 )
 
 // Вынести задачи из check triangles в отдельные функции
@@ -44,7 +44,6 @@ func reverseSliceOfNames(s []string) (newS []string) {
 	}
 	return newS
 }
-
 
 func checkTriangles(T []Triangle) (ok bool, reason string) {
 	for _, v := range T {

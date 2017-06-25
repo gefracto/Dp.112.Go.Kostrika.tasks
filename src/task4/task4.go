@@ -1,8 +1,8 @@
 package task4
 
 import (
-	"strconv"
 	"fmt"
+	"strconv"
 )
 
 // make it using ints and nit strings!

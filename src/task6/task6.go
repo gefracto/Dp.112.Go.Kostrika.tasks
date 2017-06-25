@@ -1,11 +1,11 @@
 package task6
 
 import (
+	"fmt"
 	"math"
 	"os"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
 type T6 struct {

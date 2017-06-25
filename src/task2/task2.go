@@ -1,8 +1,8 @@
 package task2
 
 import (
-	"math"
 	"fmt"
+	"math"
 )
 
 // укоротить длинные куски кода
@@ -12,7 +12,7 @@ type T2 struct {
 	E2 Envelope
 }
 
-func (T *T2)Dotask2() {
+func (T *T2) Dotask2() {
 	_, d, _ := Dotask(T.E1, T.E2)
 	fmt.Println(d)
 }
