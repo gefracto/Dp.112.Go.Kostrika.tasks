@@ -18,16 +18,16 @@ func main() {
 		fmt.Println(err)
 	} else {
 
-		var QuantityOfTasks int = reflect.ValueOf(&data).Elem().NumField()
+		var numtasks int = reflect.ValueOf(&data).Elem().NumField()
 
-		for i := 1; i <= QuantityOfTasks; i++ {
+		for i := 1; i <= numtasks; i++ {
 			methodname := fmt.Sprintf("Dotask%d", i)
 			tools.SplitOutput(i)
 			output := reflect.ValueOf(&data).MethodByName(methodname).Call(nil)
 
 			Err := output[0]
 			Dat := output[1]
-			
+
 			if reflect.Value.IsNil(Err) {
 				fmt.Println(Dat)
 

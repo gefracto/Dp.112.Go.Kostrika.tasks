@@ -70,7 +70,7 @@ func Dotask(e1 Envelope, e2 Envelope) (err error, data int) {
 	} else if areEqual {
 		return nil, 0
 
-	} else if e1.goesIn(&e2){
+	} else if e1.goesIn(&e2) {
 		return nil, 1
 
 	}

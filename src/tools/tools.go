@@ -1,12 +1,12 @@
 package tools
 
 import (
-	"fmt"
-	"path/filepath"
-	"errors"
-	"io/ioutil"
 	"encoding/json"
 	"encoding/xml"
+	"errors"
+	"fmt"
+	"io/ioutil"
+	"path/filepath"
 	"task1"
 	"task2"
 	"task3"
@@ -27,7 +27,9 @@ type Data struct {
 }
 
 func SplitOutput(i int) {
+	fmt.Println("\n**************************")
 	fmt.Printf("\n>>>>>>>>> Task %d <<<<<<<<<\n", i)
+	fmt.Println("**************************\n")
 }
 
 func getExtension(fileName string) (string, error) {
