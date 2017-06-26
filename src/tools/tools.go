@@ -44,7 +44,7 @@ func readFile(fileName string) ([]byte, error) {
 	return contents, err
 }
 
-func makeStructure(D Data, contents []byte, extension string) (Data, error) {
+func makeStruct(D Data, contents []byte, extension string) (Data, error) {
 	var err error
 
 	if extension == "json" {
@@ -70,7 +70,7 @@ func GetData(fileName string) (Data, error) {
 		return MyData, err
 	}
 
-	MyData, err = makeStructure(MyData, contents, extension)
+	MyData, err = makeStruct(MyData, contents, extension)
 
 	return MyData, err
 }

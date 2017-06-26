@@ -7,18 +7,22 @@ import (
 	"tools"
 )
 
-
-
 func main() {
-	arg := flag.String("file", "data.json", "Usage: -file=fileName.extension")
+	arg := flag.String("file", "data.json",
+		"Usage: -file=fileName.extension")
+
 	flag.Parse()
 
 	if data, err := tools.GetData(*arg); err == nil {
-		var QuantityOfTasks int = reflect.ValueOf(&data).Elem().NumField()
+		var QuantityOfTasks int = 1 //reflect.ValueOf(&data).Elem().NumField()
 		for i := 1; i <= QuantityOfTasks; i++ {
 			methodname := fmt.Sprintf("Dotask%d", i)
 			tools.SplitOutput(i)
-			reflect.ValueOf(&data).MethodByName(methodname).Call(nil)
+			output := reflect.ValueOf(&data).MethodByName(methodname).Call(nil)
+
+			if reflect.Value.IsNil(output[1]) {
+				fmt.Println(output[0])
+			} else {fmt.Println(output[1])}
 		}
 
 	} else {

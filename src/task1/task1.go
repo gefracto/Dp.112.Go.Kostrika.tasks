@@ -3,16 +3,13 @@ package task1
 import (
 	"errors"
 	"strings"
-	"fmt"
+	//"fmt"
 )
 
-func (T *T1) Dotask1() {
+func (T *T1) Dotask1() (data string, err error){
 
-	if ok, data, err := DoTask(T.Width, T.Height, T.Symbol); ok {
-		fmt.Println(data)
-	} else {
-		fmt.Println(err)
-	}
+	_, data, err = DoTask(T.Width, T.Height, T.Symbol)
+	return data, err
 }
 
 type T1 struct {
