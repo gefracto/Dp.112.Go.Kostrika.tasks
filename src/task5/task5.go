@@ -40,10 +40,13 @@ func (R *Results) setWinnersName() {
 	}
 }
 
-func makeSixDigits(n int) (s string) {
-	s = strings.Repeat("0", 6-len(strconv.Itoa(n)))
-	s += strconv.Itoa(n)
-	return
+func makeSixDigits(num int) []int {
+	numSlice := make([]int, 6)
+	for i := 5; num > 0; i-- {
+		numSlice[i] = num % 10
+		num = num / 10
+	}
+	return numSlice
 }
 
 func getInts(s string) []int {
@@ -58,61 +61,51 @@ func getInts(s string) []int {
 }
 
 func method1(n int) (b bool) {
-	var s string
+	var numSl []int
 	var sumLeft, sumRight int
-	if n < 100000 {
-		s = makeSixDigits(n)
-	} else {
-		s = strconv.Itoa(n)
-	}
-	leftN := getInts(s[:3])
-	rightN := getInts(s[3:])
+
+	numSl = makeSixDigits(n)
+
+	leftN := numSl[:3]
+	rightN := numSl[3:]
 
 	sumLeft = getSum(leftN)
 	sumRight = getSum(rightN)
 
 	if sumLeft == sumRight {
-		b = true
-	} else {
-		b = false
+		return true
 	}
 
 	return b
 }
 
 func getSum(n []int) (sum int) {
-	for _, i := range n {
-		sum += i
+	for _, v := range n {
+		sum += v
 	}
 	return
 }
 
 func method2(n int) (b bool) {
-	var s string
+	var numSl []int
 	var odds, evens []int
-	if n < 100000 {
-		s = makeSixDigits(n)
 
-	} else {
-		s = strconv.Itoa(n)
-	}
+	numSl = makeSixDigits(n)
 
-	var str []string = strings.Split(s, "")
-	for _, k := range str {
-		i, _ := strconv.Atoi(string(k))
-		if i%2 == 0 {
-			odds = append(odds, i)
+	for _, v := range numSl {
+		if v%2 == 0 {
+			odds = append(odds, v)
 
 		} else {
-			evens = append(evens, i)
+			evens = append(evens, v)
 		}
 	}
-	if getSum(odds) == getSum(evens) {
-		b = true
 
-	} else {
-		b = false
+	if getSum(odds) == getSum(evens) {
+		return true
+
 	}
+
 	return b
 }
 

@@ -17,16 +17,22 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	} else {
+
 		var QuantityOfTasks int = reflect.ValueOf(&data).Elem().NumField()
+
 		for i := 1; i <= QuantityOfTasks; i++ {
 			methodname := fmt.Sprintf("Dotask%d", i)
 			tools.SplitOutput(i)
 			output := reflect.ValueOf(&data).MethodByName(methodname).Call(nil)
 
-			if reflect.Value.IsNil(output[0]) {
-				fmt.Println(output[1])
+			Err := output[0]
+			Dat := output[1]
+			
+			if reflect.Value.IsNil(Err) {
+				fmt.Println(Dat)
+
 			} else {
-				fmt.Println(output[0])
+				fmt.Println(Err)
 			}
 		}
 

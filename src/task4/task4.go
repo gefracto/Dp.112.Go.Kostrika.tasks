@@ -24,7 +24,6 @@ func reverseString(s string) string {
 }
 
 func isPal(s string) (b bool) {
-	b = false
 	if s == reverseString(s) && len(s) > 1 {
 		b = true
 	}
