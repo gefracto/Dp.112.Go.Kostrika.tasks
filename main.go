@@ -13,8 +13,11 @@ func main() {
 
 	flag.Parse()
 
-	if data, err := tools.GetData(*arg); err == nil {
-		var QuantityOfTasks int = 3 //reflect.ValueOf(&data).Elem().NumField()
+	data, err := tools.GetData(*arg)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		var QuantityOfTasks int = reflect.ValueOf(&data).Elem().NumField()
 		for i := 1; i <= QuantityOfTasks; i++ {
 			methodname := fmt.Sprintf("Dotask%d", i)
 			tools.SplitOutput(i)
@@ -22,10 +25,10 @@ func main() {
 
 			if reflect.Value.IsNil(output[0]) {
 				fmt.Println(output[1])
-			} else {fmt.Println(output[0])}
+			} else {
+				fmt.Println(output[0])
+			}
 		}
 
-	} else {
-		fmt.Println(err)
 	}
 }

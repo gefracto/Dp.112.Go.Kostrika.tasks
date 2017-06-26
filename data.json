@@ -1,9 +1,9 @@
 {
-		"Width":-4,
+		"Width":10,
 		"Height":8,
 		"Symbol":"Go",
 		"E1":{
-			"Side1":-3,
+			"Side1":3,
 			"Side2":15
 		},
 		"E2":{
@@ -25,13 +25,13 @@
                   "C":10.3
 				},
 				{
-				  "Name":"GHI",
+		  "Name":"GHI",
                   "A":34,
                   "B":43.2,
                   "C":55
 				},
 				{
-				  "Name":"JKL",
+		  "Name":"JKL",
                   "A":2,
                   "B":3,
                   "C":2
@@ -42,5 +42,5 @@
 		"Max":1,
 		"Length":3,
 		"MaxSquare":25,
-      	"File":"context"
+      		"File":"context"
 }
