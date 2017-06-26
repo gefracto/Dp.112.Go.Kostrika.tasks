@@ -3,12 +3,11 @@ package task1
 import (
 	"errors"
 	"strings"
-	//"fmt"
 )
 
-func (T *T1) Dotask1() (data string, err error){
+func (T *T1) Dotask1() (data string, err error) {
 
-	_, data, err = DoTask(T.Width, T.Height, T.Symbol)
+	data, err = DoTask(T.Width, T.Height, T.Symbol)
 	return data, err
 }
 
@@ -43,17 +42,27 @@ func makeRow(switcher int, symbol string, width int) string {
 	return row
 }
 
-func DoTask(width int, height int, symbol string) (ok bool, board string, err error) {
-	if width <= 0 || height <= 0 {
-		err := errors.New("Числа должны быть больше нуля!\n")
-		return false, board, err
-	} else {
-		switcher := 1
-		board := ""
-		for i := 1; i <= height; i++ {
-			board += makeRow(switcher, symbol, width) + "\n"
-			switcher *= -1
-		}
-		return true, board, err
+func validate(w, h int) (bool, error) {
+	if w <= 0 || h <= 0 {
+		return false, errors.New("Числа должны быть больше нуля!\n")
 	}
+	return true, nil
+}
+
+func DoTask(width int, height int, symbol string) (string, error) {
+	var board string
+	var err error
+
+	if ok, err := validate(width, height); ok == false {
+		return board, err
+	}
+
+	switcher := 1
+	for i := 1; i <= height; i++ {
+		board += makeRow(switcher, symbol, width) + "\n"
+		switcher *= -1
+	}
+
+	return board, err
+
 }
