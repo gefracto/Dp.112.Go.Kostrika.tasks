@@ -1,7 +1,7 @@
 package task5
 
 import (
-	"fmt"
+	"errors"
 	"strconv"
 	"strings"
 )
@@ -10,9 +10,8 @@ type T5 struct {
 	Min, Max int
 }
 
-func (T *T5) Dotask5() {
-	_, d, _ := Dotask(T.Min, T.Max)
-	fmt.Println(d)
+func (T *T5) Dotask5() (err error, data interface{}) {
+	return Dotask(T.Min, T.Max)
 }
 
 // обязательно переделать работу со строками на инты
@@ -117,12 +116,12 @@ func method2(n int) (b bool) {
 	return b
 }
 
-func Dotask(min, max int) (ok bool, data Results, reason string) {
+func Dotask(min, max int) (err error, data Results) {
 	if min < 0 || max < 0 {
-		return false, data, "Значения должны быть больше нуля"
+		return errors.New("Значения должны быть больше нуля"), data
 
 	} else if min > max {
-		return false, data, "Минимальное значение не должно быть больше максимального"
+		return errors.New("Минимальное значение не должно быть больше максимального"), data
 
 	} else {
 		var Res Results
@@ -137,6 +136,6 @@ func Dotask(min, max int) (ok bool, data Results, reason string) {
 		}
 
 		Res.setWinnersName()
-		return true, Res, reason
+		return err, Res
 	}
 }

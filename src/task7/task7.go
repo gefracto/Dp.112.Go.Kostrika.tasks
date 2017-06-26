@@ -1,7 +1,7 @@
 package task7
 
 import (
-	"fmt"
+	"errors"
 	"io/ioutil"
 	"regexp"
 	"strconv"
@@ -12,9 +12,8 @@ type T7 struct {
 	File string
 }
 
-func (T *T7) Dotask7() {
-	_, d, _ := Dotask(T.File)
-	fmt.Println(d)
+func (T *T7) Dotask7() (err error, data interface{}) {
+	return Dotask(T.File)
 }
 
 // разбить код из dotask на отдельные куски
@@ -24,19 +23,19 @@ func getLength(n int) int {
 	return len(str)
 }
 
-func Dotask(file string) (ok bool, data []int, reason string) {
+func Dotask(file string) (err error, data []int) {
 	var f string
 	var numbers []int
 	var s []string
 
 	if file != "context" {
-		return false, data, "Ошибка!\nНе удалось найти файл."
+		return errors.New("Ошибка!\nНе удалось найти файл."), data
 
 	} else if contents, err := ioutil.ReadFile(file); err != nil {
-		return false, data, "Ошибка!\nНе удалось прочитать файл."
+		return errors.New("Ошибка!\nНе удалось прочитать файл."), data
 
 	} else if f = string(contents); len(f) == 0 {
-		return false, data, "Ошибка!\nФайл должен содержать числовые данные"
+		return errors.New("Ошибка!\nФайл должен содержать числовые данные"), data
 
 	} else if ok, _ := regexp.MatchString("\\A[\\d]+[,| |\n]{1}[\\d]+$", f); ok {
 
@@ -54,10 +53,10 @@ func Dotask(file string) (ok bool, data []int, reason string) {
 		max, _ := strconv.Atoi(s[1])
 
 		if min > max {
-			return false, data, "Ошибка!\nЗначение нижней границы диапазона\nне может быть больше значения верхней"
+			return errors.New("Ошибка!\nЗначение нижней границы диапазона\nне может быть больше значения верхней"), data
 
 		} else if min < 1 || max < 1 {
-			return false, data, "Ошибка!\nЗначения должны быть больше нуля"
+			return errors.New("Ошибка!\nЗначения должны быть больше нуля"), data
 		} else {
 			var a, b int = 1, 1
 			for a < int(max) {
@@ -67,7 +66,7 @@ func Dotask(file string) (ok bool, data []int, reason string) {
 				}
 			}
 
-			return true, numbers, reason
+			return err, numbers
 		}
 
 	} else if ok, _ := regexp.MatchString("\\A[\\d]+$", f); ok {
@@ -83,10 +82,10 @@ func Dotask(file string) (ok bool, data []int, reason string) {
 
 		}
 
-		return true, numbers, reason
+		return err, numbers
 	}
-	return false, data, "Ошибка!\nФайл должен содержать либо:\n1: Нижнюю и верхнюю границы " +
+	return errors.New("Ошибка!\nФайл должен содержать либо:\n1: Нижнюю и верхнюю границы " +
 		"диапазона числовых значений,\nразделенные запятой, пробелом или переносом строки." +
-		"\n2: Числовое значение длины."
+		"\n2: Числовое значение длины."), data
 
 }

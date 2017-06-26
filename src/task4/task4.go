@@ -1,7 +1,7 @@
 package task4
 
 import (
-	"fmt"
+	"errors"
 	"strconv"
 )
 
@@ -11,9 +11,8 @@ type T4 struct {
 	Number int
 }
 
-func (T *T4) Dotask4() {
-	_, d, _ := Dotask(T.Number)
-	fmt.Println(d)
+func (T *T4) Dotask4() (err error, data int) {
+	return Dotask(T.Number)
 }
 
 func reverseString(s string) string {
@@ -48,41 +47,39 @@ func findLargest(sl []string) []string {
 	return largest
 }
 
-func Dotask(num int) (ok bool, data int, reason string) {
-
-	original := strconv.Itoa(num)
-	reversed := reverseString(original)
+func Dotask(num int) (err error, data int) {
+	var ok bool
+	ABC := strconv.Itoa(num)
+	CBA := reverseString(ABC)
 	var largestPalindrome int
-	var sliceOfPalindromes []string
+	var palindromes []string
 	var largestPalindromes []string
 	if num <= 0 {
-		return false, data, "\nОшибка!\nЗадайте число больше нуля"
+		return errors.New("\nОшибка!\nЗадайте число больше нуля"), data
 
-	} else {
-		for i1, v1 := range original {
-			for i2, v2 := range reversed {
-				if i1+i2 < len(original) && v2 == v1 && isPal(original[i1:len(original)-i2]) {
-					sliceOfPalindromes = append(sliceOfPalindromes, string(original[i1:len(original)-i2]))
-
-					ok = true
-				}
-			}
-		}
-
-		if ok {
-			largestPalindromes = append(largestPalindromes, findLargest(sliceOfPalindromes)...)
-		}
-
-		for _, v := range largestPalindromes {
-			tmp, _ := strconv.Atoi(v)
-			if largestPalindrome < tmp {
-				largestPalindrome = tmp
-			}
-		}
-
-		return ok, largestPalindrome, reason
 	}
 
-	return ok, largestPalindrome, reason
+	for i1, v1 := range ABC {
+		for i2, v2 := range CBA {
+			if i1+i2 < len(ABC) && v2 == v1 && isPal(ABC[i1:len(ABC)-i2]) {
+				palindromes = append(palindromes, string(ABC[i1:len(ABC)-i2]))
+
+				ok = true
+			}
+		}
+	}
+
+	if ok {
+		largestPalindromes = append(largestPalindromes, findLargest(palindromes)...)
+	}
+
+	for _, v := range largestPalindromes {
+		tmp, _ := strconv.Atoi(v)
+		if largestPalindrome < tmp {
+			largestPalindrome = tmp
+		}
+	}
+
+	return nil, largestPalindrome
 
 }

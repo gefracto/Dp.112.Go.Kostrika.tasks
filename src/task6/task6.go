@@ -1,7 +1,7 @@
 package task6
 
 import (
-	"fmt"
+	"errors"
 	"math"
 	"os"
 	"strconv"
@@ -12,21 +12,20 @@ type T6 struct {
 	Length, MaxSquare int
 }
 
-func (T *T6) Dotask6() {
-	_, d, _ := Dotask(T.Length, T.MaxSquare)
-	fmt.Println(d)
+func (T *T6) Dotask6() (err error, data interface{}) {
+	return Dotask(T.Length, T.MaxSquare)
 }
 
-func Dotask(length, maxSquare int) (ok bool, err error, reason string) {
+func Dotask(length, maxSquare int) (err error, b bool) {
 	if length < 0 || maxSquare < 0 {
-		return false, err, "Значения не должны быть меньше нуля.\nФайл не создан."
+		return errors.New("Значения не должны быть меньше нуля.\nФайл не создан."), false
 
 	} else {
 		str := getSequence(length, maxSquare)
 		file, err := os.Create("number sequence of task6")
 		defer file.Close()
 		_, err = file.WriteString(str)
-		return true, err, reason
+		return err, true
 	}
 }
 
