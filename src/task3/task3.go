@@ -1,7 +1,7 @@
 package task3
 
 import (
-	"fmt"
+	"errors"
 	"math"
 	"regexp"
 	"sort"
@@ -13,9 +13,9 @@ type T3 struct {
 	SliceOfTriangles []Triangle
 }
 
-func (T *T3) Dotask3() {
-	_, d, _ := Dotask(T.SliceOfTriangles)
-	fmt.Println(d)
+func (T *T3) Dotask3() (err error, data []string) {
+	err, data = Dotask(T.SliceOfTriangles)
+	return
 }
 
 type Triangle struct {
@@ -45,66 +45,65 @@ func reverseSliceOfNames(s []string) (newS []string) {
 	return newS
 }
 
-func checkTriangles(T []Triangle) (ok bool, reason string) {
+func checkTriangles(T []Triangle) (ok bool, err error) {
 	for _, v := range T {
 		var pattern string = "\\A[A-Z]{1}[0-9]?[A-Z]{1}[0-9]?[A-Z]{1}[0-9]?$"
 		if ok, _ := regexp.MatchString(pattern, v.Name); ok == false {
-			return false, "Имя треугольника " + v.Name + " должно состоять из имен трех вершин\n"
+			return false, errors.New("Имя треугольника " + v.Name + " должно состоять из имен трех вершин\n")
 
 		} else if v.A >= v.B+v.C || v.A <= 0 {
-			return false, "Значение стороны \"А\" треугольника \"" + v.Name +
+			return false, errors.New("Значение стороны \"А\" треугольника \"" + v.Name +
 				"\"\nне должно быть больше суммы сторон \"B\" и \"C\", " +
-				"\nа также не может быть меньше или равно нулю\n"
+				"\nа также не может быть меньше или равно нулю\n")
 
 		} else if v.B >= v.A+v.C || v.B <= 0 {
-			return false, "Значение стороны \"B\" треугольника \"" + v.Name +
+			return false, errors.New("Значение стороны \"B\" треугольника \"" + v.Name +
 				"\"\nне должно быть больше суммы сторон \"A\" и \"C\", " +
-				"\nа также не может быть меньше или равно нулю\n"
+				"\nа также не может быть меньше или равно нулю\n")
 
 		} else if v.C >= v.A+v.B || v.C <= 0 {
-			return false, "Значение стороны \"C\" треугольника \"" + v.Name +
+			return false, errors.New("Значение стороны \"C\" треугольника \"" + v.Name +
 				"\"\nне должно быть больше суммы сторон \"B\" и \"A\", " +
-				"\nа также не может быть меньше или равно нулю\n"
+				"\nа также не может быть меньше или равно нулю\n")
 		}
 	}
-	return true, ""
+	return true, err
 }
 
-func Dotask(T []Triangle) (ok bool, data []string, reason string) {
-	if ok, reason := checkTriangles(T); ok == false {
-		return ok, nil, reason
-
-	} else {
-		var names []string
-		var squares []float64
-		var indexes []int
-		var sortedSquares []float64
-		var sortedNames []string
-
-		for i := range T {
-			names = append(names, T[i].getName())
-			squares = append(squares, T[i].getSquare(T[i].getP()))
-		}
-
-		sortedSquares = append(sortedSquares, squares...)
-		sort.Float64s(sortedSquares)
-		for _, v := range sortedSquares {
-
-			for i2, v2 := range squares {
-
-				if v == v2 {
-					indexes = append(indexes, i2)
-					squares[i2] = -1
-				}
-			}
-		}
-
-		for _, v := range indexes {
-			sortedNames = append(sortedNames, names[v])
-		}
-
-		reversedNames := reverseSliceOfNames(sortedNames)
-		return ok, reversedNames, reason
+func Dotask(T []Triangle) (err error, data []string) {
+	if ok, err := checkTriangles(T); ok == false {
+		return err, nil
 
 	}
+	var names []string
+	var squares []float64
+	var indexes []int
+	var sortedSquares []float64
+	var sortedNames []string
+
+	for i := range T {
+		names = append(names, T[i].getName())
+		squares = append(squares, T[i].getSquare(T[i].getP()))
+	}
+
+	sortedSquares = append(sortedSquares, squares...)
+	sort.Float64s(sortedSquares)
+	for _, v := range sortedSquares {
+
+		for i2, v2 := range squares {
+
+			if v == v2 {
+				indexes = append(indexes, i2)
+				squares[i2] = -1
+			}
+		}
+	}
+
+	for _, v := range indexes {
+		sortedNames = append(sortedNames, names[v])
+	}
+
+	reversedNames := reverseSliceOfNames(sortedNames)
+	return err, reversedNames
+
 }

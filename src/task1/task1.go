@@ -5,10 +5,10 @@ import (
 	"strings"
 )
 
-func (T *T1) Dotask1() (data string, err error) {
+func (T *T1) Dotask1() (err error, data interface{}) {
 
-	data, err = DoTask(T.Width, T.Height, T.Symbol)
-	return data, err
+	err, data = DoTask(T.Width, T.Height, T.Symbol)
+	return
 }
 
 type T1 struct {
@@ -49,12 +49,12 @@ func validate(w, h int) (bool, error) {
 	return true, nil
 }
 
-func DoTask(width int, height int, symbol string) (string, error) {
+func DoTask(width int, height int, symbol string) (error, string) {
 	var board string
 	var err error
 
 	if ok, err := validate(width, height); ok == false {
-		return board, err
+		return err, board
 	}
 
 	switcher := 1
@@ -63,6 +63,6 @@ func DoTask(width int, height int, symbol string) (string, error) {
 		switcher *= -1
 	}
 
-	return board, err
+	return err, board
 
 }

@@ -1,9 +1,9 @@
 {
-		"Width":4,
+		"Width":-4,
 		"Height":8,
 		"Symbol":"Go",
 		"E1":{
-			"Side1":3,
+			"Side1":-3,
 			"Side2":15
 		},
 		"E2":{
