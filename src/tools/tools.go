@@ -27,8 +27,8 @@ type Data struct {
 }
 
 func SplitOutput(i int) {
-	fmt.Println("\n**************************")
-	fmt.Printf("\n>>>>>>>>> Task %d <<<<<<<<<\n", i)
+	fmt.Println("\n\n**************************")
+	fmt.Printf("********* Task %d *********\n", i)
 	fmt.Println("**************************\n")
 }
 
