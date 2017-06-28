@@ -18,7 +18,7 @@ func main() {
 		fmt.Println(err)
 	} else {
 
-		var numtasks int = reflect.ValueOf(&data).Elem().NumField()
+		numtasks := reflect.ValueOf(&data).Elem().NumField()
 		item := reflect.ValueOf(&data)
 
 		for i := 1; i <= numtasks; i++ {
