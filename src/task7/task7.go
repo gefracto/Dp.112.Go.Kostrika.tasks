@@ -16,7 +16,6 @@ func (T *T7) Dotask7() (err error, data interface{}) {
 	return Dotask(T.File)
 }
 
-// разбить код из dotask на отдельные куски
 
 func getLength(n int) int {
 	return len(strconv.Itoa(n))

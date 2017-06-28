@@ -5,14 +5,32 @@ import (
 )
 
 func Test_getLength(t *testing.T) {
-
+	num := 12345
+	len := 5
+	if getLength(num) != len {
+		t.Errorf("Ожидалось %d, " +
+			"получено %d", len, getLength(num))
+	}
 }
 
 func Benchmark_getLength(b *testing.B) {
-
+	for i:=0; i< b.N; i++ {
+		getLength(i)
+	}
 }
 
 func Test_validateFileName(t *testing.T) {
+	name1 := "context"
+	name2 := "someother"
+	err1 := validateFileName(name1)
+	err2 := validateFileName(name2)
+
+	if err1 != nil {
+		t.Errorf("Функция должна обрабатывать имя context")
+	}
+	if err2 == nil {
+		t.Errorf("Функция не должна пропускать имя, отличное от context")
+	}
 
 }
 
@@ -80,17 +98,16 @@ func Test_caseOneNum(t *testing.T) {
 
 }
 
-func Benchmark_caskeOneNum(b *testing.B) {
+func Benchmark_caseOneNum(b *testing.B) {
 
 }
 
 func Test_Dotask(t *testing.T) {
-
 }
 
 func Benchmark_Dotask(b *testing.B) {
 	file := "context"
-	for i:=0; i < 1000000; i++ {
+	for i:=0; i < b.N; i++ {
 		Dotask(file)
 	}
 }
