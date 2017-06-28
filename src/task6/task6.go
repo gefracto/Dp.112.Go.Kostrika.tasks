@@ -13,10 +13,10 @@ type T6 struct {
 }
 
 func (T *T6) Dotask6() (err error, data interface{}) {
-	return Dotask(T.Length, T.MaxSquare), Dotask(T.Length, T.MaxSquare)
+	return dotask(T.Length, T.MaxSquare), dotask(T.Length, T.MaxSquare)
 }
 
-func Dotask(length, maxSquare int) error {
+func dotask(length, maxSquare int) error {
 	if length < 0 || maxSquare < 0 {
 		return errors.New("Значения не должны быть меньше нуля.\nФайл не создан.")
 

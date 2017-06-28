@@ -6,14 +6,12 @@ import (
 	"strconv"
 )
 
-// make it using ints and nit strings!
-
 type T4 struct {
 	Number int
 }
 
 func (T *T4) Dotask4() (err error, data int) {
-	return Dotask(T.Number)
+	return dotask(T.Number)
 }
 
 func reverseString(s string) string {
@@ -57,32 +55,31 @@ func slicetonum(sl []int) int {
 		n += float64(sl[i]) * math.Pow(10, pow)
 		pow -= 1
 	}
-	return int(n)/10
-}	
+	return int(n) / 10
+}
 func numtoslice(num int) []int {
 	l := len(strconv.Itoa(num))
 	tmp := make([]int, l)
 
-	for i:= l-1; i >= 0; i-- {
+	for i := l - 1; i >= 0; i-- {
 		tmp[i] = num % 10
-		num = num / 10 
+		num = num / 10
 	}
 	return tmp
-}	
+}
 
 func reversenum(num []int) []int {
 	var rev []int
-	for i:=len(num)-1; i >= 0; i-- {
+	for i := len(num) - 1; i >= 0; i-- {
 		rev = append(rev, num[i])
 	}
 	return rev
 }
 
-	
-func Dotask(num int) (error, int) {
+func dotask(num int) (error, int) {
 	var ok bool
-	ABC := numtoslice(num) 
-	CBA := reversenum(ABC) 
+	ABC := numtoslice(num)
+	CBA := reversenum(ABC)
 	var largestPalindrome int
 	var palindromes []int
 	var largestPalindromes []int

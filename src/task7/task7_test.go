@@ -8,13 +8,13 @@ func Test_getLength(t *testing.T) {
 	num := 12345
 	len := 5
 	if getLength(num) != len {
-		t.Errorf("Ожидалось %d, " +
+		t.Errorf("Ожидалось %d, "+
 			"получено %d", len, getLength(num))
 	}
 }
 
 func Benchmark_getLength(b *testing.B) {
-	for i:=0; i< b.N; i++ {
+	for i := 0; i < b.N; i++ {
 		getLength(i)
 	}
 }
@@ -102,12 +102,12 @@ func Benchmark_caseOneNum(b *testing.B) {
 
 }
 
-func Test_Dotask(t *testing.T) {
+func Test_dotask(t *testing.T) {
 }
 
-func Benchmark_Dotask(b *testing.B) {
+func Benchmark_dotask(b *testing.B) {
 	file := "context"
-	for i:=0; i < b.N; i++ {
-		Dotask(file)
+	for i := 0; i < b.N; i++ {
+		dotask(file)
 	}
 }

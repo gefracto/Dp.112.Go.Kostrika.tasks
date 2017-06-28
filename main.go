@@ -20,7 +20,7 @@ func main() {
 
 		var numtasks int = reflect.ValueOf(&data).Elem().NumField()
 		item := reflect.ValueOf(&data)
-		
+
 		for i := 1; i <= numtasks; i++ {
 			pattern := "<task%d.T%d Value>"
 

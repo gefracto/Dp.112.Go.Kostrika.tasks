@@ -7,14 +7,12 @@ import (
 	"sort"
 )
 
-// Вынести задачи из check triangles в отдельные функции
-
 type T3 struct {
 	SliceOfTriangles []Triangle
 }
 
 func (T *T3) Dotask3() (err error, data []string) {
-	err, data = Dotask(T.SliceOfTriangles)
+	err, data = dotask(T.SliceOfTriangles)
 	return
 }
 
@@ -54,13 +52,13 @@ func checkTriangles(T []Triangle) (ok bool, err error) {
 		}
 		if v.A >= v.B+v.C || v.A <= 0 {
 			return ok, errors.New("Значение стороны \"А\" треугольника \"" +
-				v.Name + "\"\nне должно быть"+
+				v.Name + "\"\nне должно быть" +
 				" больше суммы сторон \"B\" и \"C\", " +
 				"\nа также не может быть меньше или равно нулю\n")
 		}
 		if v.B >= v.A+v.C || v.B <= 0 {
 			return ok, errors.New("Значение стороны \"B\" треугольника \"" +
-				v.Name + "\"\nне должно быть"+
+				v.Name + "\"\nне должно быть" +
 				" больше суммы сторон \"A\" и \"C\", " +
 				"\nа также не может быть меньше или равно нулю\n")
 
@@ -74,7 +72,7 @@ func checkTriangles(T []Triangle) (ok bool, err error) {
 	return true, err
 }
 
-func Dotask(T []Triangle) (err error, data []string) {
+func dotask(T []Triangle) (err error, data []string) {
 	if ok, err := checkTriangles(T); ok == false {
 		return err, nil
 

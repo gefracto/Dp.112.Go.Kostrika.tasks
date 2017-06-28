@@ -4,7 +4,6 @@ import (
 	"errors"
 	"strconv"
 	"strings"
-
 )
 
 type T5 struct {
@@ -12,10 +11,8 @@ type T5 struct {
 }
 
 func (T *T5) Dotask5() (err error, data interface{}) {
-	return Dotask(T.Min, T.Max)
+	return dotask(T.Min, T.Max)
 }
-
-// обязательно переделать работу со строками на инты
 
 type Results struct {
 	winnersName  string
@@ -110,7 +107,7 @@ func method2(n int) (b bool) {
 	return b
 }
 
-func Dotask(min, max int) (err error, data Results) {
+func dotask(min, max int) (err error, data Results) {
 	if min < 0 || max < 0 {
 		return errors.New("Значения должны быть больше нуля"), data
 

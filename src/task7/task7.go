@@ -13,14 +13,12 @@ type T7 struct {
 }
 
 func (T *T7) Dotask7() (err error, data interface{}) {
-	return Dotask(T.File)
+	return dotask(T.File)
 }
-
 
 func getLength(n int) int {
 	return len(strconv.Itoa(n))
 }
-
 
 func validateFileName(s string) error {
 	if s != "context" {
@@ -34,16 +32,15 @@ func validateFileName(s string) error {
 func canBeRead(s string) ([]byte, error) {
 	contents, err := ioutil.ReadFile(s)
 	if err != nil {
-		return nil, errors.New("Ошибка!\n"+
+		return nil, errors.New("Ошибка!\n" +
 			"Не удалось прочитать файл.")
 	}
 	return contents, nil
 }
 
-
 func validateHasData(s string) error {
 	if len(s) == 0 {
-		return errors.New("Ошибка!\n"+
+		return errors.New("Ошибка!\n" +
 			"Файл должен содержать числовые данные")
 	}
 	return nil
@@ -53,7 +50,7 @@ func hasTwoNums(s string) bool {
 	pattern := "\\A[\\d]+[,| |\n]{1}[\\d]+$"
 	ok, _ := regexp.MatchString(pattern, s)
 	return ok
-	
+
 }
 
 func hasOneNum(s string) bool {
@@ -81,7 +78,7 @@ func splitData(s string) []string {
 
 func validateNums(min, max int) (error, bool) {
 	if min > max {
-		return errors.New("Ошибка!\nЗначение нижней границы диапазона\n"+
+		return errors.New("Ошибка!\nЗначение нижней границы диапазона\n" +
 			"не может быть больше значения верхней"), false
 	}
 
@@ -97,7 +94,7 @@ func caseTwoNums(FILE string) (err error, nums []int) {
 	min, _ := strconv.Atoi(s[0])
 	max, _ := strconv.Atoi(s[1])
 
-	if err, ok := validateNums(min,max); ok == false {
+	if err, ok := validateNums(min, max); ok == false {
 		return err, nums
 	}
 	var a, b int = 1, 1
@@ -110,7 +107,7 @@ func caseTwoNums(FILE string) (err error, nums []int) {
 	return err, nums
 }
 
-func caseOneNum(FILE string) (err error, nums[]int) {
+func caseOneNum(FILE string) (err error, nums []int) {
 	length, _ := strconv.Atoi(FILE)
 	var a, b int = 1, 1
 
@@ -122,11 +119,10 @@ func caseOneNum(FILE string) (err error, nums[]int) {
 		}
 
 	}
-		return err, nums
+	return err, nums
 }
 
-
-func Dotask(file string) (err error, data []int) {
+func dotask(file string) (err error, data []int) {
 	var FILE string
 	var numbers []int
 
@@ -158,9 +154,9 @@ func Dotask(file string) (err error, data []int) {
 		return err, numbers
 	}
 
-	return errors.New("Ошибка!\nФайл должен содержать либо:\n"+
+	return errors.New("Ошибка!\nФайл должен содержать либо:\n" +
 		"1: Нижнюю и верхнюю границы " +
-		"диапазона числовых значений,\n"+
+		"диапазона числовых значений,\n" +
 		"разделенные запятой, пробелом или переносом строки." +
 		"\n2: Числовое значение длины."), data
 

@@ -7,7 +7,7 @@ import (
 
 func (T *T1) Dotask1() (err error, data interface{}) {
 
-	err, data = DoTask(T.Width, T.Height, T.Symbol)
+	err, data = dotask(T.Width, T.Height, T.Symbol)
 	return
 }
 
@@ -49,7 +49,7 @@ func validate(w, h int) (bool, error) {
 	return true, nil
 }
 
-func DoTask(w int, h int, s string) (error, string) {
+func dotask(w int, h int, s string) (error, string) {
 	var board string
 	var err error
 

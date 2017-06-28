@@ -44,18 +44,17 @@ func Benchmark_checkTriangles(b *testing.B) {
 
 }
 
-func Test_Dotask(t *testing.T) {
+func Test_dotask(t *testing.T) {
 
 }
 
-func Benchmark_Dotask(b *testing.B) {
-	var aaa Triangle = Triangle{"ABC",10,7,5}
-	var bbb Triangle = Triangle{"DEF",43,60,71}
-	var ccc Triangle = Triangle{"GHI",143,60,100}
-	var ddd []Triangle = []Triangle{aaa,bbb,ccc}
+func Benchmark_dotask(b *testing.B) {
+	var aaa Triangle = Triangle{"ABC", 10, 7, 5}
+	var bbb Triangle = Triangle{"DEF", 43, 60, 71}
+	var ccc Triangle = Triangle{"GHI", 143, 60, 100}
+	var ddd []Triangle = []Triangle{aaa, bbb, ccc}
 
-	for i:=0; i<b.N; i++ {
-		Dotask(ddd)
+	for i := 0; i < b.N; i++ {
+		dotask(ddd)
 	}
 }
-

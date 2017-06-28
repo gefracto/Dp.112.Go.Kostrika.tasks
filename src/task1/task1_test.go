@@ -8,29 +8,29 @@ func Test_makeRow(t *testing.T) {
 	b := true
 	s := "*"
 	w := 4
-	res := makeRow(b,s,w)
+	res := makeRow(b, s, w)
 	if res != "* * " {
 		t.Error("Ожидался результат \"* * \", получено ", res)
 	}
 }
 
 func Benchmark_makeRow(b *testing.B) {
-	for i:=0;i<b.N;i++ {
+	for i := 0; i < b.N; i++ {
 		makeRow(true, "*", 8)
 	}
 }
 
 func Test_validate(t *testing.T) {
-	var valid []int= []int{1, 3, 3, 1, 3}
-	var invalid []int=[]int{0, -1, -2, -299, -323245}
-	
-	for i:=0; i<len(valid); i++ {
-		if _, err := validate(valid[i],valid[i]); err != nil {
+	var valid []int = []int{1, 3, 3, 1, 3}
+	var invalid []int = []int{0, -1, -2, -299, -323245}
+
+	for i := 0; i < len(valid); i++ {
+		if _, err := validate(valid[i], valid[i]); err != nil {
 			t.Error(err)
 		}
 	}
 
-	for j:=0; j<len(invalid); j++ {
+	for j := 0; j < len(invalid); j++ {
 		if _, err := validate(invalid[j], invalid[j]); err == nil {
 			t.Error("Ошибка! Нет реакции на недопустимое значение: ", invalid[j])
 		}
@@ -38,29 +38,27 @@ func Test_validate(t *testing.T) {
 }
 
 func Benchmark_validate(b *testing.B) {
-	for i:=0; i<b.N; i ++ {
-		validate(i,i)
+	for i := 0; i < b.N; i++ {
+		validate(i, i)
 	}
 }
 
-func Test_DoTask(t *testing.T) {
+func Test_dotask(t *testing.T) {
 	w := 4
 	h := 3
 	s := "*"
 
 	expect := "* * \n * *\n* * \n"
 
-	err, res := DoTask(w,h,s)
+	err, res := dotask(w, h, s)
 	if res != expect || err != nil {
-		t.Error("\nПолучил \n"+res+"\nОжидал: \n" + expect)
+		t.Error("\nПолучил \n" + res + "\nОжидал: \n" + expect)
 	}
 
-	
 }
 
-
-func Benchmark_DoTask(b *testing.B) {
-	for i:=0; i<b.N; i++ {
-		DoTask(100,100,"*")
+func Benchmark_dotask(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		dotask(100, 100, "*")
 	}
 }

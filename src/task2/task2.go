@@ -11,7 +11,7 @@ type T2 struct {
 }
 
 func (T *T2) Dotask2() (err error, data interface{}) {
-	err, data = Dotask(T.E1, T.E2)
+	err, data = dotask(T.E1, T.E2)
 	return
 }
 
@@ -56,7 +56,7 @@ func (e *Envelope) goesIn(e2 *Envelope) bool {
 	return x && y
 }
 
-func Dotask(e1 Envelope, e2 Envelope) (err error, data int) {
+func dotask(e1 Envelope, e2 Envelope) (err error, data int) {
 	A, B := e1.Side1, e1.Side2
 	C, D := e2.Side1, e2.Side2
 
