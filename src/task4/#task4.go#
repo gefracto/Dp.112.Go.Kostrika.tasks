@@ -25,9 +25,7 @@ func reverseString(s string) string {
 }
 
 func isPal(n []int) (b bool) {
-	first := slicetonum(n) == slicetonum(reversenum(n))
-	second := len(strconv.Itoa(slicetonum(n))) > 1
-	if first && second {
+	if slicetonum(n) == slicetonum(reversenum(n)) && len(strconv.Itoa(slicetonum(n))) > 1 {
 		b = true
 	}
 	return b
@@ -79,24 +77,26 @@ func reversenum(num []int) []int {
 }
 
 	
-func Dotask(num int) (error, int) {
+func Dotask(num int) (err error, data int) {
 	var ok bool
 	ABC := numtoslice(num) 
 	CBA := reversenum(ABC) 
-	var largestPalindrome int
-	var palindromes []int
-	var largestPalindromes []int
+	var largestPal int
+	var pals []int
+	var largestPals []int
 	if num <= 0 {
-		return errors.New("\nОшибка!\nЗадайте число больше нуля"), 0
+		return errors.New("\nОшибка!\nЗадайте число больше нуля"), data
 
 	}
 
-	for i, v := range ABC {
+	for i1, v1 := range ABC {
 		for i2, v2 := range CBA {
-			one := i+i2 < len(ABC)
-			two := v2 == v
-			if one && two && isPal(ABC[i:len(ABC)-i2]) {
-				palindromes = append(palindromes, slicetonum(ABC[i:len(ABC)-i2]))
+
+			first := i1+i2 < len(ABC)
+			second := v2 == v1
+			third := isPal(ABC[i1:len(ABC)-i2])
+			if first && second && third {
+				pals = append(pals, slicetonum(ABC[i1:len(ABC)-i2]))
 
 				ok = true
 			}
@@ -104,15 +104,15 @@ func Dotask(num int) (error, int) {
 	}
 
 	if ok {
-		largestPalindromes = append(largestPalindromes, findLargest(palindromes)...)
+		largestPals = append(largestPals, findLargest(pals)...)
 	}
 
-	for _, v := range largestPalindromes {
-		if largestPalindrome < v {
-			largestPalindrome = v
+	for _, v := range largestPals {
+		if largestPal < v {
+			largestPal = v
 		}
 	}
 
-	return nil, largestPalindrome
+	return nil, largestPal
 
 }

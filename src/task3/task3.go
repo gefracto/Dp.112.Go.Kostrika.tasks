@@ -25,44 +25,48 @@ type Triangle struct {
 	C    float64
 }
 
-func (T *Triangle) getP() float64 {
+func (T *Triangle) halfperim() float64 {
 	return (T.A + T.B + T.C) / 2
 }
 
-func (T *Triangle) getSquare(p float64) float64 {
+func (T *Triangle) area(p float64) float64 {
 	S := math.Sqrt(p * (p - T.A) * (p - T.B) * (p - T.C))
 	return S
 }
 
-func (T *Triangle) getName() string {
+func (T *Triangle) getname() string {
 	return T.Name
 }
 
-func reverseSliceOfNames(s []string) (newS []string) {
-	for i := len(s) - 1; i >= 0; i-- {
-		newS = append(newS, s[i])
+func reverseSliceOfNames(slice []string) (newSlice []string) {
+	for i := len(slice) - 1; i >= 0; i-- {
+		newSlice = append(newSlice, slice[i])
 	}
-	return newS
+	return newSlice
 }
 
 func checkTriangles(T []Triangle) (ok bool, err error) {
 	for _, v := range T {
-		var pattern string = "\\A[A-Z]{1}[0-9]?[A-Z]{1}[0-9]?[A-Z]{1}[0-9]?$"
+		pattern := "\\A[A-Z]{1}[0-9]?[A-Z]{1}[0-9]?[A-Z]{1}[0-9]?$"
 		if ok, _ := regexp.MatchString(pattern, v.Name); ok == false {
-			return false, errors.New("Имя треугольника " + v.Name + " должно состоять из имен трех вершин\n")
-
-		} else if v.A >= v.B+v.C || v.A <= 0 {
-			return false, errors.New("Значение стороны \"А\" треугольника \"" + v.Name +
-				"\"\nне должно быть больше суммы сторон \"B\" и \"C\", " +
+			return ok, errors.New("Имя треугольника " + v.Name +
+				" должно состоять из имен трех вершин\n")
+		}
+		if v.A >= v.B+v.C || v.A <= 0 {
+			return ok, errors.New("Значение стороны \"А\" треугольника \"" +
+				v.Name + "\"\nне должно быть"+
+				" больше суммы сторон \"B\" и \"C\", " +
+				"\nа также не может быть меньше или равно нулю\n")
+		}
+		if v.B >= v.A+v.C || v.B <= 0 {
+			return ok, errors.New("Значение стороны \"B\" треугольника \"" +
+				v.Name + "\"\nне должно быть"+
+				" больше суммы сторон \"A\" и \"C\", " +
 				"\nа также не может быть меньше или равно нулю\n")
 
-		} else if v.B >= v.A+v.C || v.B <= 0 {
-			return false, errors.New("Значение стороны \"B\" треугольника \"" + v.Name +
-				"\"\nне должно быть больше суммы сторон \"A\" и \"C\", " +
-				"\nа также не может быть меньше или равно нулю\n")
-
-		} else if v.C >= v.A+v.B || v.C <= 0 {
-			return false, errors.New("Значение стороны \"C\" треугольника \"" + v.Name +
+		}
+		if v.C >= v.A+v.B || v.C <= 0 {
+			return ok, errors.New("Значение стороны \"C\" треугольника \"" + v.Name +
 				"\"\nне должно быть больше суммы сторон \"B\" и \"A\", " +
 				"\nа также не может быть меньше или равно нулю\n")
 		}
@@ -82,8 +86,8 @@ func Dotask(T []Triangle) (err error, data []string) {
 	var sortedNames []string
 
 	for i := range T {
-		names = append(names, T[i].getName())
-		squares = append(squares, T[i].getSquare(T[i].getP()))
+		names = append(names, T[i].getname())
+		squares = append(squares, T[i].area(T[i].halfperim()))
 	}
 
 	sortedSquares = append(sortedSquares, squares...)

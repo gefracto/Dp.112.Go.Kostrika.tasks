@@ -46,7 +46,7 @@ func readFile(fileName string) ([]byte, error) {
 	return contents, err
 }
 
-func makeStruct(D Data, contents []byte, extension string) (Data, error) {
+func makeStruct(D Data, contents []byte, extension string) (error, Data) {
 	var err error
 
 	if extension == "json" {
@@ -54,25 +54,25 @@ func makeStruct(D Data, contents []byte, extension string) (Data, error) {
 	} else if extension == "xml" {
 		err = xml.Unmarshal(contents, &D)
 	}
-	return D, err
+	return err, D
 }
 
-func GetData(fileName string) (Data, error) {
+func GetData(fileName string) (error, Data) {
 	var MyData Data
 
 	extension, err := getExtension(fileName)
 
 	if err != nil {
-		return MyData, err
+		return err, MyData
 	}
 
 	contents, err := readFile(fileName)
 
 	if err != nil {
-		return MyData, err
+		return err, MyData
 	}
 
-	MyData, err = makeStruct(MyData, contents, extension)
+	err, MyData = makeStruct(MyData, contents, extension)
 
-	return MyData, err
+	return err, MyData
 }

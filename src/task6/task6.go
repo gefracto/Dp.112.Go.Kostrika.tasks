@@ -13,20 +13,20 @@ type T6 struct {
 }
 
 func (T *T6) Dotask6() (err error, data interface{}) {
-	return Dotask(T.Length, T.MaxSquare)
+	return Dotask(T.Length, T.MaxSquare), Dotask(T.Length, T.MaxSquare)
 }
 
-func Dotask(length, maxSquare int) (err error, b bool) {
+func Dotask(length, maxSquare int) error {
 	if length < 0 || maxSquare < 0 {
-		return errors.New("Значения не должны быть меньше нуля.\nФайл не создан."), false
+		return errors.New("Значения не должны быть меньше нуля.\nФайл не создан.")
 
-	} else {
-		str := getSequence(length, maxSquare)
-		file, err := os.Create("number sequence of task6")
-		defer file.Close()
-		_, err = file.WriteString(str)
-		return err, true
 	}
+	str := getSequence(length, maxSquare)
+	file, err := os.Create("number sequence of task6")
+	defer file.Close()
+	_, err = file.WriteString(str)
+	return err
+
 }
 
 func getSequence(quantity, square int) string {
@@ -44,6 +44,6 @@ func getSequence(quantity, square int) string {
 		root += 1
 	}
 
-	f := strings.Join(file, ", ")
-	return f
+	str := strings.Join(file, ", ")
+	return str
 }

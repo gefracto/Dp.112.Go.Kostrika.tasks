@@ -13,7 +13,7 @@ func main() {
 
 	flag.Parse()
 
-	data, err := tools.GetData(*arg)
+	err, data := tools.GetData(*arg)
 	if err != nil {
 		fmt.Println(err)
 	} else {
