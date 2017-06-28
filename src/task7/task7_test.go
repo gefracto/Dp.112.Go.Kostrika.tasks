@@ -4,6 +4,18 @@ import (
 	"testing"
 )
 
+func Test_Dotask7(t *testing.T) {
+
+}
+
+func Benchmark_Dotask7(b *testing.B) {
+	var t7 T7
+	t7.File = "context"
+	for i:=0; i<b.N; i++ {
+		t7.Dotask7()
+	}
+}
+
 func Test_getLength(t *testing.T) {
 	num := 12345
 	len := 5
