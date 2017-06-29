@@ -1,0 +1,17 @@
+{
+  "name": "kostrika-go-tasks",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/go"
+    }
+  ]
+}
