@@ -7,13 +7,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
-	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/src/task1"
-	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/src/task2"
-	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/src/task3"
-	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/src/task4"
-	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/src/task5"
-	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/src/task6"
-	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/src/task7"
+	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/task1"
+	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/task2"
+	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/task3"
+	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/task4"
+	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/task5"
+	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/task6"
+	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/task7"
 )
 
 type Data struct {
