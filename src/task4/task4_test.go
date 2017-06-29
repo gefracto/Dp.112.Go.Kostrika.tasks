@@ -48,6 +48,11 @@ func Test_dotask(t *testing.T) {
 
 }
 
-func Benchmark_dotask(b *testing.B) {
 
+func Benchmark_dotask(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := 0; j < 1000000; j++ {
+			dotask(j)
+		}
+	}
 }
