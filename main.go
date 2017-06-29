@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"reflect"
-	"github.com/gefracto/Dp.112.Go.Kostrika.tasks/tools"
+	"src/tools"
 )
 
 func main() {
