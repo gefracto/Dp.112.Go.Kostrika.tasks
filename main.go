@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"reflect"
-	"src/tools"
+	"tools"
 )
 
 func main() {
