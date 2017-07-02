@@ -1,7 +1,7 @@
 {
-		"Width":10,
+		"Width":8,
 		"Height":8,
-		"Symbol":"Go",
+		"Symbol":"*",
 		"E1":{
 			"Side1":3,
 			"Side2":15

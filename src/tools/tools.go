@@ -7,13 +7,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
-	"task1"
-	"task2"
-	"task3"
-	"task4"
-	"task5"
-	"task6"
-	"task7"
+
+	"github.com/gefracto/kostrika-go-tasks/src/task1"
+	"github.com/gefracto/kostrika-go-tasks/src/task2"
+	"github.com/gefracto/kostrika-go-tasks/src/task3"
+	"github.com/gefracto/kostrika-go-tasks/src/task4"
+	"github.com/gefracto/kostrika-go-tasks/src/task5"
+	"github.com/gefracto/kostrika-go-tasks/src/task6"
+	"github.com/gefracto/kostrika-go-tasks/src/task7"
 )
 
 type Data struct {
@@ -26,10 +27,41 @@ type Data struct {
 	task7.T7
 }
 
-func SplitOutput(i int) {
-	fmt.Println("\n\n**************************")
-	fmt.Printf("********* Task %d *********\n", i)
-	fmt.Println("**************************\n")
+//func Runall(data Data) {
+
+//	numtasks := reflect.ValueOf(&data).Elem().NumField()
+//	item := reflect.ValueOf(&data)
+
+//	for i := 1; i <= numtasks; i++ {
+//		pattern := "<task%d.T%d Value>"
+
+//		if item.Elem().Field(i-1).String() != fmt.Sprintf(pattern, i, i) {
+//			numtasks += 1
+//			continue
+//		}
+
+//		methodname := fmt.Sprintf("Dotask%d", i)
+//		SplitOutput(i)
+//		output := item.MethodByName(methodname).Call(nil)
+
+//		Err := output[0]
+//		Dat := output[1]
+
+//		if reflect.Value.IsNil(Err) {
+//			fmt.Println(Dat)
+
+//		} else {
+//			fmt.Println(Err)
+//		}
+//	}
+
+//}
+
+func SplitOutput(i int) (s string) {
+	s += "\n\n**************************"
+	s += fmt.Sprintf("********* Task %d *********\n", i)
+	s += "**************************\n"
+	return
 }
 
 func getExtension(fileName string) (string, error) {

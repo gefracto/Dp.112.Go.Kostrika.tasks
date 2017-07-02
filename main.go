@@ -1,48 +1,22 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"reflect"
-	"tools"
+	"net/http"
+
+	"github.com/gefracto/kostrika-go-tasks/src/server"
 )
 
 func main() {
-	arg := flag.String("file", "data.json",
-		"Usage: -file=fileName.extension")
 
-	flag.Parse()
+	//	arg := flag.String("file", "data.json",
+	//		"Usage: -file=fileName.extension")
 
-	err, data := tools.GetData(*arg)
-	if err != nil {
-		fmt.Println(err)
-	} else {
+	//	flag.Parse()
 
-		numtasks := reflect.ValueOf(&data).Elem().NumField()
-		item := reflect.ValueOf(&data)
+	//	_, data := tools.GetData(*arg)
+	//	tools.Runall(data)
 
-		for i := 1; i <= numtasks; i++ {
-			pattern := "<task%d.T%d Value>"
-
-			if item.Elem().Field(i-1).String() != fmt.Sprintf(pattern, i, i) {
-				numtasks += 1
-				continue
-			}
-
-			methodname := fmt.Sprintf("Dotask%d", i)
-			tools.SplitOutput(i)
-			output := item.MethodByName(methodname).Call(nil)
-
-			Err := output[0]
-			Dat := output[1]
-
-			if reflect.Value.IsNil(Err) {
-				fmt.Println(Dat)
-
-			} else {
-				fmt.Println(Err)
-			}
-		}
-
-	}
+	http.HandleFunc("/task/1", server.HandlerT1)
+	http.HandleFunc("/task/2", server.HandlerT2)
+	http.ListenAndServe(":1111", nil)
 }
