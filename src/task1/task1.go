@@ -5,15 +5,25 @@ import (
 	"strings"
 )
 
-func (T *T1) Dotask1() (err error, data interface{}) {
-
-	err, data = dotask(T.Width, T.Height, T.Symbol)
-	return
-}
-
 type T1 struct {
 	Width, Height int
 	Symbol        string
+}
+
+func (T *T1) Dotask1() (err error, data interface{}) {
+	var board string
+	var err error
+
+	if ok, err := validate(w, h); ok == false {
+		return err, board
+	}
+
+	switcher := true
+	for i := 1; i <= h; i++ {
+		board += makeRow(switcher, s, w) + "\n"
+		switcher = !switcher
+	}
+	return err, board
 }
 
 func makeRow(switcher bool, s string, w int) string {
@@ -47,22 +57,4 @@ func validate(w, h int) (bool, error) {
 		return false, errors.New("Числа должны быть больше нуля!\n")
 	}
 	return true, nil
-}
-
-func dotask(w int, h int, s string) (error, string) {
-	var board string
-	var err error
-
-	if ok, err := validate(w, h); ok == false {
-		return err, board
-	}
-
-	switcher := true
-	for i := 1; i <= h; i++ {
-		board += makeRow(switcher, s, w) + "\n"
-		switcher = !switcher
-	}
-
-	return err, board
-
 }

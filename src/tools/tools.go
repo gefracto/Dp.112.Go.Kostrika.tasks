@@ -8,17 +8,23 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
-	"github.com/gefracto/kostrika-go-tasks/src/task1"
-	"github.com/gefracto/kostrika-go-tasks/src/task2"
-	"github.com/gefracto/kostrika-go-tasks/src/task3"
-	"github.com/gefracto/kostrika-go-tasks/src/task4"
-	"github.com/gefracto/kostrika-go-tasks/src/task5"
-	"github.com/gefracto/kostrika-go-tasks/src/task6"
-	"github.com/gefracto/kostrika-go-tasks/src/task7"
+	t1 "github.com/gefracto/kostrika-go-tasks/src/task1"
+	t2 "github.com/gefracto/kostrika-go-tasks/src/task2"
+	t3 "github.com/gefracto/kostrika-go-tasks/src/task3"
+	t4 "github.com/gefracto/kostrika-go-tasks/src/task4"
+	t5 "github.com/gefracto/kostrika-go-tasks/src/task5"
+	t6 "github.com/gefracto/kostrika-go-tasks/src/task6"
+	t7 "github.com/gefracto/kostrika-go-tasks/src/task7"
+	"github.com/gefracto/qwer/src/task2"
+	"github.com/gefracto/qwer/src/task3"
+	"github.com/gefracto/qwer/src/task4"
+	"github.com/gefracto/qwer/src/task5"
+	"github.com/gefracto/qwer/src/task6"
+	"github.com/gefracto/qwer/src/task7"
 )
 
 type Data struct {
-	task1.T1
+	Task1 t1
 	task2.T2
 	task3.T3
 	task4.T4

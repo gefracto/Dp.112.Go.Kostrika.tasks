@@ -14,10 +14,11 @@ func main() {
 	//	flag.Parse()
 
 	//	_, data := tools.GetData(*arg)
-	//	tools.Runall(data)
 
-	http.HandleFunc("/task/1", server.HandlerT1)
-	http.HandleFunc("/task/2", server.HandlerT2)
-	http.HandleFunc("/task/3", server.HandlerT3)
+	http.HandleFunc("/task/", server.HandleTask)
+
+	//	http.HandleFunc("/task/1", server.HandlerT1)
+	//	http.HandleFunc("/task/2", server.HandlerT2)
+	//	http.HandleFunc("/task/3", server.HandlerT3)
 	http.ListenAndServe(":1111", nil)
 }
