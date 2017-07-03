@@ -10,9 +10,25 @@ type T2 struct {
 	E2 Envelope
 }
 
-func (T *T2) Dotask2() (err error, data interface{}) {
-	err, data = dotask(T.E1, T.E2)
-	return
+func Dotask(e1, e2 Envelope) (err error, data string) {
+	A, B := e1.Side1, e1.Side2
+	C, D := e2.Side1, e2.Side2
+
+	areEqual := (A == C || A == D) && (B == C || B == D)
+
+	if A <= 0 || B <= 0 || C <= 0 || D <= 0 {
+
+		return errors.New("Ошибка!\nСторона конверта " +
+			"не может быть меньше или равно 0"), "0"
+
+	} else if areEqual {
+		return nil, "0"
+
+	} else if e1.goesIn(&e2) {
+		return nil, "1"
+
+	}
+	return nil, "2"
 }
 
 type Envelope struct {

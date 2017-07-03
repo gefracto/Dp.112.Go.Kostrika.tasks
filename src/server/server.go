@@ -5,41 +5,36 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 
-	"github.com/gefracto/qwer/src/tools"
+	t1 "github.com/gefracto/kostrika-go-tasks/src/task1"
+	t2 "github.com/gefracto/kostrika-go-tasks/src/task2"
+	"github.com/gefracto/kostrika-go-tasks/src/tools"
 )
 
 func HandleTask(w http.ResponseWriter, r *http.Request) {
 
-	addr := r.URL.Path[:]
+	addr, _ := strconv.Atoi(r.URL.Path[len("/task/"):])
 	var d tools.Data
 	body, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(body, &d)
 	//	tmpl := ioutil.ReadFile("index.html")
+	w.Write([]byte(fmt.Sprintf("Task %d\n", addr)))
 
+	var err error
+	var res string
 	switch addr {
 
-	case "/task/1":
+	case 1:
+		T1 := d.T1
+		err, res = t1.Dotask(T1.Width, T1.Height, T1.Symbol)
 
-		w.Write([]byte("Task 1\n"))
-		if err, res := d.Dotask1(); err != nil {
-			w.Write([]byte(error.Error(err)))
-		} else {
-			w.Write([]byte(res.(string)))
-		}
+	case 2:
 
-	case "/task/2":
+		err, res = t2.Dotask(d.T2.E1, d.T2.E2)
 
-		w.Write([]byte("\nTask 2\n"))
-		if err, res := d.Dotask2(); err != nil {
-			w.Write([]byte(error.Error(err)))
-		} else {
-			w.Write([]byte(fmt.Sprintf("%d", res.(int))))
-		}
+	case 3:
 
-	case "3":
-
-		w.Write([]byte("\nTask 3\n"))
 		if err, res := d.Dotask3(); err != nil {
 			w.Write([]byte(error.Error(err)))
 		} else {
@@ -48,9 +43,24 @@ func HandleTask(w http.ResponseWriter, r *http.Request) {
 			}
 
 		}
+
+	}
+	if err != nil {
+		w.Write([]byte(error.Error(err)))
+	} else {
+		w.Write([]byte(res))
 	}
 
 }
+
+//func HandleAll(w http.ResponseWriter, r *http.Request) {
+//	var d tools.Data
+//	body, _ := ioutil.ReadAll(r.Body)
+//	json.Unmarshal(body, &d)
+
+//	w.Write([]byte(res.(string)))
+
+//}
 
 //func HandlerT1(w http.ResponseWriter, r *http.Request) {
 //	var d tools.Data

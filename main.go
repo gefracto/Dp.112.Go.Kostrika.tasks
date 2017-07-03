@@ -16,6 +16,7 @@ func main() {
 	//	_, data := tools.GetData(*arg)
 
 	http.HandleFunc("/task/", server.HandleTask)
+	//	http.HandleFunc("/alltasks/", server.HandleAll)
 
 	//	http.HandleFunc("/task/1", server.HandlerT1)
 	//	http.HandleFunc("/task/2", server.HandlerT2)
