@@ -11,9 +11,10 @@ import (
 func HandleTask(w http.ResponseWriter, r *http.Request) {
 
 	i, _ := strconv.Atoi(r.URL.Path[len("/task/task"):])
-	fmt.Println(i)
 
 	body, _ := ioutil.ReadAll(r.Body)
+
+	fmt.Println(i)
 	fmt.Println(string(body))
 
 	var err error
@@ -28,7 +29,6 @@ func HandleTask(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(err)
-
 	fmt.Println(string(res))
 
 }

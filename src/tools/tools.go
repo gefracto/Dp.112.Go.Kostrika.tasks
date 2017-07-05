@@ -5,16 +5,16 @@ import (
 	"fmt"
 )
 
-var JsonRunners map[int]func([]byte) (error, []byte) = make(map[int]func([]byte) (error, []byte))
+var TasksMap map[int]func([]byte) (error, []byte) = make(map[int]func([]byte) (error, []byte))
 
-func RememberMe(task int, jsonRunner func([]byte) (error, []byte)) {
-	JsonRunners[task] = jsonRunner
+func RememberMe(task int, taskFoo func([]byte) (error, []byte)) {
+	TasksMap[task] = taskFoo
 }
 
-func RunTask(task int, jsonParams []byte) (error, []byte) {
-	taskFunc, ok := JsonRunners[task]
+func RunTask(task int, json []byte) (error, []byte) {
+	taskFunc, ok := TasksMap[task]
 	if !ok {
-		return errors.New(fmt.Sprintf("Task #1 didn't registered runner")), nil
+		return errors.New(fmt.Sprintf("Task #1 didn't sign in")), nil
 	}
-	return taskFunc(jsonParams)
+	return taskFunc(json)
 }
