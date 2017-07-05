@@ -20,7 +20,7 @@ func HandleTask(w http.ResponseWriter, r *http.Request) {
 	var err error
 	var res []byte
 
-	err, res = tools.RunTask(i, body)
+	err, res = tools.Run(i, body)
 
 	if err != nil {
 		w.Write([]byte(error.Error(err)))

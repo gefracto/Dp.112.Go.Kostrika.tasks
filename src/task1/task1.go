@@ -3,7 +3,6 @@ package task1
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"github.com/gefracto/kostrika-go-tasks/src/tools"
 	"strings"
 )
@@ -23,8 +22,8 @@ func Dotask(js []byte) (error, []byte) {
 	var d Data
 	json.Unmarshal(js, &d)
 
-	fmt.Println(d)
-	fmt.Println(js)
+	// fmt.Println(d)
+	// fmt.Println(js)
 
 	w := d.Width
 	h := d.Height
