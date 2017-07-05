@@ -1,10 +1,10 @@
 package task2
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/gefracto/kostrika-go-tasks/src/tools"
-	"github.com/json-iterator/go"
 	"math"
 )
 
@@ -14,13 +14,13 @@ type T2 struct {
 }
 
 func init() {
-	tools.RegisterJsonRunner(2, Dotask)
+	tools.RememberMe(2, Dotask)
 }
 
 func Dotask(js []byte) (err error, data []byte) {
 
 	var t []Envelope
-	jsoniter.Unmarshal(js, &t)
+	json.Unmarshal(js, &t)
 	fmt.Println(t[0], t[1])
 
 	A, B := t[0].Width, t[0].Height
@@ -39,8 +39,10 @@ func Dotask(js []byte) (err error, data []byte) {
 	} else if t[0].goesIn(&t[1]) {
 		return nil, []byte("1")
 
+	} else if t[1].goesIn(&t[0]) {
+		return nil, []byte("2")
 	}
-	return nil, []byte("2")
+	return nil, []byte("1")
 }
 
 type Envelope struct {

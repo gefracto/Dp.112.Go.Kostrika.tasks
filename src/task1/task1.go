@@ -1,29 +1,34 @@
 package task1
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/gefracto/kostrika-go-tasks/src/tools"
-	"github.com/json-iterator/go"
 	"strings"
 )
 
 type Data struct {
-	width, height int
-	symbol        string
+	Width  int    `json:"width"`
+	Height int    `json:"height"`
+	Symbol string `json:"symbol"`
 }
 
 func init() {
-	tools.RegisterJsonRunner(1, Dotask)
+	tools.RememberMe(1, Dotask)
 }
 
 func Dotask(js []byte) (error, []byte) {
 
 	var d Data
-	jsoniter.Unmarshal(js, &d)
+	json.Unmarshal(js, &d)
 
-	w := d.width
-	h := d.height
-	s := d.symbol
+	fmt.Println(d)
+	fmt.Println(js)
+
+	w := d.Width
+	h := d.Height
+	s := d.Symbol
 
 	var board string
 	var err error

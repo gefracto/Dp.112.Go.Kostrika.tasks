@@ -1,12 +1,12 @@
 package main
 
 import (
-	"net/http"
-
+	"fmt"
 	"github.com/gefracto/kostrika-go-tasks/src/server"
-	// "github.com/gefracto/kostrika-go-tasks/src/tools"
 	_ "github.com/gefracto/kostrika-go-tasks/src/task1"
 	_ "github.com/gefracto/kostrika-go-tasks/src/task2"
+	"html/template"
+	"net/http"
 )
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
@@ -21,7 +21,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.Handle("/client/", http.StripPrefix("/client/", http.FileServer(http.Dir("./client/"))))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		server.IndexHandler(w, r)
+		IndexHandler(w, r)
 	})
 
 	http.HandleFunc("/task/", server.HandleTask)

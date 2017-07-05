@@ -7,7 +7,7 @@ import (
 
 var JsonRunners map[int]func([]byte) (error, []byte) = make(map[int]func([]byte) (error, []byte))
 
-func RegisterJsonRunner(task int, jsonRunner func([]byte) (error, []byte)) {
+func RememberMe(task int, jsonRunner func([]byte) (error, []byte)) {
 	JsonRunners[task] = jsonRunner
 }
 
