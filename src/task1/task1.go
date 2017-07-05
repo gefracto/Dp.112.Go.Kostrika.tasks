@@ -3,8 +3,9 @@ package task1
 import (
 	"encoding/json"
 	"errors"
-	"github.com/gefracto/kostrika-go-tasks/src/tools"
 	"strings"
+
+	"github.com/gefracto/kostrika-go-tasks/src/tools"
 )
 
 type Data struct {
@@ -21,9 +22,6 @@ func Dotask(js []byte) (error, []byte) {
 
 	var d Data
 	json.Unmarshal(js, &d)
-
-	// fmt.Println(d)
-	// fmt.Println(js)
 
 	w := d.Width
 	h := d.Height

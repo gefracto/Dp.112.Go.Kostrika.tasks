@@ -3,8 +3,9 @@ package task2
 import (
 	"encoding/json"
 	"errors"
-	"github.com/gefracto/kostrika-go-tasks/src/tools"
 	"math"
+
+	"github.com/gefracto/kostrika-go-tasks/src/tools"
 )
 
 type T2 struct {
@@ -13,10 +14,10 @@ type T2 struct {
 }
 
 func init() {
-	tools.RememberMe(2, Dotask)
+	tools.RememberMe(2, Dotask2)
 }
 
-func Dotask(js []byte) (err error, data []byte) {
+func Dotask2(js []byte) (err error, data []byte) {
 
 	var t []Envelope
 	json.Unmarshal(js, &t)
@@ -41,7 +42,7 @@ func Dotask(js []byte) (err error, data []byte) {
 	} else if t[1].goesIn(&t[0]) {
 		return nil, []byte("2")
 	}
-	return nil, []byte("1")
+	return nil, []byte("0")
 }
 
 type Envelope struct {
@@ -49,15 +50,15 @@ type Envelope struct {
 	Height float64 `json:"height"`
 }
 
-func (e *Envelope) isBigger(e2 *Envelope) (b bool) {
-	A, B := e.Width, e.Height
-	C, D := e2.Width, e2.Height
+//func (e *Envelope) isBigger(e2 *Envelope) (b bool) {
+//	A, B := e.Width, e.Height
+//	C, D := e2.Width, e2.Height
 
-	if A*B > C*D {
-		return true
-	}
-	return
-}
+//	if A*B > C*D {
+//		return true
+//	}
+//	return
+//}
 
 func (e *Envelope) biggerS() (f float64) {
 	if e.Width >= e.Height {
@@ -81,7 +82,7 @@ func (e *Envelope) diagonal() (f float64) {
 }
 
 func (e *Envelope) goesIn(e2 *Envelope) bool {
-	x := e2.isBigger(e)
-	y := e2.diagonal()-e.biggerS() >= e.smallerS()
-	return x && y
+	//	x := e2.isBigger(e/*)*/
+	//	y := e2.diagonal()-e.biggerS() >= e.smallerS()
+	return e.smallerS() < e2.smallerS() && e.biggerS() < e2.biggerS()
 }
