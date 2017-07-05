@@ -2,15 +2,35 @@ package task1
 
 import (
 	"errors"
+	"github.com/gefracto/kostrika-go-tasks/src/tools"
+	"github.com/json-iterator/go"
 	"strings"
 )
 
-func Dotask(w, h int, s string) (error, string) {
+type Data struct {
+	width, height int
+	symbol        string
+}
+
+func init() {
+	tools.RegisterJsonRunner(1, Dotask)
+}
+
+func Dotask(js []byte) (error, []byte) {
+
+	var d Data
+	jsoniter.Unmarshal(js, &d)
+
+	w := d.width
+	h := d.height
+	s := d.symbol
+
 	var board string
 	var err error
 
 	if ok, err := validate(w, h); ok == false {
-		return err, board
+		b := []byte(board)
+		return err, b
 	}
 
 	switcher := true
@@ -18,14 +38,9 @@ func Dotask(w, h int, s string) (error, string) {
 		board += makeRow(switcher, s, w) + "\n"
 		switcher = !switcher
 	}
+	b := []byte(board)
+	return err, b
 
-	return err, board
-
-}
-
-type T1 struct {
-	Width, Height int
-	Symbol        string
 }
 
 func makeRow(switcher bool, s string, w int) string {
@@ -60,21 +75,3 @@ func validate(w, h int) (bool, error) {
 	}
 	return true, nil
 }
-
-//func dotask(w int, h int, s string) (error, string) {
-//	var board string
-//	var err error
-
-//	if ok, err := validate(w, h); ok == false {
-//		return err, board
-//	}
-
-//	switcher := true
-//	for i := 1; i <= h; i++ {
-//		board += makeRow(switcher, s, w) + "\n"
-//		switcher = !switcher
-//	}
-
-//	return err, board
-
-//}
