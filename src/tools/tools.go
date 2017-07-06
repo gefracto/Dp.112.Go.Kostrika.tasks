@@ -18,7 +18,3 @@ func Run(task int, json []byte) (error, []byte) {
 	}
 	return taskFunc(json)
 }
-
-//func RunAll(json []byte) (error, []byte) {
-
-//}

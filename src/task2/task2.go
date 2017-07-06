@@ -14,10 +14,10 @@ type T2 struct {
 }
 
 func init() {
-	tools.RememberMe(2, Dotask2)
+	tools.RememberMe(2, Dotask)
 }
 
-func Dotask2(js []byte) (err error, data []byte) {
+func Dotask(js []byte) (err error, data []byte) {
 
 	var t []Envelope
 	json.Unmarshal(js, &t)
@@ -49,16 +49,6 @@ type Envelope struct {
 	Width  float64 `json:"width"`
 	Height float64 `json:"height"`
 }
-
-//func (e *Envelope) isBigger(e2 *Envelope) (b bool) {
-//	A, B := e.Width, e.Height
-//	C, D := e2.Width, e2.Height
-
-//	if A*B > C*D {
-//		return true
-//	}
-//	return
-//}
 
 func (e *Envelope) biggerS() (f float64) {
 	if e.Width >= e.Height {
