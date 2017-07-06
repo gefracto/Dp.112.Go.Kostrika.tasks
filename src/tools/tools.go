@@ -5,10 +5,13 @@ import (
 	"fmt"
 )
 
-var TasksMap map[int]func([]byte) (error, []byte) = make(map[int]func([]byte) (error, []byte))
+type task func([]byte) (error, []byte)
 
-func RememberMe(task int, taskFoo func([]byte) (error, []byte)) {
-	TasksMap[task] = taskFoo
+var TasksMap map[int]task = make(map[int]task)
+
+func RememberMe(tasknum int, t task) {
+	TasksMap[tasknum] = t
+	//	panic(t)
 }
 
 func Run(task int, json []byte) (error, []byte) {
