@@ -3,9 +3,8 @@ package task2
 import (
 	"encoding/json"
 	"errors"
-	"math"
 
-	"github.com/gefracto/kostrika-go-tasks/src/tools"
+	"github.com/gefracto/kostrika-go-tasks/src/tasklist"
 )
 
 type T2 struct {
@@ -14,10 +13,10 @@ type T2 struct {
 }
 
 func init() {
-	tools.RememberMe(2, Dotask)
+	tasklist.RememberMe(2, Dotask2)
 }
 
-func Dotask(js []byte) (err error, data []byte) {
+func Dotask2(js []byte) (err error, data []byte) {
 
 	var t []Envelope
 	json.Unmarshal(js, &t)
@@ -33,15 +32,22 @@ func Dotask(js []byte) (err error, data []byte) {
 		return errors.New("Ошибка!\nСторона конверта " +
 			"не может быть меньше или равно 0"), []byte("0")
 
-	} else if areEqual {
+	}
+
+	if areEqual {
 		return nil, []byte("0")
 
-	} else if t[0].goesIn(&t[1]) {
+	}
+
+	if t[0].goesIn(&t[1]) {
 		return nil, []byte("1")
 
-	} else if t[1].goesIn(&t[0]) {
+	}
+
+	if t[1].goesIn(&t[0]) {
 		return nil, []byte("2")
 	}
+
 	return nil, []byte("0")
 }
 
@@ -66,10 +72,10 @@ func (e *Envelope) smallerS() (f float64) {
 	return e.Height
 }
 
-func (e *Envelope) diagonal() (f float64) {
-	f = float64(math.Sqrt(e.Width*e.Width + e.Height*e.Height))
-	return
-}
+// func (e *Envelope) diagonal() (f float64) {
+// 	f = float64(math.Sqrt(e.Width*e.Width + e.Height*e.Height))
+// 	return
+// }
 
 func (e *Envelope) goesIn(e2 *Envelope) bool {
 	//	x := e2.isBigger(e/*)*/

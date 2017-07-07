@@ -1,8 +1,11 @@
 package main
 
 import (
-	"github.com/gefracto/kostrika-go-tasks/src/server"
 	"net/http"
+
+	"github.com/gefracto/kostrika-go-tasks/src/server"
+	_ "github.com/gefracto/kostrika-go-tasks/src/task1"
+	_ "github.com/gefracto/kostrika-go-tasks/src/task2"
 )
 
 func main() {

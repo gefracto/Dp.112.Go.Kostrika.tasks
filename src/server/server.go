@@ -1,28 +1,35 @@
 package server
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"path"
 	"strconv"
 
-	_ "github.com/gefracto/kostrika-go-tasks/src/task1"
-	_ "github.com/gefracto/kostrika-go-tasks/src/task2"
-	"github.com/gefracto/kostrika-go-tasks/src/tools"
+	"github.com/gefracto/kostrika-go-tasks/src/runner"
 )
 
 func HandleTask(w http.ResponseWriter, r *http.Request) {
+	//	var i int
+	//	var body []byte
 
-	if i, err := strconv.Atoi(path.Base(r.URL.Path[:])); err != nil {
-		w.Write(errors.New("URL не распознан"))
+	i, err := strconv.Atoi(path.Base(r.URL.Path[:]))
+
+	if err != nil {
+		w.Write([]byte(fmt.Sprint(err)))
 	}
 
-	if body, err := ioutil.ReadAll(r.Body); err != nil {
-		w.Write(errors.New("HTTP не прочитан"))
+	body, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		w.Write([]byte(fmt.Sprint(err)))
 	}
 
-	if err, res := tools.Run(i, body); err != nil {
-		w.Write(error.Error(err))
+	err, res := runner.Run(i, body)
+
+	if err != nil {
+		w.Write([]byte(fmt.Sprint(err)))
 	} else {
 		w.Write(res)
 	}

@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/gefracto/kostrika-go-tasks/src/tools"
+	"github.com/gefracto/kostrika-go-tasks/src/tasklist"
 )
 
 type Data struct {
@@ -15,7 +15,7 @@ type Data struct {
 }
 
 func init() {
-	tools.RememberMe(1, Dotask)
+	tasklist.RememberMe(1, Dotask)
 }
 
 func Dotask(js []byte) (error, []byte) {
