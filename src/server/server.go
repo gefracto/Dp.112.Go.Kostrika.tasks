@@ -13,17 +13,18 @@ import (
 
 func HandleTask(w http.ResponseWriter, r *http.Request) {
 
-	i, _ := strconv.Atoi(path.Base(r.URL.Path[:]))
-	body, _ := ioutil.ReadAll(r.Body)
-	_, res := tools.Run(i, body)
-	w.Write(res)
+	if i, err := strconv.Atoi(path.Base(r.URL.Path[:])); err != nil {
+		w.Write(errors.New("URL не распознан"))
+	}
+
+	if body, err := ioutil.ReadAll(r.Body); err != nil {
+		w.Write(errors.New("HTTP не прочитан"))
+	}
+
+	if err, res := tools.Run(i, body); err != nil {
+		w.Write(error.Error(err))
+	} else {
+		w.Write(res)
+	}
 
 }
-
-// web.router
-// restapi
-
-//GET /COLLECTION/filter
-// {...}
-// GET /COLLECTION
-// [{..}, {..}]
