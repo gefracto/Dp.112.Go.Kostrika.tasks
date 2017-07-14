@@ -14,7 +14,9 @@ import (
 )
 
 func main() {
-
+	http.Handle("/client/", http.StripPrefix("/client/", http.FileServer(http.Dir("./client/"))))
+	http.HandleFunc("/", server.IndexHandler)
 	http.HandleFunc("/task/", server.HandleTask)
+	http.HandleFunc("/tasks", server.HandleTasks)
 	http.ListenAndServe(":1111", nil)
 }
