@@ -42,23 +42,3 @@ func Benchmark_validate(b *testing.B) {
 		validate(i, i)
 	}
 }
-
-func Test_dotask(t *testing.T) {
-	w := 4
-	h := 3
-	s := "*"
-
-	expect := "* * \n * *\n* * \n"
-
-	err, res := dotask(w, h, s)
-	if res != expect || err != nil {
-		t.Error("\nПолучил \n" + res + "\nОжидал: \n" + expect)
-	}
-
-}
-
-func Benchmark_dotask(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		dotask(100, 100, "*")
-	}
-}

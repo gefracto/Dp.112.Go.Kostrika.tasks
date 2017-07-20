@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gefracto/kostrika-go-tasks/src/server"
@@ -18,5 +19,5 @@ func main() {
 	http.HandleFunc("/", server.IndexHandler)
 	http.HandleFunc("/task/", server.HandleTask)
 	http.HandleFunc("/tasks", server.HandleTasks)
-	http.ListenAndServe(":1111", nil)
+	log.Fatal(http.ListenAndServe(":1111", nil))
 }

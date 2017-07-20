@@ -73,6 +73,6 @@ func HandleTask(w http.ResponseWriter, r *http.Request) {
 	A.Resp = string(val)
 	js, _ := json.Marshal(A)
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(json.RawMessage(js))
+	w.Write(js)
 
 }
