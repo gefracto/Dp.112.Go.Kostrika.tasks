@@ -1,0 +1,1 @@
+web: kostrika-go-tasks

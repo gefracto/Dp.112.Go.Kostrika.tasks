@@ -1,0 +1,6 @@
+{
+	"ImportPath": "github.com/gefracto/kostrika-go-tasks",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Deps": []
+}
