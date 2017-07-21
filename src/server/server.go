@@ -66,13 +66,13 @@ func HandleTask(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Write([]byte(fmt.Sprint(err)))
 	}
-
-	err, res := runner.Run(i, body)
+	var A Answer
+	A.Task = i
+	err, val := runner.Run(i, body)
+	A.Reason = fmt.Sprint(err)
+	A.Resp = string(val)
+	js, _ := json.Marshal(A)
 	w.Header().Set("Content-Type", "application/json")
-	if err != nil {
-		w.Write([]byte(fmt.Sprint(err)))
-	} else {
-		w.Write(res)
-	}
+	w.Write(js)
 
 }

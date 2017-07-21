@@ -1,1 +1,1 @@
-web: kostrika-go-tasks
+web: main-heroku
