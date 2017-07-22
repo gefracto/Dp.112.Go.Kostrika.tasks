@@ -1,6 +1,47 @@
 {
-	"ImportPath": "github.com/gefracto/kostrika-go-tasks",
+	"ImportPath": "github.com/gefracto/gotasks",
 	"GoVersion": "go1.8",
 	"GodepVersion": "v79",
-	"Deps": []
+	"Deps": [
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/runner",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/server",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/task1",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/task2",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/task3",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/task4",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/task5",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/task6",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/task7",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		},
+		{
+			"ImportPath": "github.com/gefracto/kostrika-go-tasks/src/tasklist",
+			"Rev": "5ed6461b522e09439a0edf3a84bf74afa0feb8c9"
+		}
+	]
 }
