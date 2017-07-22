@@ -3,7 +3,11 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
 jobs:
-
+  deployment:
+    staging:
+      branch: master
+      heroku:
+        appname: gotasks
   build:
     docker:
       # specify the version
