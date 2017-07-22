@@ -1,2 +1,3 @@
-FROM golang:onbuild
-EXPOSE 1111
+FROM scratch
+COPY main       /
+CMD  ["/main"]
