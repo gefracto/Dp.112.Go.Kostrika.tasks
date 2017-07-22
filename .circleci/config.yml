@@ -32,8 +32,8 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test -v ./...
     deployment:
-    staging:
-      branch: master
-      commands:
-        - git push git@heroku.com:kostrika-go.git:
-          timeout: 60
+      staging:
+        branch: master
+          commands:
+            - git push git@heroku.com:kostrika-go.git:
+              timeout: 60
