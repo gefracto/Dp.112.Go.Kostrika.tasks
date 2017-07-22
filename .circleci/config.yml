@@ -1,41 +1,33 @@
-# Golang CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-go/ for more details
-version: 2
+machine:
+  services:
+    - docker
+  environment:
+    GOPATH: /home/ubuntu/.go_workspace
+    IMPORT_PATH: github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
 
+general:
+  build_dir: ../.go_workspace/src/$IMPORT_PATH
 
+checkout:
+  post:
+    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
+    - rsync -azC --delete $HOME/$CIRCLE_PROJECT_REPONAME/ $GOPATH/src/$IMPORT_PATH/
 
-jobs:
-  
-  build:
-    
-    docker:
-      # specify the version
-      - image: circleci/golang:1.8
+dependencies:
+  pre:
+    - go get github.com/tools/godep # if using godep to manage dependencies
+  override:
+    - godep restore # if using godep to manage dependencies
 
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    #### TEMPLATE_NOTE: go expects specific checkout path representing url
-    #### expecting it in the form of
-    ####   /go/src/github.com/circleci/go-tool
-    ####   /go/src/bitbucket.org/circleci/go-tool
-    working_directory: /go/src/github.com/gefracto/gotasks
-    steps:
-      - checkout
-
-      # specify any bash command here prefixed with `run: `
-      - run: mkdir TEST_RESULTS
-      #- run: go get github.com/jstemmer/go-junit-report
-      - run: go get -v -t -d ./...
-      - run: go test -v ./...
-      - run: echo "Hello lol"
+test:
+  override:
+    - go test
 
 deployment:
   prod:
     branch: master
-    heroku:
-      appname: kostrika-go
+    commands:
+      - heroku plugins:install heroku-container-registry
+      - heroku container:login
+      - CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+      - heroku container:push web --app kostrika-go
