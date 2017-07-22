@@ -6,12 +6,7 @@ version: 2
 
 
 jobs:
-  deployment:
-    staging:
-      branch: master
-      commands:
-        - git push git@heroku.com:kostrika-go.git:
-          timeout: 60
+  
   build:
     docker:
       # specify the version
@@ -36,4 +31,9 @@ jobs:
       - run: go get github.com/jstemmer/go-junit-report
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-      
+    deployment:
+    staging:
+      branch: master
+      commands:
+        - git push git@heroku.com:kostrika-go.git:
+          timeout: 60
