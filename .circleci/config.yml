@@ -3,28 +3,12 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
 jobs:
-  deployment:
-    staging:
-      branch: master
-      heroku:
-        appname: gotasks
-        commands:
-      - |
-        cat >~/.netrc <<EOF
-        machine api.heroku.com
-          login $HEROKU_EMAIL
-          password $HEROKU_TOKEN
-        machine git.heroku.com
-          login $HEROKU_EMAIL
-          password $HEROKU_TOKEN
-        EOF
-      - chmod 600 ~/.netrc # Heroku cli complains about permissions without this
-      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
-      - git push git@heroku.com:gotasks.git $CIRCLE_SHA1:refs/heads/master
+
   build:
     docker:
       # specify the version
       - image: circleci/golang:1.8
+
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
