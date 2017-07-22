@@ -1,6 +1,6 @@
 .PHONY: build run
 
-image=serhiiherasymov/golang-docker-ssl
+image=gefracto/gotasks
 
 build:
 	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
