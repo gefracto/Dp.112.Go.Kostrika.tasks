@@ -7,9 +7,9 @@ version: 2
 
 jobs:
   deployment:
-  staging:
-    branch: master
-    commands:
+    staging:
+      branch: master
+      commands:
         - git push git@heroku.com:kostrika-go.git:
           timeout: 60
   build:
