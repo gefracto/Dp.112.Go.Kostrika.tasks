@@ -34,14 +34,14 @@ jobs:
       - run: go test -v ./...
       - run: echo "Hello lol"
       - run:
-        name: Install plugin
-        command: heroku plugins:install heroku-container-registry
+          name: Install plugin
+          command: heroku plugins:install heroku-container-registry
       - run:
-        name: Login to HERoku
-        command: heroku container:login
+          name: Login to HERoku
+          command: heroku container:login
       - run:
-        name: build
-        command: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+          name: build
+          command: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
       - run:
-        name: push
-        command: heroku container:push web --app kostrika-go
+          name: push
+          command: heroku container:push web --app kostrika-go
