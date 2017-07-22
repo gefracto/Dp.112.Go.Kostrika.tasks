@@ -6,8 +6,8 @@ version: 2
 deployment:
   staging:
     branch: master
-    heroku:
-      appname: kostrika-go
+    commands:
+        - git push heroku master
 
 jobs:
 
