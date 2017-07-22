@@ -3,16 +3,15 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
   jobs:
-    deployment:
-        staging:
-            branch: master
-            heroku:
-                appname: kostrika-go
   build:
     docker:
       # specify the version
       - image: circleci/golang:1.8
-      
+      deployment:                                                                                                                
+        staging:                                                                                                               
+            branch: master                                                                                                     
+            heroku:                                                                                                            
+                appname: kostrika-go
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
