@@ -36,12 +36,6 @@ jobs:
       - run:
           name: Install plugin
           command: heroku plugins:install heroku-container-registry
-      - run:
-          name: Login to HERoku
-          command: heroku container:login
-      - run:
-          name: build
-          command: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
-      - run:
-          name: push
-          command: heroku container:push web --app kostrika-go
+      - run: heroku container:login
+      - run: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+      - run: heroku container:push web --app kostrika-go
