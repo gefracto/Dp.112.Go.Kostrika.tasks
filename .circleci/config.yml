@@ -33,5 +33,9 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test -v ./...
       - run: echo "Hello lol"
-      - run: sh setup_heroku.sh
-      - run: git push heroku master
+
+deployment:
+  prod:
+    branch: master
+    heroku:
+      appname: kostrika-go
