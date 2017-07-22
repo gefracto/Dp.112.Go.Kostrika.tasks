@@ -14,9 +14,9 @@ import (
 )
 
 type Answer struct {
-	Task   int
-	Resp   string
-	Reason string
+	Reason string `json:"reason"`
+	Resp   string `json:"resp"`
+	Task   int    `json:"task"`
 }
 
 func getData(a interface{}) []byte {
@@ -45,6 +45,9 @@ func HandleTasks(w http.ResponseWriter, r *http.Request) {
 		A.Task = key
 		err, val := runner.Run(key, getData(value))
 		A.Reason = fmt.Sprint(err)
+		if A.Reason == "<nil>" {
+			A.Reason = ""
+		}
 		A.Resp = string(val)
 		Answers = append(Answers, A)
 	}
@@ -70,6 +73,9 @@ func HandleTask(w http.ResponseWriter, r *http.Request) {
 	A.Task = i
 	err, val := runner.Run(i, body)
 	A.Reason = fmt.Sprint(err)
+	if A.Reason == "<nil>" {
+		A.Reason = ""
+	}
 	A.Resp = string(val)
 	js, _ := json.Marshal(A)
 	w.Header().Set("Content-Type", "application/json")
