@@ -33,7 +33,7 @@ jobs:
       - run: go get -v -t -d ./...
       - run: go test -v ./...
       - run: echo "Hello lol"
-      - run: apt install heroku
+      - run: sudo apt install heroku -y
       - run: heroku plugins:install heroku-container-registry
       - run: heroku container:login
       - run: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
