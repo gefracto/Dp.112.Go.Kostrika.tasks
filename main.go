@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+	// this is just a test comment :)
 	http.Handle("/client/", http.StripPrefix("/client/", http.FileServer(http.Dir("./client/"))))
 	http.HandleFunc("/", server.IndexHandler)
 	http.HandleFunc("/task/", server.HandleTask)
