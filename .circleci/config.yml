@@ -35,6 +35,11 @@ jobs:
       - run: echo "Hello lol"
       - run: wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
       - run: sudo heroku plugins:install heroku-container-registry
+      - run: sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+      - run: udo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      - run: sudo apt-get update
+      - run: sudo apt install docker-ce
       - run: sudo service docker start
       - run: sudo heroku container:login
       - run: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
