@@ -31,9 +31,9 @@ jobs:
       - run: go get github.com/jstemmer/go-junit-report
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-    deployment:
-      staging:
-        - branch: master
-          commands:
-            - git push git@heroku.com:kostrika-go.git:
-              - timeout: 60
+      - deployment:
+        staging:
+          - branch: master
+            commands:
+              - git push git@heroku.com:kostrika-go.git:
+                - timeout: 60
