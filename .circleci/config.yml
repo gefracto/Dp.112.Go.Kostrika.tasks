@@ -36,8 +36,8 @@ jobs:
       - run: wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
       - run: sudo heroku plugins:install heroku-container-registry
       - run: sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-      - run: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-      - run: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      - run: curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+      - run: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
       - run: sudo apt-get update
       - run: sudo apt install docker-ce
       - run: sudo service docker start
