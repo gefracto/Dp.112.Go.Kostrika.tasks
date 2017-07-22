@@ -31,7 +31,7 @@ jobs:
       - run: go get github.com/jstemmer/go-junit-report
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-      - run: bash .circleci/setup-heroku.sh
+      - run: sh .circleci/setup-heroku.sh
         - add_ssh_keys:
             fingerprints:
               - "33:df:4f:40:e0:90:53:3b:03:13:2a:08:c4:f4:1e:c5"
