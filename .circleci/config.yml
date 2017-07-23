@@ -34,6 +34,7 @@ jobs:
       - run: go test -v ./...
       - run: wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
       - run: heroku login
+      - run: sudo service docker start
       - run: sudo docker ps
       - run: echo "StrictHostKeyChecking=no" >> ~/.ssh/config
       - run: git remote add heroku git@heroku.com:kostrika-go.git
