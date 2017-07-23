@@ -48,3 +48,4 @@ jobs:
       #- run: heroku git:remote -a kostrika-go
       - run: git remote add heroku git@heroku.com:kostrika-go
       - run: git push heroku master
+      - run: send "yes\r"
