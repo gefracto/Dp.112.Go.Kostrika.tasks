@@ -45,11 +45,6 @@ jobs:
       - run: heroku login
       #- run: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
       #- run: sudo heroku container:push web --app kostrika-go
-      - run: heroku git:remote -a kostrika-go
+      #- run: heroku git:remote -a kostrika-go
+      - run: git remote add heroku git@heroku.com:kostrika-go
       - run: git push heroku master
-
-deployment:
-  prod:
-    branch: master
-    heroku:
-      appname: kostrika-go
