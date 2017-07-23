@@ -9,9 +9,9 @@ jobs:
   
   build:
     
-    docker:
+    #docker:
       # specify the version
-      - image: circleci/golang:1.8
+      #- image: circleci/golang:1.8
 
       
       # Specify service dependencies here if necessary
