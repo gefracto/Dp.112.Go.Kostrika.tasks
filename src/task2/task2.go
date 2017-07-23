@@ -20,7 +20,6 @@ func Dotask2(js []byte) (err error, data []byte) {
 
 	var t []Envelope
 	json.Unmarshal(js, &t)
-	// fmt.Println(t[0], t[1])
 
 	A, B := t[0].Width, t[0].Height
 	C, D := t[1].Width, t[1].Height
@@ -72,13 +71,6 @@ func (e *Envelope) smallerS() (f float64) {
 	return e.Height
 }
 
-// func (e *Envelope) diagonal() (f float64) {
-// 	f = float64(math.Sqrt(e.Width*e.Width + e.Height*e.Height))
-// 	return
-// }
-
 func (e *Envelope) goesIn(e2 *Envelope) bool {
-	//	x := e2.isBigger(e/*)*/
-	//	y := e2.diagonal()-e.biggerS() >= e.smallerS()
 	return e.smallerS() < e2.smallerS() && e.biggerS() < e2.biggerS()
 }

@@ -10,7 +10,6 @@ import (
 	"strconv"
 
 	"github.com/gefracto/kostrika-go-tasks/src/runner"
-	//	"github.com/gefracto/kostrika-go-tasks/templates"
 )
 
 type Answer struct {
