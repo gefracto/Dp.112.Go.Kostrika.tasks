@@ -2,16 +2,16 @@ angular.module('golang')
 	.constant('DEFAULTS', function() {
   		return {
 			1: {
-				"width": 8,
-				"height": 16,
+				"width": 10,
+				"height": 10,
 				"symbol": "*"
 			}, 
 			2: [{
-				"width": 8,
+				"width": 5,
 				"height": 5
 			}, {
-				"width": 6,
-				"height": 9
+				"width": 10,
+				"height": 10
 			}]
 		};
 	}());
