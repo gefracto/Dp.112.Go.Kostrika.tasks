@@ -26,6 +26,7 @@ jobs:
     working_directory: /go/src/github.com/gefracto/gotasks
     steps:
       - checkout
+      - setup_remote_docker
 
       # specify any bash command here prefixed with `run: `
       - run: mkdir TEST_RESULTS
