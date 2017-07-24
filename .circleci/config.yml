@@ -33,6 +33,6 @@ jobs:
       - run: heroku container:login
       - run: heroku container:push web
       
-      - run: docker tag scratch registry.heroku.com/kostrika-go/web
-      - run: docker push registry.heroku.com/kostrika-go/web
+      #- run: docker tag scratch registry.heroku.com/kostrika-go/web
+      #- run: docker push registry.heroku.com/kostrika-go/web
       ###
