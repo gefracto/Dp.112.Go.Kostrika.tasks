@@ -3,8 +3,8 @@ angular.module('golang')
   		return {
 			1: {
 				"width": 8,
-				"height": 4,
-				"symbol": "#"
+				"height": 16,
+				"symbol": "*"
 			}, 
 			2: [{
 				"width": 8,
