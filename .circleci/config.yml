@@ -29,6 +29,7 @@ jobs:
       - run: git remote add heroku git@heroku.com:kostrika-go.git
       - run: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main
       - run: docker build -t scratch -f Dockerfile.scratch .
+      - run: docker run -it --rm scratch
       - run: heroku plugins:install heroku-container-registry
       - run: make -f Makefile
       - run: heroku container:login
