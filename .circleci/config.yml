@@ -41,5 +41,6 @@ jobs:
       - run: docker build -t example-scratch -f Dockerfile.scratch .
       - run: sudo heroku plugins:install heroku-container-registry
       - run: sudo heroku container:login
+      - run: sudo service docker start
       - run: docker tag circleci/golang:1.8 registry.heroku.com/kostrika-go/web
       
