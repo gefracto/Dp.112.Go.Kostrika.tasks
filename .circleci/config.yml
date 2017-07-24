@@ -31,6 +31,7 @@ jobs:
       - run: docker build -t scratch -f Dockerfile.scratch .
       - run: heroku plugins:install heroku-container-registry
       - run: heroku container:login
-      - run: docker tag scratch registry.heroku.com/kostrika-go/web
-      - run: heroku ps:restart web
+      - run: heroku container:push web
+      # run: docker tag scratch registry.heroku.com/kostrika-go/web
+      #- run: heroku ps:restart web
       ###
