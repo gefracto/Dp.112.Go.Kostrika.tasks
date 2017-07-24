@@ -36,4 +36,10 @@ jobs:
       - run: heroku login
       - run: echo "StrictHostKeyChecking=no" >> ~/.ssh/config
       - run: git remote add heroku git@heroku.com:kostrika-go.git
-      - run: git push heroku master
+      #- run: git push heroku master
+      - run: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main
+      - run: docker build -t example-scratch -f Dockerfile.scratch .
+      - run: sudo heroku plugins:install heroku-container-registry
+      - run: sudo heroku container:login
+      - run: docker tag circleci/golang:1.8 registry.heroku.com/kostrika-go/web
+      
