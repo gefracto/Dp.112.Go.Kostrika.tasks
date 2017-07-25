@@ -27,7 +27,7 @@ func Test_HandleTasks(t *testing.T) {
 
 }
 func Test_HandleTask(t *testing.T) {
-	req, err := http.NewRequest("POST", "/", nil)
+	req, err := http.NewRequest("POST", "/task/1", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
