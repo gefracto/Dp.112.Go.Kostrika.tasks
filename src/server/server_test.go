@@ -15,7 +15,7 @@ func Test_IndexHandler(t *testing.T) {
 		t.Fatal(err)
 	}
 	rr := httptest.NewRecorder()
-	handler := http.HandleFunc(IndexHandler)
+	handler := http.HandleFunc("/", IndexHandler)
 	handler.ServeHTTP(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {
