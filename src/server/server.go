@@ -34,7 +34,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleTasks(w http.ResponseWriter, r *http.Request) {
-	var Answers []Answerb
+	var Answers []Answer
 	m := make(map[int]interface{})
 	body, _ := ioutil.ReadAll(r.Body)
 	_ = json.Unmarshal(body, &m)
